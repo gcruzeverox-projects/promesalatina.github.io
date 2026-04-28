@@ -1,5 +1,5 @@
 // apps/api/src/quotes/quotes.module.ts
-import { Module } from '@nestjs/common'
+import { Module }           from '@nestjs/common'
 import { QuotesController } from './quotes.controller'
 import { QuotesService }    from './quotes.service'
 import { EmailModule }      from '../email/email.module'

@@ -1,14 +1,14 @@
 // apps/api/src/quotes/quotes.controller.ts
 import {
-  Controller, Get, Post, Put, Delete, Param, Body, Query,
-  UseGuards, Request, Res
+  Controller, Get, Post, Put, Delete,
+  Param, Body, Query, UseGuards, Request, Res,
 } from '@nestjs/common'
-import { Response } from 'express'
-import { JwtAuthGuard }  from '../auth/guards/jwt-auth.guard'
-import { RolesGuard, Roles } from '../auth/guards/roles.guard'
-import { QuotesService }  from './quotes.service'
-import { CreateQuoteDto } from './dto/create-quote.dto'
-import { UpdateQuoteDto } from './dto/update-quote.dto'
+import type { Response } from 'express'
+import { JwtAuthGuard }       from '../auth/guards/jwt-auth.guard'
+import { RolesGuard, Roles }  from '../auth/guards/roles.guard'
+import { QuotesService }      from './quotes.service'
+import { CreateQuoteDto }     from './dto/create-quote.dto'
+import { UpdateQuoteDto }     from './dto/update-quote.dto'
 
 @Controller('quotes')
 @UseGuards(JwtAuthGuard)
@@ -21,8 +21,8 @@ export class QuotesController {
   findAll(@Query() q: { search?: string; page?: string; limit?: string }) {
     return this.quotesService.findAll({
       search: q.search,
-      page:   q.page   ? Number(q.page)  : 1,
-      limit:  q.limit  ? Number(q.limit) : 20,
+      page:   q.page  ? Number(q.page)  : 1,
+      limit:  q.limit ? Number(q.limit) : 20,
     })
   }
 
@@ -47,7 +47,6 @@ export class QuotesController {
     return this.quotesService.update(id, dto)
   }
 
-  // Genera PDF + envía por email + actualiza sentAt
   @Post(':id/send')
   @UseGuards(RolesGuard)
   @Roles('ADMIN', 'VENTAS')
@@ -55,7 +54,6 @@ export class QuotesController {
     return this.quotesService.sendQuote(id)
   }
 
-  // Descarga PDF sin enviar
   @Get(':id/pdf')
   @UseGuards(RolesGuard)
   @Roles('ADMIN', 'VENTAS')
@@ -64,7 +62,7 @@ export class QuotesController {
     const quote  = await this.quotesService.findOne(id)
     res.set({
       'Content-Type':        'application/pdf',
-      'Content-Disposition': `attachment; filename="cotizacion-${quote.quoteNumber}.pdf"`,
+      'Content-Disposition': `attachment; filename="cotizacion-${(quote as any).quoteNumber}.pdf"`,
       'Content-Length':      buffer.length,
     })
     res.end(buffer)
@@ -77,20 +75,3 @@ export class QuotesController {
     return this.quotesService.remove(id)
   }
 }
-
-// ─────────────────────────────────────────────────────────────────────────────
-
-// apps/api/src/quotes/quotes.module.ts
-import { Module } from '@nestjs/common'
-import { QuotesController } from './quotes.controller'
-import { QuotesService }    from './quotes.service'
-import { EmailModule }      from '../email/email.module'
-import { StorageModule }    from '../storage/storage.module'
-
-@Module({
-  imports:     [EmailModule, StorageModule],
-  controllers: [QuotesController],
-  providers:   [QuotesService],
-  exports:     [QuotesService],
-})
-export class QuotesModule {}
