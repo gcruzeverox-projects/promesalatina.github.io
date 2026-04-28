@@ -1,0 +1,50 @@
+# ── Dependencias ──────────────────────────────────────────────────────────────
+node_modules/
+.pnpm-store/
+.yarn/
+
+# ── IMPORTANTE: pnpm-lock.yaml SÍ debe commitearse ───────────────────────────
+# NO agregar pnpm-lock.yaml aquí — es requerido por GitHub Actions CI
+
+# ── Next.js ───────────────────────────────────────────────────────────────────
+apps/web/.next/
+apps/web/out/
+apps/web/.vercel/
+
+# ── NestJS build ──────────────────────────────────────────────────────────────
+apps/api/dist/
+
+# ── React Native / Expo ───────────────────────────────────────────────────────
+apps/mobile/.expo/
+apps/mobile/android/
+apps/mobile/ios/
+
+# ── Variables de entorno — NUNCA COMMITEAR ────────────────────────────────────
+.env
+.env.local
+.env.*.local
+apps/**/.env
+apps/**/.env.local
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+
+# ── Testing ───────────────────────────────────────────────────────────────────
+coverage/
+
+# ── Turbo cache ───────────────────────────────────────────────────────────────
+.turbo/
+
+# ── Uploads locales ───────────────────────────────────────────────────────────
+uploads/
+tmp/

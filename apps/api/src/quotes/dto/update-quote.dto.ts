@@ -1,0 +1,5 @@
+// apps/api/src/quotes/dto/update-quote.dto.ts
+import { PartialType } from '@nestjs/mapped-types'
+import { CreateQuoteDto } from './create-quote.dto'
+
+export class UpdateQuoteDto extends PartialType(CreateQuoteDto) {}

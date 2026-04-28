@@ -1,0 +1,898 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1F3A93;
+  --navy-dark: #162b6e;
+  --navy-light: #2a4db5;
+  --orange: #E65100;
+  --orange-light: #FF6D00;
+  --white: #FFFFFF;
+  --off-white: #F5F7FA;
+  --gray-50: #F8FAFC;
+  --gray-100: #EEF2F7;
+  --gray-200: #DDE3EE;
+  --gray-400: #94A3B8;
+  --gray-600: #475569;
+  --gray-800: #1E293B;
+  --font-title: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --radius: 12px;
+  --shadow-sm: 0 2px 8px rgba(31,58,147,.08);
+  --shadow-md: 0 6px 24px rgba(31,58,147,.12);
+  --shadow-lg: 0 16px 48px rgba(31,58,147,.18);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); background: var(--white); color: var(--gray-800); font-size: 15px; line-height: 1.6; }
+
+/* ── HEADER ── */
+header {
+  background: var(--navy);
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+/* REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ */
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--orange);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--white);
+}
+.logo-text {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--white);
+  line-height: 1.2;
+}
+.logo-text span { display: block; font-size: 10px; font-weight: 400; color: rgba(255,255,255,0.65); letter-spacing: .05em; text-transform: uppercase; }
+
+.search-bar {
+  flex: 1;
+  max-width: 380px;
+  position: relative;
+}
+.search-bar input {
+  width: 100%;
+  height: 38px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.12);
+  padding: 0 40px 0 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--white);
+  outline: none;
+  transition: all .2s;
+}
+.search-bar input::placeholder { color: rgba(255,255,255,0.55); }
+.search-bar input:focus { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.2); }
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.6);
+  font-size: 16px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+nav a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all .15s;
+}
+nav a:hover { color: var(--white); background: rgba(255,255,255,0.12); }
+
+.lang-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.12);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.2);
+  margin-left: 8px;
+}
+.lang-toggle button {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all .15s;
+  letter-spacing: .05em;
+}
+.lang-toggle button.active {
+  background: var(--orange);
+  color: var(--white);
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
+  padding: 72px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='1.5' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E");
+}
+.hero-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(230,81,0,0.2);
+  border: 1px solid rgba(230,81,0,0.4);
+  color: #FFB74D;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  letter-spacing: .04em;
+}
+.hero h1 {
+  font-family: var(--font-title);
+  font-size: clamp(28px, 5vw, 46px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.12;
+  margin-bottom: 18px;
+  letter-spacing: -.02em;
+}
+.hero h1 span { color: #FFB74D; }
+.hero p {
+  color: rgba(255,255,255,0.75);
+  font-size: 16px;
+  max-width: 520px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+.hero-ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 13px 28px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all .2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--orange-light); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(230,81,0,.35); }
+.btn-outline {
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 13px 28px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  cursor: pointer;
+  transition: all .2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.6); }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  background: var(--gray-50);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 20px 24px;
+}
+.stats-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.stat { text-align: center; }
+.stat-number {
+  font-family: var(--font-title);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* ── SECTION STYLES ── */
+section { padding: 56px 24px; }
+.section-title {
+  font-family: var(--font-title);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 6px;
+}
+.section-sub {
+  font-size: 14px;
+  color: var(--gray-400);
+  margin-bottom: 28px;
+}
+.section-inner { max-width: 1100px; margin: 0 auto; }
+
+/* ── CATEGORIES ── */
+.categories-section { background: var(--white); }
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+@media (max-width: 700px) { .categories-grid { grid-template-columns: repeat(2, 1fr); } }
+.cat-card {
+  background: var(--off-white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+}
+.cat-card:hover {
+  border-color: var(--navy);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.cat-card:hover .cat-icon { background: var(--navy); color: var(--white); }
+.cat-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--gray-100);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin: 0 auto 10px;
+  transition: all .2s;
+}
+.cat-name {
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+.cat-count {
+  font-size: 11px;
+  color: var(--gray-400);
+  margin-top: 2px;
+}
+
+/* ── PRODUCTS CAROUSEL ── */
+.products-section { background: var(--gray-50); }
+.products-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-200) transparent;
+}
+.product-card {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  min-width: 200px;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all .2s;
+}
+.product-card:hover {
+  border-color: var(--navy);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.product-img {
+  height: 130px;
+  background: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  position: relative;
+}
+.badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.badge-new { background: var(--navy); color: var(--white); }
+.badge-top { background: var(--orange); color: var(--white); }
+.badge-avail { background: #27AE60; color: var(--white); }
+.product-info { padding: 12px 14px; }
+.product-name {
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin-bottom: 4px;
+}
+.product-meta {
+  font-size: 11px;
+  color: var(--gray-400);
+  margin-bottom: 8px;
+}
+.product-price {
+  font-family: var(--font-title);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.product-price span {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gray-400);
+}
+.add-btn {
+  width: 100%;
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-title);
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all .15s;
+}
+.add-btn:hover { background: var(--navy-light); }
+
+/* ── HOW IT WORKS ── */
+.how-section { background: var(--white); }
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 700px) { .steps-grid { grid-template-columns: 1fr; } }
+.step-card {
+  padding: 28px 24px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  position: relative;
+}
+.step-number {
+  width: 36px;
+  height: 36px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.step-title {
+  font-family: var(--font-title);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin-bottom: 8px;
+}
+.step-desc {
+  font-size: 13px;
+  color: var(--gray-600);
+  line-height: 1.65;
+}
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--navy);
+  padding: 56px 24px;
+  text-align: center;
+}
+.cta-band h2 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.cta-band p {
+  color: rgba(255,255,255,0.7);
+  font-size: 15px;
+  margin-bottom: 28px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--gray-800);
+  color: rgba(255,255,255,0.75);
+  padding: 48px 24px 24px;
+  font-size: 13px;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 32px;
+  margin-bottom: 36px;
+}
+@media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-brand p {
+  color: rgba(255,255,255,0.55);
+  font-size: 13px;
+  line-height: 1.65;
+  margin-top: 12px;
+  max-width: 240px;
+}
+.footer-col h4 {
+  font-family: var(--font-title);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.footer-col a {
+  display: block;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color .15s;
+}
+.footer-col a:hover { color: #FFB74D; }
+.footer-contact p { color: rgba(255,255,255,0.6); margin-bottom: 6px; }
+.footer-contact strong { color: var(--white); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer-bottom a { color: rgba(255,255,255,0.45); text-decoration: none; margin-left: 16px; font-size: 12px; }
+.footer-bottom a:hover { color: rgba(255,255,255,0.75); }
+
+/* CART TOAST */
+.cart-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--navy);
+  color: var(--white);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(80px);
+  opacity: 0;
+  transition: all .3s ease;
+  z-index: 999;
+  font-family: var(--font-body);
+}
+.cart-toast.show { transform: translateY(0); opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <!-- REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ -->
+    <a class="logo" href="#">
+      <div class="logo-icon">PL</div>
+      <div class="logo-text">Promesa Latina<span>Distribuidora B2B</span></div>
+    </a>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar productos, marcas, SKU..." id="searchInput">
+      <span class="search-icon">⌕</span>
+    </div>
+    <nav>
+      <a href="#catalog" onclick="scrollTo('#catalog')">Productos</a>
+      <a href="#about">Nosotros</a>
+      <a href="#contact">Contáctanos</a>
+    </nav>
+    <div class="lang-toggle">
+      <button class="active" id="btnES" onclick="setLang('es')">ES</button>
+      <button id="btnEN" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🌎 Distribución B2B — Los Ángeles & EEUU</div>
+    <h1 id="heroTitle">Abastece tu tienda con<br><span>productos que tus clientes aman</span></h1>
+    <p id="heroSub">Importamos directamente desde Centroamérica y Sudamérica. Pedidos mínimos accesibles, cotización en minutos, entrega confiable.</p>
+    <div class="hero-ctas">
+      <a href="#catalog" class="btn-primary" id="heroCta1">📦 Explorar Catálogo</a>
+      <a href="#contact" class="btn-outline" id="heroCta2">💬 Solicitar Cotización</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-number">500+</div><div class="stat-label" id="statP">Productos</div></div>
+    <div class="stat"><div class="stat-number">12</div><div class="stat-label" id="statC">Categorías</div></div>
+    <div class="stat"><div class="stat-number">48h</div><div class="stat-label" id="statD">Entrega est.</div></div>
+    <div class="stat"><div class="stat-number">10+</div><div class="stat-label" id="statR">Países origen</div></div>
+  </div>
+</div>
+
+<!-- ── CATEGORIES ── -->
+<section class="categories-section" id="catalog">
+  <div class="section-inner">
+    <div class="section-title" id="catTitle">Explorar por Categoría</div>
+    <div class="section-sub" id="catSub">Categorías administrables desde el panel · click para filtrar</div>
+    <div class="categories-grid">
+      <div class="cat-card" onclick="filterCategory('Bebidas')">
+        <div class="cat-icon">🥤</div>
+        <div class="cat-name">Bebidas</div>
+        <div class="cat-count">Jugos · Sodas · Energizantes</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Snacks')">
+        <div class="cat-icon">🍪</div>
+        <div class="cat-name">Galletas & Snacks</div>
+        <div class="cat-count">Rosquillas · Churritos · Nachos</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Pan')">
+        <div class="cat-icon">🥖</div>
+        <div class="cat-name">Pan & Repostería</div>
+        <div class="cat-count">Pan dulce · Tortillas</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Granos')">
+        <div class="cat-icon">🫘</div>
+        <div class="cat-name">Granos & Condimentos</div>
+        <div class="cat-count">Frijoles · Arroz · Especias</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Congelados')">
+        <div class="cat-icon">🧊</div>
+        <div class="cat-name">Congelados</div>
+        <div class="cat-count">Tamales · Pupusas · Yuca</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Medicina')">
+        <div class="cat-icon">💊</div>
+        <div class="cat-name">Medicina & Salud</div>
+        <div class="cat-count">Remedios · Suplementos</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Nostalgia')">
+        <div class="cat-icon">💛</div>
+        <div class="cat-name">Nostalgia Latina</div>
+        <div class="cat-count">Marcas clásicas importadas</div>
+      </div>
+      <div class="cat-card" onclick="filterCategory('Ver todo')">
+        <div class="cat-icon">📦</div>
+        <div class="cat-name">Ver Todo</div>
+        <div class="cat-count">Catálogo completo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEW PRODUCTS ── -->
+<section class="products-section">
+  <div class="section-inner">
+    <div class="section-title" id="prodTitle">✨ Nuevos Productos</div>
+    <div class="section-sub" id="prodSub">Los últimos agregados al catálogo esta semana</div>
+    <div class="products-scroll" id="productsScroll">
+      <!-- Products are rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section" id="about">
+  <div class="section-inner">
+    <div class="section-title" id="howTitle">¿Cómo funciona?</div>
+    <div class="section-sub" id="howSub">Proceso simple de 3 pasos para abastecer tu negocio</div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-title" id="step1T">Explora el catálogo</div>
+        <p class="step-desc" id="step1D">Navega cientos de productos latinos importados directamente. Filtra por categoría, marca o país de origen.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-title" id="step2T">Crea tu orden de compra</div>
+        <p class="step-desc" id="step2D">Agrega productos a tu carrito B2B con cantidades por caja o paquete. Recibe cotización personalizada en minutos.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-title" id="step3T">Recibe y vende</div>
+        <p class="step-desc" id="step3D">Tu pedido llega directo a tu tienda. Reordena con un clic desde tu historial. Sin fricción, sin papeleo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BAND ── -->
+<div class="cta-band" id="contact">
+  <div style="max-width:600px;margin:0 auto">
+    <h2 id="ctaTitle">¿Listo para abastecer tu tienda?</h2>
+    <p id="ctaSub">Regístrate gratis o solicita una cotización personalizada. Nuestro equipo responde en menos de 24 horas.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-primary" onclick="alert('Módulo de registro — conectar con /auth/register')" id="ctaBtn1">Crear cuenta gratis</button>
+      <button class="btn-outline" onclick="alert('Módulo de cotización — conectar con /quotes/new')" id="ctaBtn2">Solicitar cotización</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<!-- REEMPLAZAR AQUÍ INFORMACIÓN DE PROMESA LATINA -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <!-- REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ -->
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <div style="width:28px;height:28px;background:#E65100;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff">PL</div>
+          <span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;color:#fff">Promesa Latina</span>
+        </div>
+        <p>Distribuidora B2B de productos centroamericanos y sudamericanos para tiendas latinas en Estados Unidos.<br><br><!-- REEMPLAZAR AQUÍ INFORMACIÓN DE PROMESA LATINA --></p>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <a href="#">Bebidas</a>
+        <a href="#">Snacks</a>
+        <a href="#">Granos</a>
+        <a href="#">Congelados</a>
+        <a href="#">Ver catálogo</a>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <a href="#">Sobre Nosotros</a>
+        <a href="#">Cómo funciona</a>
+        <a href="#">Política de envíos</a>
+        <a href="#">Términos</a>
+        <a href="#">Privacidad</a>
+      </div>
+      <!-- REEMPLAZAR AQUÍ INFORMACIÓN DE CONTACTO DE PROMESA LATINA -->
+      <div class="footer-contact footer-col">
+        <h4>Contacto</h4>
+        <p>📧 <strong>ventas@promesalatina.com</strong></p>
+        <p>📞 <strong>+1 (XXX) XXX-XXXX</strong></p>
+        <p>📍 <strong>Los Ángeles, CA — EEUU</strong></p>
+        <p style="margin-top:12px">
+          <a href="#" style="margin-right:12px">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#" style="margin-left:12px">WhatsApp</a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Promesa Latina. Todos los derechos reservados.</span>
+      <div>
+        <a href="#">Privacidad</a>
+        <a href="#">Términos</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CART TOAST -->
+<div class="cart-toast" id="cartToast"></div>
+
+<script>
+// ── LANGUAGE SYSTEM ──
+const translations = {
+  es: {
+    heroTitle: 'Abastece tu tienda con<br><span style="color:#FFB74D">productos que tus clientes aman</span>',
+    heroSub: 'Importamos directamente desde Centroamérica y Sudamérica. Pedidos mínimos accesibles, cotización en minutos, entrega confiable.',
+    heroCta1: '📦 Explorar Catálogo',
+    heroCta2: '💬 Solicitar Cotización',
+    statP: 'Productos', statC: 'Categorías', statD: 'Entrega est.', statR: 'Países origen',
+    catTitle: 'Explorar por Categoría', catSub: 'Categorías administrables desde el panel · click para filtrar',
+    prodTitle: '✨ Nuevos Productos', prodSub: 'Los últimos agregados al catálogo esta semana',
+    howTitle: '¿Cómo funciona?', howSub: 'Proceso simple de 3 pasos para abastecer tu negocio',
+    step1T: 'Explora el catálogo', step1D: 'Navega cientos de productos latinos importados directamente. Filtra por categoría, marca o país de origen.',
+    step2T: 'Crea tu orden de compra', step2D: 'Agrega productos a tu carrito B2B con cantidades por caja o paquete. Recibe cotización personalizada en minutos.',
+    step3T: 'Recibe y vende', step3D: 'Tu pedido llega directo a tu tienda. Reordena con un clic desde tu historial. Sin fricción, sin papeleo.',
+    ctaTitle: '¿Listo para abastecer tu tienda?', ctaSub: 'Regístrate gratis o solicita una cotización personalizada. Nuestro equipo responde en menos de 24 horas.',
+    ctaBtn1: 'Crear cuenta gratis', ctaBtn2: 'Solicitar cotización',
+    addBtn: 'Agregar al carrito', toast: '✓ Agregado al carrito'
+  },
+  en: {
+    heroTitle: 'Stock your store with<br><span style="color:#FFB74D">products your customers love</span>',
+    heroSub: 'We import directly from Central & South America. Accessible minimums, quotes in minutes, reliable delivery.',
+    heroCta1: '📦 Browse Catalog',
+    heroCta2: '💬 Request a Quote',
+    statP: 'Products', statC: 'Categories', statD: 'Est. delivery', statR: 'Origin countries',
+    catTitle: 'Browse by Category', catSub: 'Categories managed from admin panel · click to filter',
+    prodTitle: '✨ New Products', prodSub: 'Latest additions to the catalog this week',
+    howTitle: 'How does it work?', howSub: 'Simple 3-step process to stock your business',
+    step1T: 'Browse the catalog', step1D: 'Navigate hundreds of directly imported Latin products. Filter by category, brand or origin.',
+    step2T: 'Create your purchase order', step2D: 'Add products to your B2B cart by case or pack. Receive a personalized quote in minutes.',
+    step3T: 'Receive and sell', step3D: 'Your order arrives directly to your store. Reorder with one click from your history. No friction, no paperwork.',
+    ctaTitle: 'Ready to stock your store?', ctaSub: 'Sign up for free or request a personalized quote. Our team responds in less than 24 hours.',
+    ctaBtn1: 'Create free account', ctaBtn2: 'Request a quote',
+    addBtn: 'Add to cart', toast: '✓ Added to cart'
+  }
+};
+
+let currentLang = 'es';
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btnES').classList.toggle('active', lang==='es');
+  document.getElementById('btnEN').classList.toggle('active', lang==='en');
+  const t = translations[lang];
+  document.getElementById('heroTitle').innerHTML = t.heroTitle;
+  document.getElementById('heroSub').textContent = t.heroSub;
+  document.getElementById('heroCta1').textContent = t.heroCta1;
+  document.getElementById('heroCta2').textContent = t.heroCta2;
+  document.getElementById('statP').textContent = t.statP;
+  document.getElementById('statC').textContent = t.statC;
+  document.getElementById('statD').textContent = t.statD;
+  document.getElementById('statR').textContent = t.statR;
+  document.getElementById('catTitle').textContent = t.catTitle;
+  document.getElementById('catSub').textContent = t.catSub;
+  document.getElementById('prodTitle').textContent = t.prodTitle;
+  document.getElementById('prodSub').textContent = t.prodSub;
+  document.getElementById('howTitle').textContent = t.howTitle;
+  document.getElementById('howSub').textContent = t.howSub;
+  document.getElementById('step1T').textContent = t.step1T;
+  document.getElementById('step1D').textContent = t.step1D;
+  document.getElementById('step2T').textContent = t.step2T;
+  document.getElementById('step2D').textContent = t.step2D;
+  document.getElementById('step3T').textContent = t.step3T;
+  document.getElementById('step3D').textContent = t.step3D;
+  document.getElementById('ctaTitle').textContent = t.ctaTitle;
+  document.getElementById('ctaSub').textContent = t.ctaSub;
+  document.getElementById('ctaBtn1').textContent = t.ctaBtn1;
+  document.getElementById('ctaBtn2').textContent = t.ctaBtn2;
+  document.querySelectorAll('.add-btn').forEach(btn => btn.textContent = t.addBtn);
+}
+
+// ── SAMPLE PRODUCTS (conectar a API /products?new=true) ──
+const products = [
+  { name: 'Gaseosa Colombiana Postobon', meta: 'Caja × 24 unid · 350ml', price: '$28.50', badge: 'nuevo', emoji: '🥤' },
+  { name: 'Tortillas Maseca Premium', meta: 'Caja × 12 kg · 1kg c/u', price: '$42.00', badge: 'top', emoji: '🫓' },
+  { name: 'Churritos Mr. Corn', meta: 'Caja × 50 bolsas · 28g', price: '$18.00', badge: 'disponible', emoji: '🌽' },
+  { name: 'Café Bustelo Espresso', meta: 'Caja × 12 latas · 10oz', price: '$55.00', badge: 'top', emoji: '☕' },
+  { name: 'Frijoles Rojos Isleño', meta: 'Caja × 24 latas · 15oz', price: '$36.00', badge: 'nuevo', emoji: '🫘' },
+  { name: 'Pupusas Congeladas', meta: 'Caja × 48 unid · 80g', price: '$32.00', badge: 'disponible', emoji: '🫓' },
+  { name: 'Salsa Lizano Original', meta: 'Caja × 12 botellas · 700ml', price: '$29.00', badge: 'nuevo', emoji: '🍶' },
+];
+
+function badgeClass(b) {
+  if(b==='nuevo') return 'badge-new';
+  if(b==='top') return 'badge-top';
+  return 'badge-avail';
+}
+function badgeLabel(b) {
+  if(b==='nuevo') return currentLang==='es'?'Nuevo':'New';
+  if(b==='top') return 'Top Seller';
+  return currentLang==='es'?'Disponible':'Available';
+}
+
+function renderProducts() {
+  const addBtnText = translations[currentLang].addBtn;
+  const scroll = document.getElementById('productsScroll');
+  scroll.innerHTML = products.map((p,i) => `
+    <div class="product-card">
+      <div class="product-img">
+        ${p.emoji}
+        <span class="badge ${badgeClass(p.badge)}">${badgeLabel(p.badge)}</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-meta">${p.meta}</div>
+        <div class="product-price">${p.price} <span>/ caja</span></div>
+        <button class="add-btn" onclick="addToCart('${p.name}')">${addBtnText}</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCategory(cat) {
+  const t = currentLang === 'es' ? `Filtrando: ${cat}` : `Filtering: ${cat}`;
+  showToast('🔍 ' + t);
+}
+
+function addToCart(name) {
+  showToast((translations[currentLang].toast) + ': ' + name);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('cartToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// Search input basic interaction
+document.getElementById('searchInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter' && e.target.value.trim()) {
+    showToast('🔍 ' + (currentLang==='es'?'Buscando: ':'Searching: ') + e.target.value);
+  }
+});
+
+renderProducts();
+</script>
+</body>
+</html>

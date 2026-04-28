@@ -1,0 +1,56 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "Distribución B2B — Los Ángeles & EE.UU.",
+      "title": "Abastece tu tienda con",
+      "titleHighlight": "productos que tus clientes aman",
+      "subtitle": "Importamos directamente desde Centroamérica y Sudamérica. Pedidos mínimos accesibles, cotización en minutos, entrega confiable.",
+      "cta_catalog": "Explorar Catálogo",
+      "cta_quote": "Solicitar Cotización"
+    },
+    "stats": {
+      "products": "Productos",
+      "categories": "Categorías",
+      "delivery": "Entrega est.",
+      "countries": "Países origen"
+    },
+    "categories": {
+      "title": "Explorar por Categoría",
+      "subtitle": "Categorías administrables desde el panel"
+    },
+    "products": {
+      "title": "Nuevos Productos",
+      "subtitle": "Los últimos agregados al catálogo esta semana",
+      "badge_new": "Nuevo",
+      "badge_top": "Top Seller",
+      "badge_avail": "Disponible",
+      "add_to_cart": "Agregar al carrito"
+    },
+    "how": {
+      "title": "¿Cómo funciona?",
+      "step1_title": "Explora el catálogo",
+      "step1_desc": "Navega cientos de productos latinos importados directamente.",
+      "step2_title": "Crea tu orden de compra",
+      "step2_desc": "Agrega productos con cantidades por caja o paquete.",
+      "step3_title": "Recibe y vende",
+      "step3_desc": "Tu pedido llega directo a tu tienda. Reordena con un clic."
+    },
+    "cta": {
+      "title": "¿Listo para abastecer tu tienda?",
+      "subtitle": "Regístrate gratis o solicita cotización personalizada.",
+      "register": "Crear cuenta gratis",
+      "quote": "Solicitar cotización"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "search": "Buscar",
+    "back": "Volver"
+  }
+}

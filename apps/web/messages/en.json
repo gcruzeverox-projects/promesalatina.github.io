@@ -1,0 +1,56 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "B2B Distribution — Los Angeles & USA",
+      "title": "Stock your store with",
+      "titleHighlight": "products your customers love",
+      "subtitle": "We import directly from Central & South America. Accessible minimums, quotes in minutes, reliable delivery.",
+      "cta_catalog": "Browse Catalog",
+      "cta_quote": "Request a Quote"
+    },
+    "stats": {
+      "products": "Products",
+      "categories": "Categories",
+      "delivery": "Est. delivery",
+      "countries": "Origin countries"
+    },
+    "categories": {
+      "title": "Browse by Category",
+      "subtitle": "Categories managed from the admin panel"
+    },
+    "products": {
+      "title": "New Products",
+      "subtitle": "Latest additions to the catalog this week",
+      "badge_new": "New",
+      "badge_top": "Top Seller",
+      "badge_avail": "Available",
+      "add_to_cart": "Add to cart"
+    },
+    "how": {
+      "title": "How does it work?",
+      "step1_title": "Browse the catalog",
+      "step1_desc": "Navigate hundreds of directly imported Latin products.",
+      "step2_title": "Create your purchase order",
+      "step2_desc": "Add products to your B2B cart by case or pack.",
+      "step3_title": "Receive and sell",
+      "step3_desc": "Your order arrives directly to your store. Reorder with one click."
+    },
+    "cta": {
+      "title": "Ready to stock your store?",
+      "subtitle": "Sign up for free or request a personalized quote.",
+      "register": "Create free account",
+      "quote": "Request a quote"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "back": "Back"
+  }
+}
