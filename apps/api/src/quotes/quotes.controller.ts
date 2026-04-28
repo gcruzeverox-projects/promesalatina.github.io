@@ -1,14 +1,16 @@
 // apps/api/src/quotes/quotes.controller.ts
+// FIX: eliminado import type { Response } from 'express'
+// Se usa @Res() con tipo any para evitar la dependencia de @types/express
+
 import {
   Controller, Get, Post, Put, Delete,
   Param, Body, Query, UseGuards, Request, Res,
 } from '@nestjs/common'
-import type { Response } from 'express'
-import { JwtAuthGuard }       from '../auth/guards/jwt-auth.guard'
-import { RolesGuard, Roles }  from '../auth/guards/roles.guard'
-import { QuotesService }      from './quotes.service'
-import { CreateQuoteDto }     from './dto/create-quote.dto'
-import { UpdateQuoteDto }     from './dto/update-quote.dto'
+import { JwtAuthGuard }      from '../auth/guards/jwt-auth.guard'
+import { RolesGuard, Roles } from '../auth/guards/roles.guard'
+import { QuotesService }     from './quotes.service'
+import { CreateQuoteDto }    from './dto/create-quote.dto'
+import { UpdateQuoteDto }    from './dto/update-quote.dto'
 
 @Controller('quotes')
 @UseGuards(JwtAuthGuard)
@@ -54,15 +56,16 @@ export class QuotesController {
     return this.quotesService.sendQuote(id)
   }
 
+  // @Res() tipado como any — evita depender de @types/express
   @Get(':id/pdf')
   @UseGuards(RolesGuard)
   @Roles('ADMIN', 'VENTAS')
-  async downloadPdf(@Param('id') id: string, @Res() res: Response) {
+  async downloadPdf(@Param('id') id: string, @Res() res: any) {
     const buffer = await this.quotesService.getPdfBuffer(id)
-    const quote  = await this.quotesService.findOne(id)
+    const quote  = await this.quotesService.findOne(id) as any
     res.set({
       'Content-Type':        'application/pdf',
-      'Content-Disposition': `attachment; filename="cotizacion-${(quote as any).quoteNumber}.pdf"`,
+      'Content-Disposition': `attachment; filename="cotizacion-${quote.quoteNumber}.pdf"`,
       'Content-Length':      buffer.length,
     })
     res.end(buffer)
