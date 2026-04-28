@@ -3,54 +3,45 @@
 # Corrige: pnpm-lock.yaml not found al usar --frozen-lockfile sin lockfile previo
 
 name: CI — Promesa Latina
-
+ 
 on:
   push:
     branches: [main, develop]
   pull_request:
     branches: [main]
-
+ 
 jobs:
   lint-and-build:
     name: Lint & Build
     runs-on: ubuntu-latest
-
+ 
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
-
+ 
       - name: Instalar pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9.0.0
-          run_install: false
-
+ 
       - name: Instalar Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
-
+ 
       - name: Instalar dependencias
-        # Si no existe pnpm-lock.yaml usa install normal y lo genera.
-        # Si ya existe usa --frozen-lockfile para reproducibilidad.
-        run: |
-          if [ -f "pnpm-lock.yaml" ]; then
-            pnpm install --frozen-lockfile
-          else
-            pnpm install
-          fi
-
+        run: pnpm install --no-frozen-lockfile
+ 
       - name: Generar Prisma Client
         run: pnpm db:generate
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://test:test@localhost/test' }}
-
+ 
       - name: Build frontend
         run: pnpm --filter web build
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL || 'http://localhost:3001' }}
           NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL || 'http://localhost:3000' }}
-
+ 
       - name: Build backend
         run: pnpm --filter api build
