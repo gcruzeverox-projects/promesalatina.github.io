@@ -1,28 +1,36 @@
 'use client'
 // apps/web/components/landing/Header.tsx
-// Header de la landing — integrado con carrito B2B, sesión y cotizaciones.
-// Versión final con todos los módulos comunicados.
+// ACTUALIZADO: botón de login prominente con indicador de rol después del acceso
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { CartButton } from '@/components/cart/CartButton'
 
 interface UserSession {
-  name:  string
-  role:  'ADMIN' | 'VENTAS' | 'CLIENTE'
-  email: string
+  name:         string
+  role:         'ADMIN' | 'VENTAS' | 'CLIENTE'
+  email:        string
+  businessName?: string
+}
+
+const ROLE_CONFIG = {
+  ADMIN:   { label: 'Panel Admin',    icon: '⚙️', href: '/admin/products', color: '#E65100' },
+  VENTAS:  { label: 'Cotizaciones',   icon: '📄', href: '/admin/quotes',   color: '#1F3A93' },
+  CLIENTE: { label: 'Mis Órdenes',    icon: '📋', href: '/orders',         color: '#1F3A93' },
 }
 
 export function Header() {
   const [lang,     setLang]     = useState<'es' | 'en'>('es')
   const [session,  setSession]  = useState<UserSession | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [mounted,  setMounted]  = useState(false)
 
   useEffect(() => {
-    const stored = localStorage.getItem('pl_user')
-    if (stored) {
-      try { setSession(JSON.parse(stored)) } catch { /* ignore */ }
-    }
+    setMounted(true)
+    try {
+      const stored = localStorage.getItem('pl_user')
+      if (stored) setSession(JSON.parse(stored))
+    } catch { /* ignore */ }
   }, [])
 
   function handleLogout() {
@@ -33,142 +41,349 @@ export function Header() {
   }
 
   const isStaff = session?.role === 'ADMIN' || session?.role === 'VENTAS'
+  const roleConf = session ? ROLE_CONFIG[session.role] : null
 
-  const nav = {
-    es: { products: 'Productos', about: 'Nosotros', contact: 'Contáctanos', catalog: 'Catálogo', orders: 'Mis Órdenes', quotes: 'Cotizaciones', admin: 'Panel Admin', login: 'Iniciar sesión' },
-    en: { products: 'Products',  about: 'About',    contact: 'Contact',     catalog: 'Catalog',  orders: 'My Orders',   quotes: 'Quotes',       admin: 'Admin Panel',  login: 'Login' },
+  const t = {
+    es: {
+      catalog: 'Catálogo',
+      about:   'Nosotros',
+      contact: 'Contacto',
+      login:   'Iniciar sesión',
+      loginSub:'Vendedores · Admins · Clientes',
+      logout:  'Cerrar sesión',
+      orders:  'Mis Órdenes',
+    },
+    en: {
+      catalog: 'Catalog',
+      about:   'About',
+      contact: 'Contact',
+      login:   'Sign in',
+      loginSub:'Sellers · Admins · Clients',
+      logout:  'Sign out',
+      orders:  'My Orders',
+    },
   }[lang]
 
   return (
     <header style={{
       background: '#1F3A93',
-      padding: '0 24px',
-      position: 'sticky', top: 0, zIndex: 100,
-      boxShadow: '0 4px 20px rgba(31,58,147,.25)',
+      padding: '0 20px',
+      position: 'sticky',
+      top: 0,
+      zIndex: 100,
+      boxShadow: '0 4px 20px rgba(31,58,147,.3)',
     }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', height: 64, display: 'flex', alignItems: 'center', gap: 14 }}>
+      <div style={{
+        maxWidth: 1200,
+        margin: '0 auto',
+        height: 64,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 12,
+      }}>
 
-        {/* Logo — REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ */}
+        {/* ── Logo ── REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', flexShrink: 0 }}>
-          <div style={{ width: 34, height: 34, background: '#E65100', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14, color: '#fff' }}>PL</div>
-          <div>
-            <div style={{ color: '#fff', fontWeight: 700, fontSize: 14, fontFamily: 'Poppins, sans-serif', lineHeight: 1.1 }}>Promesa Latina</div>
-            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 9, letterSpacing: '0.07em', textTransform: 'uppercase' }}>Distribuidora B2B</div>
+          <div style={{
+            width: 36, height: 36,
+            background: '#E65100',
+            borderRadius: 9,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontWeight: 800, fontSize: 15, color: '#fff',
+            fontFamily: 'Poppins, sans-serif',
+            boxShadow: '0 2px 8px rgba(230,81,0,.4)',
+          }}>PL</div>
+          <div style={{ lineHeight: 1.2 }}>
+            <div style={{ color: '#fff', fontWeight: 700, fontSize: 14, fontFamily: 'Poppins, sans-serif' }}>
+              Promesa Latina
+            </div>
+            <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 9, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+              Distribuidora B2B
+            </div>
           </div>
         </Link>
 
-        {/* Buscador */}
-        <div style={{ flex: 1, maxWidth: 380, position: 'relative' }}>
-          <span style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.5)', fontSize: 16 }}>⌕</span>
+        {/* ── Buscador ── */}
+        <div style={{ flex: 1, maxWidth: 360, position: 'relative' }}>
+          <span style={{
+            position: 'absolute', left: 12, top: '50%',
+            transform: 'translateY(-50%)',
+            color: 'rgba(255,255,255,0.45)',
+            fontSize: 16, pointerEvents: 'none',
+          }}>⌕</span>
           <input
             type="text"
             placeholder={lang === 'es' ? 'Buscar productos...' : 'Search products...'}
-            style={{ width: '100%', height: 38, background: 'rgba(255,255,255,0.12)', border: '1.5px solid rgba(255,255,255,0.2)', borderRadius: 20, paddingLeft: 36, paddingRight: 14, fontSize: 13, color: '#fff', outline: 'none', fontFamily: 'Inter, sans-serif' }}
-            onFocus={e => (e.target.style.background = 'rgba(255,255,255,0.2)')}
-            onBlur={e => (e.target.style.background = 'rgba(255,255,255,0.12)')}
+            style={{
+              width: '100%', height: 38,
+              background: 'rgba(255,255,255,0.1)',
+              border: '1.5px solid rgba(255,255,255,0.18)',
+              borderRadius: 20,
+              paddingLeft: 36, paddingRight: 14,
+              fontSize: 13, color: '#fff',
+              outline: 'none',
+              fontFamily: 'Inter, sans-serif',
+              transition: 'all .2s',
+            }}
+            onFocus={e => {
+              e.target.style.background = 'rgba(255,255,255,0.18)'
+              e.target.style.borderColor = 'rgba(255,255,255,0.45)'
+            }}
+            onBlur={e => {
+              e.target.style.background = 'rgba(255,255,255,0.1)'
+              e.target.style.borderColor = 'rgba(255,255,255,0.18)'
+            }}
             onKeyDown={e => {
               if (e.key === 'Enter') {
-                window.location.href = `/catalog?search=${encodeURIComponent((e.target as HTMLInputElement).value)}`
+                const val = (e.target as HTMLInputElement).value.trim()
+                if (val) window.location.href = `/catalog?search=${encodeURIComponent(val)}`
               }
             }}
           />
         </div>
 
-        {/* Nav pública */}
+        {/* ── Nav pública ── */}
         <nav style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Link href="/catalog" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 10px', borderRadius: 6 }}>
-            {nav.catalog}
-          </Link>
-          <Link href="/#about" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 10px', borderRadius: 6 }}>
-            {nav.about}
-          </Link>
-          <Link href="/#contact" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: 13, fontWeight: 500, padding: '6px 10px', borderRadius: 6 }}>
-            {nav.contact}
-          </Link>
+          {[
+            { label: t.catalog, href: '/catalog' },
+            { label: t.about,   href: '/#about'  },
+            { label: t.contact, href: '/#contact' },
+          ].map(item => (
+            <Link key={item.href} href={item.href} style={{
+              color: 'rgba(255,255,255,0.75)',
+              textDecoration: 'none',
+              fontSize: 13, fontWeight: 500,
+              padding: '6px 10px',
+              borderRadius: 7,
+              transition: 'all .15s',
+              whiteSpace: 'nowrap',
+            }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.color = '#fff'
+                el.style.background = 'rgba(255,255,255,0.1)'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.color = 'rgba(255,255,255,0.75)'
+                el.style.background = 'transparent'
+              }}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Mis Órdenes (solo clientes autenticados) */}
-        {session && session.role === 'CLIENTE' && (
-          <Link href="/orders" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: 12, fontWeight: 600, padding: '6px 10px', borderRadius: 6, border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', gap: 4 }}>
-            📋 {nav.orders}
-          </Link>
-        )}
-
-        {/* Accesos staff */}
-        {isStaff && (
-          <div style={{ display: 'flex', gap: 6 }}>
-            <Link href="/admin/quotes" style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.85)', padding: '6px 12px', borderRadius: 7, textDecoration: 'none', fontSize: 12, fontWeight: 600, border: '1px solid rgba(255,255,255,0.2)' }}>
-              📄 {nav.quotes}
-            </Link>
-            <Link href="/admin/products" style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#E65100', color: '#fff', padding: '6px 12px', borderRadius: 7, textDecoration: 'none', fontSize: 12, fontWeight: 700 }}>
-              ⚙️ {nav.admin}
-            </Link>
-          </div>
-        )}
-
-        {/* Carrito */}
+        {/* ── Carrito ── */}
         <CartButton lang={lang} />
 
-        {/* Selector idioma */}
-        <div style={{ display: 'flex', background: 'rgba(255,255,255,0.1)', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.2)' }}>
+        {/* ── Selector idioma ── */}
+        <div style={{
+          display: 'flex',
+          background: 'rgba(255,255,255,0.1)',
+          borderRadius: 20,
+          overflow: 'hidden',
+          border: '1px solid rgba(255,255,255,0.18)',
+          flexShrink: 0,
+        }}>
           {(['es', 'en'] as const).map(l => (
-            <button key={l} onClick={() => setLang(l)} style={{ background: lang === l ? '#E65100' : 'none', border: 'none', color: lang === l ? '#fff' : 'rgba(255,255,255,0.65)', fontSize: 11, fontWeight: 700, padding: '5px 10px', cursor: 'pointer', letterSpacing: '0.05em' }}>
+            <button key={l} onClick={() => setLang(l)} style={{
+              background: lang === l ? '#E65100' : 'none',
+              border: 'none',
+              color: lang === l ? '#fff' : 'rgba(255,255,255,0.6)',
+              fontSize: 11, fontWeight: 700,
+              padding: '5px 10px',
+              cursor: 'pointer',
+              letterSpacing: '0.05em',
+              transition: 'all .15s',
+            }}>
               {l.toUpperCase()}
             </button>
           ))}
         </div>
 
-        {/* Sesión */}
-        {session ? (
-          <div style={{ position: 'relative' }}>
-            <button onClick={() => setMenuOpen(o => !o)}
-              style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 20, padding: '4px 12px 4px 6px', cursor: 'pointer' }}>
-              <div style={{ width: 28, height: 28, borderRadius: '50%', background: '#E65100', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700 }}>
-                {session.name.charAt(0).toUpperCase()}
-              </div>
-              <span style={{ color: '#fff', fontSize: 12, fontWeight: 600 }}>{session.name.split(' ')[0]}</span>
-              <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 10 }}>▾</span>
-            </button>
-
-            {menuOpen && (
-              <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: 6, background: '#fff', borderRadius: 10, border: '1px solid #E2E8F0', boxShadow: '0 8px 24px rgba(0,0,0,0.12)', minWidth: 180, overflow: 'hidden', zIndex: 200 }}>
-                <div style={{ padding: '10px 14px', borderBottom: '1px solid #F1F5F9' }}>
-                  <p style={{ fontSize: 13, fontWeight: 600, color: '#0F172A', margin: 0 }}>{session.name}</p>
-                  <p style={{ fontSize: 11, color: '#94A3B8', margin: '2px 0 0' }}>{session.role}</p>
-                </div>
-                {session.role === 'CLIENTE' && (
-                  <Link href="/orders" onClick={() => setMenuOpen(false)}
-                    style={{ display: 'block', padding: '8px 14px', fontSize: 13, color: '#374151', textDecoration: 'none' }}>
-                    📋 Mis Órdenes
-                  </Link>
-                )}
-                {isStaff && (
-                  <>
-                    <Link href="/admin/products" onClick={() => setMenuOpen(false)}
-                      style={{ display: 'block', padding: '8px 14px', fontSize: 13, color: '#374151', textDecoration: 'none' }}>
-                      📦 Productos
-                    </Link>
-                    <Link href="/admin/orders" onClick={() => setMenuOpen(false)}
-                      style={{ display: 'block', padding: '8px 14px', fontSize: 13, color: '#374151', textDecoration: 'none' }}>
-                      📋 Órdenes
-                    </Link>
-                    <Link href="/admin/quotes" onClick={() => setMenuOpen(false)}
-                      style={{ display: 'block', padding: '8px 14px', fontSize: 13, color: '#374151', textDecoration: 'none' }}>
-                      📄 Cotizaciones
-                    </Link>
-                  </>
-                )}
-                <button onClick={handleLogout}
-                  style={{ width: '100%', padding: '8px 14px', border: 'none', background: 'none', fontSize: 13, color: '#EF4444', cursor: 'pointer', textAlign: 'left', borderTop: '1px solid #F1F5F9' }}>
-                  ⎋ Cerrar sesión
+        {/* ── ZONA DE SESIÓN ──────────────────────────────────────────── */}
+        {mounted && (
+          <>
+            {session ? (
+              /* ── Usuario autenticado ── */
+              <div style={{ position: 'relative', flexShrink: 0 }}>
+                <button
+                  onClick={() => setMenuOpen(o => !o)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 9,
+                    background: 'rgba(255,255,255,0.12)',
+                    border: '1.5px solid rgba(255,255,255,0.25)',
+                    borderRadius: 22,
+                    padding: '4px 14px 4px 5px',
+                    cursor: 'pointer',
+                    transition: 'all .15s',
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.2)')}
+                  onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
+                >
+                  {/* Avatar con inicial */}
+                  <div style={{
+                    width: 30, height: 30,
+                    borderRadius: '50%',
+                    background: roleConf?.color ?? '#E65100',
+                    color: '#fff',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: 13, fontWeight: 800,
+                    fontFamily: 'Poppins, sans-serif',
+                    flexShrink: 0,
+                  }}>
+                    {session.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ color: '#fff', fontSize: 12, fontWeight: 700, lineHeight: 1.2 }}>
+                      {session.name.split(' ')[0]}
+                    </div>
+                    <div style={{
+                      fontSize: 9, fontWeight: 700,
+                      color: roleConf?.color === '#E65100' ? '#FFB74D' : 'rgba(255,255,255,0.55)',
+                      letterSpacing: '0.07em',
+                      textTransform: 'uppercase',
+                    }}>
+                      {session.role}
+                    </div>
+                  </div>
+                  <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 10, marginLeft: 2 }}>▾</span>
                 </button>
+
+                {/* Menú desplegable */}
+                {menuOpen && (
+                  <div style={{
+                    position: 'absolute', top: 'calc(100% + 8px)', right: 0,
+                    background: '#fff',
+                    borderRadius: 12,
+                    border: '1px solid #E2E8F0',
+                    boxShadow: '0 12px 36px rgba(0,0,0,0.14)',
+                    minWidth: 210,
+                    overflow: 'hidden',
+                    zIndex: 200,
+                  }}>
+                    {/* Info usuario */}
+                    <div style={{ padding: '14px 16px', borderBottom: '1px solid #F1F5F9', background: '#FAFBFD' }}>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: '#0F172A', margin: 0 }}>{session.name}</p>
+                      <p style={{ fontSize: 11, color: '#94A3B8', margin: '2px 0 0' }}>{session.email}</p>
+                      <span style={{
+                        display: 'inline-block', marginTop: 6,
+                        background: roleConf?.color === '#E65100' ? '#FFF3E0' : '#EEF2FF',
+                        color: roleConf?.color,
+                        fontSize: 10, fontWeight: 800,
+                        padding: '2px 8px', borderRadius: 4,
+                        letterSpacing: '0.06em', textTransform: 'uppercase',
+                      }}>
+                        {roleConf?.icon} {session.role}
+                      </span>
+                    </div>
+
+                    {/* Acceso directo según rol */}
+                    {roleConf && (
+                      <Link href={roleConf.href}
+                        onClick={() => setMenuOpen(false)}
+                        style={{
+                          display: 'flex', alignItems: 'center', gap: 10,
+                          padding: '12px 16px',
+                          fontSize: 13, fontWeight: 700,
+                          color: roleConf.color,
+                          textDecoration: 'none',
+                          borderBottom: '1px solid #F1F5F9',
+                          background: '#F8FAFC',
+                          transition: 'background .15s',
+                        }}
+                        onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#F0F4FF')}
+                        onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#F8FAFC')}
+                      >
+                        <span style={{ fontSize: 18 }}>{roleConf.icon}</span>
+                        Ir a {roleConf.label}
+                      </Link>
+                    )}
+
+                    {/* Links adicionales por rol */}
+                    {session.role === 'CLIENTE' && (
+                      <Link href="/catalog" onClick={() => setMenuOpen(false)}
+                        style={{ display: 'block', padding: '10px 16px', fontSize: 13, color: '#374151', textDecoration: 'none', borderBottom: '1px solid #F1F5F9' }}>
+                        🛒 Catálogo
+                      </Link>
+                    )}
+                    {isStaff && (
+                      <>
+                        <Link href="/admin/products" onClick={() => setMenuOpen(false)}
+                          style={{ display: 'block', padding: '10px 16px', fontSize: 13, color: '#374151', textDecoration: 'none', borderBottom: '1px solid #F1F5F9' }}>
+                          📦 Productos
+                        </Link>
+                        <Link href="/admin/orders" onClick={() => setMenuOpen(false)}
+                          style={{ display: 'block', padding: '10px 16px', fontSize: 13, color: '#374151', textDecoration: 'none', borderBottom: '1px solid #F1F5F9' }}>
+                          📋 Órdenes
+                        </Link>
+                        <Link href="/admin/quotes" onClick={() => setMenuOpen(false)}
+                          style={{ display: 'block', padding: '10px 16px', fontSize: 13, color: '#374151', textDecoration: 'none', borderBottom: '1px solid #F1F5F9' }}>
+                          📄 Cotizaciones
+                        </Link>
+                      </>
+                    )}
+
+                    {/* Logout */}
+                    <button onClick={handleLogout} style={{
+                      width: '100%', padding: '10px 16px',
+                      border: 'none', background: 'none',
+                      fontSize: 13, color: '#EF4444',
+                      cursor: 'pointer', textAlign: 'left',
+                      display: 'flex', alignItems: 'center', gap: 8,
+                      transition: 'background .15s',
+                    }}
+                      onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#FEF2F2')}
+                      onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = 'none')}
+                    >
+                      ⎋ {t.logout}
+                    </button>
+                  </div>
+                )}
               </div>
+            ) : (
+              /* ── BOTÓN LOGIN PROMINENTE (sin sesión) ── */
+              <Link
+                href="/admin/login"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  background: '#fff',
+                  color: '#1F3A93',
+                  padding: '7px 18px',
+                  borderRadius: 10,
+                  textDecoration: 'none',
+                  flexShrink: 0,
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.15)',
+                  transition: 'all .2s',
+                  lineHeight: 1.2,
+                  minWidth: 120,
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.background = '#F0F4FF'
+                  el.style.transform = 'translateY(-1px)'
+                  el.style.boxShadow = '0 4px 16px rgba(0,0,0,0.2)'
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.background = '#fff'
+                  el.style.transform = 'translateY(0)'
+                  el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.15)'
+                }}
+              >
+                <span style={{ fontSize: 13, fontWeight: 800, fontFamily: 'Poppins, sans-serif' }}>
+                  🔑 {t.login}
+                </span>
+                <span style={{ fontSize: 9, color: '#94A3B8', letterSpacing: '0.04em', marginTop: 1 }}>
+                  {t.loginSub}
+                </span>
+              </Link>
             )}
-          </div>
-        ) : (
-          <Link href="/admin/login" style={{ background: 'rgba(255,255,255,0.12)', color: '#fff', padding: '6px 14px', borderRadius: 7, textDecoration: 'none', fontSize: 12, fontWeight: 600, border: '1px solid rgba(255,255,255,0.2)', flexShrink: 0 }}>
-            {nav.login}
-          </Link>
+          </>
         )}
       </div>
     </header>
