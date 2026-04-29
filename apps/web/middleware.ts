@@ -1,34 +1,23 @@
 // apps/web/middleware.ts
-// FIX: MIDDLEWARE_INVOCATION_FAILED en Vercel
-// next-intl v3.22+ requiere pathnames explícito o routing config actualizado
- 
-import createMiddleware from 'next-intl/middleware'
+// SOLUCIÓN DEFINITIVA: middleware mínimo sin next-intl
+// next-intl en edge runtime de Vercel causa MIDDLEWARE_INVOCATION_FAILED
+// El i18n se maneja via [locale] routing — el middleware solo redirige / a /es
+
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
- 
-const intlMiddleware = createMiddleware({
-  locales:       ['es', 'en'],
-  defaultLocale: 'es',
-  localePrefix:  'as-needed',   // /es solo cuando no es el default
-})
- 
-export default function middleware(request: NextRequest) {
-  // Rutas de admin no necesitan i18n — pasarlas directo
+
+export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  if (
-    pathname.startsWith('/admin') ||
-    pathname.startsWith('/checkout') ||
-    pathname.startsWith('/catalog') ||
-    pathname.startsWith('/orders')
-  ) {
-    return NextResponse.next()
+
+  // Solo redirigir la raíz exacta a /es
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/es', request.url))
   }
-  return intlMiddleware(request)
+
+  return NextResponse.next()
 }
- 
+
 export const config = {
-  matcher: [
-    // Excluir archivos estáticos, API routes y rutas de Next.js internas
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js|map)).*)',
-  ],
+  // Solo actuar sobre la raíz — nada más
+  matcher: ['/'],
 }
