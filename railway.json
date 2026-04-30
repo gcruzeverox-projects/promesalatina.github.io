@@ -1,12 +1,10 @@
 {
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS",
-    "buildCommand": "npx pnpm@9 install --no-frozen-lockfile && npx pnpm@9 --filter api build"
+    "builder": "NIXPACKS"
   },
   "deploy": {
     "startCommand": "node apps/api/dist/main.js",
-    "healthcheckPath": "/api/health",
     "restartPolicyType": "ON_FAILURE"
   }
 }
