@@ -1,11 +1,12 @@
 {
-  "$schema": "https://railway.com/railway.schema.json",
+  "$schema": "https://railway.app/railway-schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "NODE_ENV=development npx --yes pnpm@9 install --no-frozen-lockfile && npx pnpm@9 --filter api build"
+    "buildCommand": "pnpm install && pnpm --filter api run db:generate && pnpm --filter api run build"
   },
   "deploy": {
-    "startCommand": "npx pnpm@9 run db:generate && node apps/api/dist/main.js",
-    "restartPolicyType": "ON_FAILURE"
+    "startCommand": "pnpm --filter api run start:prod",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 3
   }
 }
