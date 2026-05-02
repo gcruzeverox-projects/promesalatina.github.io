@@ -2,14 +2,19 @@
   "name": "api",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "build":       "nest build",
-    "start":       "node dist/main",
-    "start:dev":   "nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "lint":        "eslint \"{src,apps,libs,test}/**/*.ts\"",
-    "test":        "jest",
-    "clean":       "rm -rf dist"
+"scripts": {
+  "build":       "prisma generate && nest build",
+  "start":       "node dist/apps/api/main",
+  "start:prod":  "node dist/apps/api/main",
+  "start:dev":   "nest start --watch",
+  "start:debug": "nest start --debug --watch",
+  "db:generate": "prisma generate",
+  "db:migrate":  "prisma migrate deploy",
+  "db:seed":     "ts-node --project tsconfig.json ../../database/seed.ts",
+  "lint":        "eslint \"{src,apps,libs,test}/**/*.ts\"",
+  "test":        "jest",
+  "clean":       "rm -rf dist"
+}, 
   },
   "dependencies": {
     "@nestjs/common":           "^10.3.0",
