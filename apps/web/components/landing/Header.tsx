@@ -14,11 +14,11 @@ interface UserSession {
   businessName?: string
 }
 
-const ROLE_CONFIG = {
+const getRoleConfig = (locale: string) => ({
   ADMIN:   { label: 'Panel Admin',    icon: '⚙️', href: `/${locale}/admin/products`, color: '#E65100' },
   VENTAS:  { label: 'Cotizaciones',   icon: '📄', href: `/${locale}/admin/quotes`,   color: '#1F3A93' },
   CLIENTE: { label: 'Mis Órdenes',    icon: '📋', href: `/${locale}/orders`,         color: '#1F3A93' },
-}
+})
 
 export function Header() {
   const [lang,     setLang]     = useState<'es' | 'en'>('es')
@@ -43,7 +43,7 @@ export function Header() {
   }
 
   const isStaff = session?.role === 'ADMIN' || session?.role === 'VENTAS'
-  const roleConf = session ? ROLE_CONFIG[session.role] : null
+  const roleConf = session ? getRoleConfig(locale)[session.role] : null
 
   const t = {
     es: {
