@@ -16,7 +16,7 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { href: '/admin',           label: 'Dashboard',    icon: '▦',  roles: ['ADMIN', 'VENTAS'] },
+  { href: '/admin/dashboard',           label: 'Dashboard',    icon: '▦',  roles: ['ADMIN', 'VENTAS'] },
   { href: '/admin/products',  label: 'Productos',    icon: '📦', roles: ['ADMIN', 'VENTAS'] },
   { href: '/admin/orders',    label: 'Órdenes',      icon: '📋', roles: ['ADMIN', 'VENTAS'] },
   { href: '/admin/quotes',    label: 'Cotizaciones', icon: '📄', roles: ['ADMIN', 'VENTAS'] },

@@ -9,6 +9,7 @@
 //  - acceso rápido al botón "Nuevo producto"
 
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { AdminLayout } from '@/components/admin/layout/AdminLayout'
@@ -25,6 +26,8 @@ const STATUS_LABELS: Record<string, { label: string; color: string; bg: string }
 
 export default function ProductsPage() {
   const router = useRouter()
+  const params = useParams()
+  const locale = params.locale as string || 'es'
 
   const [products,    setProducts]    = useState<Product[]>([])
   const [categories,  setCategories]  = useState<Category[]>([])
@@ -145,7 +148,7 @@ export default function ProductsPage() {
           </p>
         </div>
         <Link
-          href="/admin/products/new"
+          href={`/${locale}/admin/products/new`}
           style={{
             background: '#1F3A93', color: '#fff',
             padding: '10px 20px', borderRadius: 8,
@@ -238,7 +241,7 @@ export default function ProductsPage() {
               {search ? `No hay resultados para "${search}"` : 'Crea tu primer producto para empezar'}
             </p>
             {!search && (
-              <Link href="/admin/products/new" style={{ display: 'inline-block', marginTop: 16, background: '#1F3A93', color: '#fff', padding: '10px 20px', borderRadius: 8, textDecoration: 'none', fontSize: 13, fontWeight: 600 }}>
+              <Link href={`/${locale}/admin/products/new`} style={{ display: 'inline-block', marginTop: 16, background: '#1F3A93', color: '#fff', padding: '10px 20px', borderRadius: 8, textDecoration: 'none', fontSize: 13, fontWeight: 600 }}>
                 + Crear primer producto
               </Link>
             )}
@@ -335,7 +338,7 @@ export default function ProductsPage() {
                       {/* Acciones */}
                       <td style={{ padding: '12px 16px', textAlign: 'right' }}>
                         <div style={{ display: 'flex', gap: 4, justifyContent: 'flex-end' }}>
-                          <ActionBtn title="Editar" onClick={() => router.push(`/admin/products/${product.id}`)} disabled={busy}>✏️</ActionBtn>
+                          <ActionBtn title="Editar" onClick={() => router.push(`/${locale}/admin/products/${product.id}`)} disabled={busy}>✏️</ActionBtn>
                           <ActionBtn title={product.status === 'ACTIVE' ? 'Ocultar' : 'Activar'} onClick={() => handleToggleStatus(product)} disabled={busy}>
                             {product.status === 'ACTIVE' ? '👁️' : '✅'}
                           </ActionBtn>
