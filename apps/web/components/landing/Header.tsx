@@ -4,6 +4,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 import { CartButton } from '@/components/cart/CartButton'
 
 interface UserSession {
@@ -14,15 +15,16 @@ interface UserSession {
 }
 
 const ROLE_CONFIG = {
-  ADMIN:   { label: 'Panel Admin',    icon: '⚙️', href: '/admin/products', color: '#E65100' },
-  VENTAS:  { label: 'Cotizaciones',   icon: '📄', href: '/admin/quotes',   color: '#1F3A93' },
-  CLIENTE: { label: 'Mis Órdenes',    icon: '📋', href: '/orders',         color: '#1F3A93' },
+  ADMIN:   { label: 'Panel Admin',    icon: '⚙️', href: `/${locale}/admin/products`, color: '#E65100' },
+  VENTAS:  { label: 'Cotizaciones',   icon: '📄', href: `/${locale}/admin/quotes`,   color: '#1F3A93' },
+  CLIENTE: { label: 'Mis Órdenes',    icon: '📋', href: `/${locale}/orders`,         color: '#1F3A93' },
 }
 
 export function Header() {
   const [lang,     setLang]     = useState<'es' | 'en'>('es')
   const [session,  setSession]  = useState<UserSession | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const locale = useLocale()
   const [mounted,  setMounted]  = useState(false)
 
   useEffect(() => {
@@ -136,7 +138,7 @@ export function Header() {
             onKeyDown={e => {
               if (e.key === 'Enter') {
                 const val = (e.target as HTMLInputElement).value.trim()
-                if (val) window.location.href = `/catalog?search=${encodeURIComponent(val)}`
+                if (val) window.location.href = `/${locale}/catalog?search=${encodeURIComponent(val)}`
               }
             }}
           />
@@ -145,7 +147,7 @@ export function Header() {
         {/* ── Nav pública ── */}
         <nav style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           {[
-            { label: t.catalog, href: '/catalog' },
+            { label: t.catalog, href: `/${locale}/catalog` },
             { label: t.about,   href: '/#about'  },
             { label: t.contact, href: '/#contact' },
           ].map(item => (
@@ -303,22 +305,22 @@ export function Header() {
 
                     {/* Links adicionales por rol */}
                     {session.role === 'CLIENTE' && (
-                      <Link href="/catalog" onClick={() => setMenuOpen(false)}
+                      <Link href={`/${locale}/catalog`} onClick={() => setMenuOpen(false)}
                         style={{ display: 'block', padding: '10px 16px', fontSize: 13, color: '#374151', textDecoration: 'none', borderBottom: '1px solid #F1F5F9' }}>
                         🛒 Catálogo
                       </Link>
                     )}
                     {isStaff && (
                       <>
-                        <Link href="/admin/products" onClick={() => setMenuOpen(false)}
+                        <Link href={`/${locale}/admin/products`} onClick={() => setMenuOpen(false)}
                           style={{ display: 'block', padding: '10px 16px', fontSize: 13, color: '#374151', textDecoration: 'none', borderBottom: '1px solid #F1F5F9' }}>
                           📦 Productos
                         </Link>
-                        <Link href="/admin/orders" onClick={() => setMenuOpen(false)}
+                        <Link href={`/${locale}/admin/orders`} onClick={() => setMenuOpen(false)}
                           style={{ display: 'block', padding: '10px 16px', fontSize: 13, color: '#374151', textDecoration: 'none', borderBottom: '1px solid #F1F5F9' }}>
                           📋 Órdenes
                         </Link>
-                        <Link href="/admin/quotes" onClick={() => setMenuOpen(false)}
+                        <Link href={`/${locale}/admin/quotes`} onClick={() => setMenuOpen(false)}
                           style={{ display: 'block', padding: '10px 16px', fontSize: 13, color: '#374151', textDecoration: 'none', borderBottom: '1px solid #F1F5F9' }}>
                           📄 Cotizaciones
                         </Link>
@@ -345,7 +347,7 @@ export function Header() {
             ) : (
               /* ── BOTÓN LOGIN PROMINENTE (sin sesión) ── */
               <Link
-                href="/admin/login"
+                href={`/${locale}/admin/login`}
                 style={{
                   display: 'flex',
                   flexDirection: 'column',

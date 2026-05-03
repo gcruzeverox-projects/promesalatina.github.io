@@ -4,6 +4,7 @@
 // Protegido por rol ADMIN o VENTAS (verificar en middleware.ts)
 
 import { useState, useEffect } from 'react'
+import { useLocale } from 'next-intl'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 
@@ -26,20 +27,21 @@ const NAV_ITEMS: NavItem[] = [
 export function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router   = useRouter()
+  const locale   = useLocale()
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [user, setUser] = useState<{ name: string; role: string } | null>(null)
 
   useEffect(() => {
     // Cargar usuario del localStorage — en producción usar next-auth o cookies httpOnly
     const stored = localStorage.getItem('pl_user')
-    if (!stored) { router.push('/admin/login'); return }
+    if (!stored) { router.push(`/${locale}/admin/login`); return }
     setUser(JSON.parse(stored))
   }, [router])
 
   function handleLogout() {
     localStorage.removeItem('pl_token')
     localStorage.removeItem('pl_user')
-    router.push('/admin/login')
+    router.push(`/${locale}/admin/login`)
   }
 
   return (
@@ -82,11 +84,11 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
         {/* Nav */}
         <nav style={{ flex: 1, padding: '12px 8px', overflowY: 'auto' }}>
           {NAV_ITEMS.map((item) => {
-            const active = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href))
+            const active = pathname.includes(item.href) || (item.href !== '/admin' && pathname.startsWith(item.href))
             return (
               <Link
                 key={item.href}
-                href={item.href}
+                href={`/${locale}${item.href}`}
                 title={!sidebarOpen ? item.label : undefined}
                 style={{
                   display: 'flex',
