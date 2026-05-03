@@ -3,11 +3,13 @@
 // Página de login del panel administrativo
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 
 const BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
 
 export default function AdminLoginPage() {
+  const params = useParams()
+  const locale = params.locale as string || 'es'
   const router = useRouter()
   const [email,    setEmail]    = useState('')
   const [password, setPassword] = useState('')
@@ -31,9 +33,9 @@ export default function AdminLoginPage() {
       localStorage.setItem('pl_user',  JSON.stringify(data.user))
 
       // Redirigir según rol
-      if (data.user.role === 'ADMIN')  router.push('/admin/products')
-      else if (data.user.role === 'VENTAS') router.push('/admin/quotes')
-      else router.push('/')
+      if (data.user.role === 'ADMIN')  router.push(`/${locale}/admin/products`)
+      else if (data.user.role === 'VENTAS') router.push(`/${locale}/admin/quotes`)
+      else router.push(`/${locale}`)
     } catch (e: any) {
       setError(e.message)
     } finally {
