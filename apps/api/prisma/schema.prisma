@@ -1,0 +1,212 @@
+// database/schema.prisma
+// Schema completo de Promesa Latina — PostgreSQL + Prisma ORM
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── ENUMS ─────────────────────────────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  VENTAS
+  CLIENTE
+}
+
+enum OrderStatus {
+  RECIBIDA
+  COTIZANDO
+  ENVIADA
+  CONFIRMADA
+  SURTIDA
+  CANCELADA
+}
+
+enum ProductStatus {
+  ACTIVE
+  HIDDEN
+  DELETED
+}
+
+// ── USERS ─────────────────────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  password     String
+  role         Role     @default(CLIENTE)
+  name         String
+  businessName String?
+  phone        String?
+  address      String?
+  city         String?
+  state        String?
+  zipCode      String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  orders       Order[]
+  quotes       Quote[]
+
+  @@map("users")
+}
+
+// ── CATEGORIES ────────────────────────────────────────────────────────────────
+
+model Category {
+  id            String        @id @default(cuid())
+  name          String
+  nameEn        String
+  slug          String        @unique
+  icon          String?
+  order         Int           @default(0)
+  isActive      Boolean       @default(true)
+  subcategories Subcategory[]
+  products      Product[]
+  createdAt     DateTime      @default(now())
+
+  @@map("categories")
+}
+
+model Subcategory {
+  id         String    @id @default(cuid())
+  name       String
+  nameEn     String
+  slug       String    @unique
+  categoryId String
+  category   Category  @relation(fields: [categoryId], references: [id])
+  products   Product[]
+  isActive   Boolean   @default(true)
+  order      Int       @default(0)
+
+  @@map("subcategories")
+}
+
+// ── PRODUCTS ──────────────────────────────────────────────────────────────────
+
+model Product {
+  id              String        @id @default(cuid())
+  name            String
+  nameEn          String?
+  description     String?
+  descriptionEn   String?
+  sku             String        @unique
+  weight          Float?
+  unitsPerPack    Int           @default(1)
+  unitsPerCase    Int           @default(1)
+  moq             Int           @default(1)
+  basePrice       Float
+  status          ProductStatus @default(ACTIVE)
+  stockQuantity   Int           @default(0)
+  images          ProductImage[]
+  categoryId      String
+  category        Category      @relation(fields: [categoryId], references: [id])
+  subcategoryId   String?
+  subcategory     Subcategory?  @relation(fields: [subcategoryId], references: [id])
+  orderItems      OrderItem[]
+  quoteItems      QuoteItem[]
+  isNew           Boolean       @default(false)
+  isTopSeller     Boolean       @default(false)
+  countryOfOrigin String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("products")
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  url       String
+  altText   String?
+  order     Int     @default(0)
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("product_images")
+}
+
+// ── ORDERS ────────────────────────────────────────────────────────────────────
+
+model Order {
+  id            String      @id @default(cuid())
+  orderNumber   String      @unique @default(cuid())
+  status        OrderStatus @default(RECIBIDA)
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id])
+  guestName     String?
+  guestEmail    String?
+  guestPhone    String?
+  guestBusiness String?
+  guestAddress  String?
+  items         OrderItem[]
+  notes         String?
+  subtotal      Float
+  total         Float
+  quotes        Quote[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  unitType  String  @default("caja")
+  unitPrice Float
+  subtotal  Float
+
+  @@map("order_items")
+}
+
+// ── QUOTES ────────────────────────────────────────────────────────────────────
+
+model Quote {
+  id              String      @id @default(cuid())
+  quoteNumber     String      @unique @default(cuid())
+  orderId         String
+  order           Order       @relation(fields: [orderId], references: [id])
+  createdById     String
+  createdBy       User        @relation(fields: [createdById], references: [id])
+  validUntil      DateTime
+  items           QuoteItem[]
+  profitPercent   Float       @default(0)
+  bottlingPercent Float       @default(0)
+  subtotal        Float
+  fees            Float       @default(0)
+  total           Float
+  notes           String?
+  pdfUrl          String?
+  sentAt          DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@map("quotes")
+}
+
+model QuoteItem {
+  id            String  @id @default(cuid())
+  quoteId       String
+  quote         Quote   @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  productId     String
+  product       Product @relation(fields: [productId], references: [id])
+  quantity      Int
+  unitType      String  @default("caja")
+  supplierPrice Float
+  salePrice     Float
+  subtotal      Float
+  isAvailable   Boolean @default(true)
+  deliveryDays  Int?
+  notes         String?
+
+  @@map("quote_items")
+}

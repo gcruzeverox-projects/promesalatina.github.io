@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build":       "prisma generate --schema=../../database/schema.prisma && nest build",
+    "build":       "prisma generate && nest build",
     "start":       "node dist/main",
     "start:prod":  "node dist/main",
     "start:dev":   "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "db:generate": "prisma generate --schema=../../database/schema.prisma",
-    "db:migrate":  "prisma migrate deploy --schema=../../database/schema.prisma",
+    "db:generate": "prisma generate ",
+    "db:migrate":  "prisma migrate deploy ",
     "db:seed":     "ts-node --project tsconfig.json ../../database/seed.ts",
     "lint":        "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "test":        "jest",
@@ -50,8 +50,5 @@
     "ts-node":             "^10.9.2",
     "tsconfig-paths":      "^4.2.0",
     "typescript":          "^5.4.0"
-  },
-  "prisma": {
-    "schema": "../../database/schema.prisma"
   }
 }
