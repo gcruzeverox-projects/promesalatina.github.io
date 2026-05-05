@@ -12,7 +12,8 @@ function toApiPayload(data: ProductFormData): ProductFormData {
 }
 
 export default function EditProductPage() {
-  const params = useParams<{ id: string }>()
+  const params = useParams<{ id: string; locale: string }>()
+  const locale = params.locale || 'es'
   const searchParams = useSearchParams()
   const router = useRouter()
   const justCreated = searchParams.get('created') === '1'
@@ -44,12 +45,12 @@ export default function EditProductPage() {
   }
 
   if (loading) return <AdminLayout><div style={{ padding: 64, textAlign: 'center', color: '#94A3B8' }}>Cargando...</div></AdminLayout>
-  if (!product) return <AdminLayout><div style={{ padding: 48, textAlign: 'center' }}><p style={{ color: '#EF4444' }}>No encontrado</p><Link href="/admin/products" style={{ color: '#1F3A93' }}>← Volver</Link></div></AdminLayout>
+  if (!product) return <AdminLayout><div style={{ padding: 48, textAlign: 'center' }}><p style={{ color: '#EF4444' }}>No encontrado</p><Link href={`/${locale}/admin/products`} style={{ color: '#1F3A93' }}>← Volver</Link></div></AdminLayout>
 
   return (
     <AdminLayout>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20, fontSize: 13, color: '#64748B' }}>
-        <Link href="/admin/products" style={{ color: '#64748B', textDecoration: 'none' }}>Productos</Link>
+        <Link href={`/${locale}/admin/products`} style={{ color: '#64748B', textDecoration: 'none' }}>Productos</Link>
         <span>›</span>
         <span style={{ color: '#0F172A', fontWeight: 600 }}>{product.name}</span>
       </div>
@@ -73,7 +74,7 @@ export default function EditProductPage() {
       {error && <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 10, padding: '12px 16px', marginBottom: 20, color: '#B91C1C', fontSize: 13 }}>⚠️ {error}</div>}
       <div style={{ maxWidth: 800 }}>
         <div style={{ background: '#fff', borderRadius: 14, border: '1px solid #E2E8F0', padding: '28px 32px' }}>
-          <ProductForm product={product} onSubmit={handleSubmit} onCancel={() => router.push('/admin/products')} isSubmitting={isSubmitting} />
+          <ProductForm product={product} onSubmit={handleSubmit} onCancel={() => router.push(`/${locale}/admin/products`)} isSubmitting={isSubmitting} />
         </div>
       </div>
     </AdminLayout>

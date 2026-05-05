@@ -3,7 +3,7 @@
 // Pantalla de creación de nuevo producto
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { AdminLayout } from '@/components/admin/layout/AdminLayout'
 import { ProductForm } from '@/components/admin/products/ProductForm'
@@ -35,6 +35,8 @@ function toApiPayload(data: ProductFormData): ProductFormData {
 }
 
 export default function NewProductPage() {
+  const params = useParams()
+  const locale = params.locale as string || 'es'
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -44,7 +46,7 @@ export default function NewProductPage() {
     setError(null)
     try {
       const product = await createProduct(toApiPayload(data))
-      router.push(`/admin/products/${product.id}?created=1`)
+      router.push(`/${locale}/admin/products/${product.id}?created=1`)
     } catch (e: any) {
       setError(e.message ?? 'Error al crear el producto')
     } finally {
@@ -56,7 +58,7 @@ export default function NewProductPage() {
     <AdminLayout>
       {/* Breadcrumb */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20, fontSize: 13, color: '#64748B' }}>
-        <Link href="/admin/products" style={{ color: '#64748B', textDecoration: 'none' }}>Productos</Link>
+        <Link href={`/${locale}/admin/products`} style={{ color: '#64748B', textDecoration: 'none' }}>Productos</Link>
         <span>›</span>
         <span style={{ color: '#0F172A', fontWeight: 600 }}>Nuevo producto</span>
       </div>
@@ -82,7 +84,7 @@ export default function NewProductPage() {
         <div style={{ background: '#fff', borderRadius: 14, border: '1px solid #E2E8F0', padding: '28px 32px' }}>
           <ProductForm
             onSubmit={handleSubmit}
-            onCancel={() => router.push('/admin/products')}
+            onCancel={() => router.push(`/${locale}/admin/products`)}
             isSubmitting={isSubmitting}
           />
         </div>
