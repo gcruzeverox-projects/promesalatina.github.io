@@ -5,6 +5,7 @@
 // badges nuevo/top seller, stock, y toast de confirmación al agregar.
 
 import { useState, useEffect, useCallback, useRef, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { ProductCard }     from '@/components/catalog/ProductCard'
 import { CartButton }      from '@/components/cart/CartButton'
@@ -32,11 +33,13 @@ function CatalogContent() {
   const [loading,    setLoading]    = useState(true)
   const [search,     setSearch]     = useState('')
   const [catFilter,  setCatFilter]  = useState('')
+  const [catName,    setCatName]    = useState('')
   const [badge,      setBadge]      = useState<'all' | 'new' | 'top'>('all')
   const [page,       setPage]       = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [total,      setTotal]      = useState(0)
   const [toast,      setToast]      = useState<string | null>(null)
+  const searchParams = useSearchParams()
   const searchTimer = useRef<ReturnType<typeof setTimeout>>()
   const LIMIT = 24
 
@@ -65,6 +68,17 @@ function CatalogContent() {
       setLoading(false)
     }
   }, [search, catFilter, badge, page])
+
+  // Leer categoría de la URL al cargar
+  useEffect(() => {
+    const categoryName = searchParams.get('category')
+    if (categoryName && categories.length > 0) {
+      const cat = categories.find((c: any) => 
+        c.nameEs === categoryName || c.name === categoryName
+      )
+      if (cat) { setCatFilter(cat.id); setCatName(cat.nameEs ?? cat.name) }
+    }
+  }, [searchParams, categories])
 
   useEffect(() => {
     clearTimeout(searchTimer.current)
