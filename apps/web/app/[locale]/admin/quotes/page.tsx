@@ -6,7 +6,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import { AdminLayout } from '@/components/admin/layout/AdminLayout'
 import { getQuotes, deleteQuote, getPendingOrders } from '@/lib/api-quotes'
 import type { Quote } from '@/types/quote'
@@ -22,6 +22,8 @@ function fmt(n: number) {
 
 export default function QuotesPage() {
   const router = useRouter()
+  const params = useParams()
+  const locale = params.locale as string || 'es'
   const [quotes,    setQuotes]    = useState<Quote[]>([])
   const [pending,   setPending]   = useState<Order[]>([])
   const [total,     setTotal]     = useState(0)
@@ -170,7 +172,7 @@ export default function QuotesPage() {
                       </td>
                       <td style={{ padding: '12px 16px' }}>
                         <Link
-                          href={`/admin/quotes/new?orderId=${order.id}`}
+                          href={`/${locale}/admin/quotes/new?orderId=${order.id}`}
                           style={{
                             background: orange, color: '#fff',
                             padding: '7px 16px', borderRadius: 7,
@@ -240,7 +242,7 @@ export default function QuotesPage() {
                       </td>
                       <td style={{ padding: '12px 16px' }}>
                         <div style={{ display: 'flex', gap: 4 }}>
-                          <button title="Ver detalle" onClick={() => router.push(`/admin/quotes/${quote.id}`)}
+                          <button title="Ver detalle" onClick={() => router.push(`/${locale}/admin/quotes/${quote.id}`)}
                             style={{ width: 30, height: 30, border: '1px solid #e2e8f0', borderRadius: 6, background: '#f8fafc', cursor: 'pointer', fontSize: 13 }}>
                             👁️
                           </button>
