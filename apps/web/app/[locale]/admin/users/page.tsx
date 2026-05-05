@@ -13,14 +13,18 @@ const ROLE_COLORS: Record<string, { color: string; bg: string }> = {
 export default function UsersPage() {
   const [users, setUsers] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const token = localStorage.getItem('pl_token')
-    if (!token) return
+    if (!token) { setLoading(false); return }
     fetch(`${BASE}/api/auth/users`, { headers: { Authorization: `Bearer ${token}` } })
-      .then(r => r.json())
+      .then(r => {
+        if (!r.ok) throw new Error('Endpoint no disponible')
+        return r.json()
+      })
       .then(data => { setUsers(data ?? []); setLoading(false) })
-      .catch(() => setLoading(false))
+      .catch(() => { setError('El módulo de usuarios está en desarrollo'); setLoading(false) })
   }, [])
 
   return (
@@ -28,7 +32,13 @@ export default function UsersPage() {
       <div style={{ padding: 32 }}>
         <h1 style={{ fontSize: 28, fontWeight: 700, color: '#111827', marginBottom: 8 }}>Usuarios</h1>
         <p style={{ color: '#6B7280', marginBottom: 32 }}>{users.length} usuarios registrados</p>
-        {loading ? <p>Cargando...</p> : users.length === 0 ? (
+        {loading ? <p>Cargando...</p> : error ? (
+          <div style={{ textAlign: 'center', padding: 60, background: '#fff', borderRadius: 12, border: '1px dashed #E5E7EB' }}>
+            <div style={{ fontSize: 48, marginBottom: 16 }}>🚧</div>
+            <p style={{ color: '#6B7280', fontWeight: 600 }}>{error}</p>
+            <p style={{ color: '#9CA3AF', fontSize: 13, marginTop: 8 }}>Próximamente disponible</p>
+          </div>
+        ) : users.length === 0 ? (
           <div style={{ textAlign: 'center', padding: 60, background: '#fff', borderRadius: 12 }}>
             <div style={{ fontSize: 48 }}>👥</div>
             <p style={{ color: '#6B7280', marginTop: 16 }}>No hay usuarios aún</p>
