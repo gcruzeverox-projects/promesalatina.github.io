@@ -4,7 +4,7 @@
 // Soporta cliente invitado y cliente autenticado.
 
 import { useState, useEffect, Suspense } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useCartStore } from '@/store/cart'
 import { submitOrder }  from '@/lib/api-catalog'
@@ -24,6 +24,8 @@ const inp: React.CSSProperties = {
 
 function CheckoutContent() {
   const router = useRouter()
+  const params = useParams()
+  const locale = params.locale as string || 'es'
   const { items, subtotal, checkoutNotes, setNotes, clearCart } = useCartStore()
 
   const [form, setForm] = useState({
@@ -79,7 +81,7 @@ function CheckoutContent() {
       }
       const order = await submitOrder(payload)
       clearCart()
-      router.push(`/checkout/success?order=${order.orderNumber}`)
+      router.push(`/${locale}/checkout/success?order=${order.orderNumber}`)
     } catch (e: any) {
       setError(e.message ?? 'Error al enviar la orden')
     } finally {
@@ -94,7 +96,7 @@ function CheckoutContent() {
           <div style={{ fontSize: 56, marginBottom: 16 }}>🛒</div>
           <h2 style={{ fontFamily: 'Poppins, sans-serif', color: '#0F172A', margin: '0 0 8px' }}>Tu carrito está vacío</h2>
           <p style={{ color: '#64748B', marginBottom: 20 }}>Agrega productos antes de continuar</p>
-          <Link href="/catalog" style={{ background: navy, color: '#fff', padding: '12px 24px', borderRadius: 8, textDecoration: 'none', fontWeight: 700, fontFamily: 'Poppins, sans-serif' }}>Ver catálogo</Link>
+          <Link href={`/${locale}/catalog`} style={{ background: navy, color: '#fff', padding: '12px 24px', borderRadius: 8, textDecoration: 'none', fontWeight: 700, fontFamily: 'Poppins, sans-serif' }}>Ver catálogo</Link>
         </div>
       </div>
     )
@@ -105,7 +107,7 @@ function CheckoutContent() {
 
       {/* Header */}
       <header style={{ background: navy, padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', gap: 12 }}>
-        <Link href="/catalog" style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none', fontSize: 13 }}>← Catálogo</Link>
+        <Link href={`/${locale}/catalog`} style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none', fontSize: 13 }}>← Catálogo</Link>
         <span style={{ color: 'rgba(255,255,255,0.3)' }}>·</span>
         <h1 style={{ fontFamily: 'Poppins, sans-serif', fontSize: 16, fontWeight: 700, color: '#fff', margin: 0 }}>Solicitar Cotización B2B</h1>
       </header>
@@ -227,7 +229,7 @@ function CheckoutContent() {
             </div>
           </div>
 
-          <Link href="/catalog" style={{ display: 'block', textAlign: 'center', marginTop: 12, color: '#64748B', fontSize: 12, textDecoration: 'none' }}>
+          <Link href={`/${locale}/catalog`} style={{ display: 'block', textAlign: 'center', marginTop: 12, color: '#64748B', fontSize: 12, textDecoration: 'none' }}>
             ← Seguir comprando
           </Link>
         </div>

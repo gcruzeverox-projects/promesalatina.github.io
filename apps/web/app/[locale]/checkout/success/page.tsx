@@ -3,13 +3,15 @@
 // Página de confirmación después de enviar una orden.
 
 import { Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams , useParams} from 'next/navigation'
 import Link from 'next/link'
 
 const navy   = '#1F3A93'
 const orange = '#E65100'
 
 function SuccessContent() {
+  const params = useParams()
+  const locale = params.locale as string || 'es'
   const sp          = useSearchParams()
   const orderNumber = sp.get('order') ?? '—'
 
@@ -74,14 +76,14 @@ function SuccessContent() {
         </div>
 
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
-          <Link href="/catalog" style={{
+          <Link href={`/${locale}/catalog`} style={{
             background: navy, color: '#fff', padding: '13px 0',
             borderRadius: 8, textDecoration: 'none', fontWeight: 700,
             fontSize: 14, display: 'block', fontFamily: 'Poppins, sans-serif',
           }}>
             Seguir comprando
           </Link>
-          <Link href="/" style={{
+          <Link href={`/${locale}`} style={{
             color: '#64748B', fontSize: 13, textDecoration: 'none',
             padding: '8px 0', display: 'block',
           }}>
