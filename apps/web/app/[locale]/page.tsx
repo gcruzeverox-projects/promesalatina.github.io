@@ -3,6 +3,7 @@
 
 import { setRequestLocale } from 'next-intl/server'
 import { Header } from '@/components/landing/Header'
+import Link from 'next/link'
 
 const locales = ['es', 'en']
 
@@ -10,7 +11,7 @@ export function generateStaticParams() {
   return locales.map(locale => ({ locale }))
 }
 
-export default function LandingPage({
+export default async function LandingPage({
   params,
 }: {
   params: { locale: string }
@@ -91,24 +92,29 @@ export default function LandingPage({
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
               {[
-                ['🥤','Bebidas','Jugos · Sodas · Energizantes'],
-                ['🍪','Galletas & Snacks','Rosquillas · Churritos'],
-                ['🥖','Pan & Repostería','Pan dulce · Tortillas'],
-                ['🫘','Granos & Condimentos','Frijoles · Arroz · Salsas'],
-                ['🧊','Congelados','Pupusas · Tamales · Yuca'],
-                ['💊','Medicina & Salud','Remedios · Vitaminas'],
-                ['💛','Nostalgia Latina','Marcas clásicas importadas'],
-                ['📦','Ver Todo','Catálogo completo'],
-              ].map(([icon, name, sub]) => (
-                <div key={name} style={{
+                ['🥤','Bebidas','Jugos · Sodas · Energizantes','Bebidas'],
+                ['🍪','Galletas & Snacks','Rosquillas · Churritos','Galletas & Snacks'],
+                ['🥖','Pan & Repostería','Pan dulce · Tortillas','Pan & Repostería'],
+                ['🫘','Granos & Condimentos','Frijoles · Arroz · Salsas','Granos & Condimentos'],
+                ['🧊','Congelados','Pupusas · Tamales · Yuca','Congelados'],
+                ['💊','Medicina & Salud','Remedios · Vitaminas','Medicina & Salud'],
+                ['💛','Nostalgia Latina','Marcas clásicas importadas','Nostalgia Latina'],
+                ['📦','Ver Todo','Catálogo completo','all'],
+              ].map(([icon, name, sub, slug]) => {
+                const locale = params.locale
+                const href = slug === 'all' ? `/${locale}/catalog` : `/${locale}/catalog?category=${slug}`
+                return (
+                <Link key={name} href={href} style={{
                   background: '#F5F7FA', border: '1.5px solid #DDE3EE',
                   borderRadius: 12, padding: '20px 16px', textAlign: 'center', cursor: 'pointer',
+                  textDecoration: 'none', display: 'block',
                 }}>
                   <div style={{ fontSize: 28, marginBottom: 10 }}>{icon}</div>
                   <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 13, fontWeight: 600, color: '#0F172A' }}>{name}</div>
                   <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 2 }}>{sub}</div>
-                </div>
-              ))}
+                </Link>
+              )}
+            )})
             </div>
           </div>
         </section>
