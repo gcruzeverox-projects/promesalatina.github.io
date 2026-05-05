@@ -4,6 +4,7 @@
 // Muestra items, cantidades editables, tipo de empaque y totales.
 
 import { useState } from 'react'
+import { useLocale } from 'next-intl'
 import Link from 'next/link'
 import { useCartStore } from '@/store/cart'
 import type { UnitType } from '@/store/cart'
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export function CartDrawer({ open, onClose, lang = 'es' }: Props) {
+  const locale = useLocale()
   const { items, removeItem, updateQuantity, updateUnitType, subtotal, clearCart } = useCartStore()
 
   const t = {
@@ -151,7 +153,7 @@ export function CartDrawer({ open, onClose, lang = 'es' }: Props) {
             </div>
             <p style={{ fontSize: 11, color: '#94A3B8', margin: '0 0 14px', textAlign: 'center' }}>⚠️ {t.note}</p>
             <Link
-              href="/checkout"
+              href={`/${locale}/checkout`}
               onClick={onClose}
               style={{ display: 'block', width: '100%', background: orange, color: '#fff', padding: '13px 0', borderRadius: 8, textAlign: 'center', textDecoration: 'none', fontWeight: 700, fontSize: 14, fontFamily: 'Poppins, sans-serif', marginBottom: 8 }}
             >
