@@ -13,7 +13,8 @@ import type { Quote, QuoteFormData } from '@/types/quote'
 import type { Order } from '@/types/order'
 
 export default function QuoteDetailPage() {
-  const { id }     = useParams<{ id: string }>()
+  const { id, locale: localeParam } = useParams<{ id: string; locale: string }>()
+  const locale = localeParam || 'es'
   const sp         = useSearchParams()
   const router     = useRouter()
   const justCreated = sp.get('created') === '1'
@@ -53,13 +54,13 @@ export default function QuoteDetailPage() {
   }
 
   if (loading) return <AdminLayout><div style={{ padding: 64, textAlign: 'center', color: '#94a3b8' }}>Cargando cotización...</div></AdminLayout>
-  if (!quote || !order)  return <AdminLayout><div style={{ padding: 48, textAlign: 'center' }}><p style={{ color: '#ef4444' }}>No encontrada.</p><Link href="/admin/quotes" style={{ color: '#1F3A93', fontSize: 13 }}>← Volver</Link></div></AdminLayout>
+  if (!quote || !order)  return <AdminLayout><div style={{ padding: 48, textAlign: 'center' }}><p style={{ color: '#ef4444' }}>No encontrada.</p><Link href={`/${locale}/admin/quotes`} style={{ color: '#1F3A93', fontSize: 13 }}>← Volver</Link></div></AdminLayout>
 
   return (
     <AdminLayout>
       {/* Breadcrumb */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20, fontSize: 13, color: '#64748b' }}>
-        <Link href="/admin/quotes" style={{ color: '#64748b', textDecoration: 'none' }}>Cotizaciones</Link>
+        <Link href={`/${locale}/admin/quotes`} style={{ color: '#64748b', textDecoration: 'none' }}>Cotizaciones</Link>
         <span>›</span>
         <span style={{ color: '#0f172a', fontWeight: 600 }}>#{quote.quoteNumber.slice(-8)}</span>
       </div>
