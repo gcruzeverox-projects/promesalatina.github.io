@@ -2,11 +2,12 @@
 // Plantilla PDF profesional usando React.createElement puro (sin JSX)
 // NestJS tsconfig no tiene --jsx, por eso se usa .ts en lugar de .tsx
 
-import React from 'react'
+import * as ReactAll from 'react'
 import {
   Document, Page, Text, View, StyleSheet,
 } from '@react-pdf/renderer'
 
+const React = (ReactAll as any).default ?? ReactAll
 const fmt = (n: number) =>
   `$${n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 
@@ -61,7 +62,7 @@ const S = StyleSheet.create({
 
 
 export function QuotePdfTemplate({ quote }: { quote: any }) {
-  const ce = React.createElement
+  const ce = React.createElement.bind(React)
   const client = quote.order?.user ?? {
     name:         quote.order?.guestName,
     email:        quote.order?.guestEmail,
