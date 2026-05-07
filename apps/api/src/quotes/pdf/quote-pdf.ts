@@ -59,10 +59,9 @@ const S = StyleSheet.create({
   footerText:  { fontSize: 7.5, color: '#94a3b8' },
 })
 
-// Alias corto para no repetir React.createElement
-const ce = React.createElement
 
 export function QuotePdfTemplate({ quote }: { quote: any }) {
+  const ce = React.createElement
   const client = quote.order?.user ?? {
     name:         quote.order?.guestName,
     email:        quote.order?.guestEmail,
