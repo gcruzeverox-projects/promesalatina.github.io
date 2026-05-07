@@ -15,7 +15,7 @@ export class EmailService {
     try {
       await this.resend.emails.send({
         // REEMPLAZAR AQUÍ INFORMACIÓN DE PROMESA LATINA
-        from:    process.env.FROM_EMAIL ?? 'Promesa Latina <noreply@promesalatina.com>',
+        from:    process.env.FROM_EMAIL ?? 'Promesa Latina <onboarding@resend.dev>',
         to,
         subject: `✅ Orden #${order.orderNumber?.slice(-8)} recibida — Promesa Latina`,
         html:    this.buildOrderConfirmationHtml(order),
