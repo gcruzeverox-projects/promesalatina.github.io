@@ -189,7 +189,8 @@ export class QuotesService {
     const { renderToBuffer }   = await import('@react-pdf/renderer')
     // Importar el .ts (sin JSX) en lugar de .tsx
     const { QuotePdfTemplate } = await import('./pdf/quote-pdf')
-    const React = await import('react')
+    const ReactModule = await import('react')
+    const React = (ReactModule as any).default ?? ReactModule
 
     const element = React.createElement(QuotePdfTemplate, { quote })
     const buffer  = await renderToBuffer(element as any)
