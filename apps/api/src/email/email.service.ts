@@ -75,9 +75,8 @@ export class EmailService {
       html: `
         <div style="font-family: Inter, sans-serif; max-width: 560px; padding: 24px;">
           <div style="background: #1F3A93; padding: 24px; border-radius: 12px; text-align: center; margin-bottom: 24px;">
-            <!-- REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ -->
-            <h1 style="color: #fff; margin: 0; font-size: 22px; font-family: Poppins, sans-serif;">Promesa Latina</h1>
-            <p style="color: rgba(255,255,255,0.7); margin: 4px 0 0; font-size: 13px;">Distribuidora B2B · Productos Latinoamericanos</p>
+            <img src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_SIN_FONDO_hn3n6b.png" alt="Promesa Latina" style="height: 80px; width: auto; object-fit: contain;" />
+            <p style="color: rgba(255,255,255,0.7); margin: 8px 0 0; font-size: 13px;">Distribuidora B2B · Productos Latinoamericanos</p>
           </div>
 
           <h2 style="color: #1F3A93; margin: 0 0 4px;">Hola, ${client}</h2>

@@ -84,25 +84,13 @@ export function Header() {
         gap: 12,
       }}>
 
-        {/* ── Logo ── REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', flexShrink: 0 }}>
-          <div style={{
-            width: 36, height: 36,
-            background: '#E65100',
-            borderRadius: 9,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontWeight: 800, fontSize: 15, color: '#fff',
-            fontFamily: 'Poppins, sans-serif',
-            boxShadow: '0 2px 8px rgba(230,81,0,.4)',
-          }}>PL</div>
-          <div style={{ lineHeight: 1.2 }}>
-            <div style={{ color: '#fff', fontWeight: 700, fontSize: 14, fontFamily: 'Poppins, sans-serif' }}>
-              Promesa Latina
-            </div>
-            <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 9, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-              Distribuidora B2B
-            </div>
-          </div>
+        {/* ── Logo ── */}
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+          <img
+            src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png"
+            alt="Promesa Latina"
+            style={{ height: 48, width: 'auto', objectFit: 'contain' }}
+          />
         </Link>
 
         {/* ── Buscador ── */}

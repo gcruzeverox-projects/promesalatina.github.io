@@ -4,7 +4,7 @@
 
 import * as ReactAll from 'react'
 import {
-  Document, Page, Text, View, StyleSheet,
+  Document, Page, Text, View, StyleSheet, Image,
 } from '@react-pdf/renderer'
 
 const React = (ReactAll as any).default ?? ReactAll
@@ -80,8 +80,7 @@ export function QuotePdfTemplate({ quote }: { quote: any }) {
       // HEADER
       ce(View, { style: S.header },
         ce(View, { style: S.logoBox },
-          // REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ
-          ce(Text, { style: S.compName }, 'Promesa Latina'),
+          ce(Image, { src: 'https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png', style: { width: 80, height: 80, marginBottom: 4 } }),
           ce(Text, { style: S.compSub }, 'Distribuidora B2B · Productos Latinoamericanos'),
           // REEMPLAZAR AQUÍ INFORMACIÓN DE PROMESA LATINA
           ce(Text, { style: S.compMeta }, 'ventas@promesalatina.com  ·  +1 (XXX) XXX-XXXX'),
