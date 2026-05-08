@@ -62,13 +62,11 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
       }}>
         {/* Logo */}
         <div style={{ padding: '20px 16px', borderBottom: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: 12 }}>
-          {/* REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ */}
-          <div style={{
-            width: 32, height: 32, background: '#E65100',
-            borderRadius: 8, display: 'flex', alignItems: 'center',
-            justifyContent: 'center', fontWeight: 800, fontSize: 14,
-            color: '#fff', flexShrink: 0,
-          }}>PL</div>
+          <img
+            src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png"
+            alt="Promesa Latina"
+            style={{ height: 40, width: 40, objectFit: 'contain', flexShrink: 0 }}
+          />
           {sidebarOpen && (
             <div>
               <div style={{ color: '#fff', fontWeight: 700, fontSize: 13, fontFamily: 'Poppins, sans-serif', whiteSpace: 'nowrap' }}>
