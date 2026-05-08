@@ -113,8 +113,8 @@ export default async function LandingPage({
                   <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 13, fontWeight: 600, color: '#0F172A' }}>{name}</div>
                   <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 2 }}>{sub}</div>
                 </Link>
-              )}
-            )})
+              )
+            })}
             </div>
           </div>
         </section>

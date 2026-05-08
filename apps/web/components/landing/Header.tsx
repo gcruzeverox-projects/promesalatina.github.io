@@ -89,7 +89,7 @@ export function Header() {
           <img
             src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png"
             alt="Promesa Latina"
-            style={{ height: 48, width: 'auto', objectFit: 'contain' }}
+            style={{ height: 56, width: 'auto', objectFit: 'contain' }}
           />
         </Link>
 

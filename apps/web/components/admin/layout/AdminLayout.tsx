@@ -65,7 +65,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
           <img
             src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png"
             alt="Promesa Latina"
-            style={{ height: 40, width: 40, objectFit: 'contain', flexShrink: 0 }}
+            style={{ height: 52, width: 52, objectFit: 'contain', flexShrink: 0 }}
           />
           {sidebarOpen && (
             <div>
