@@ -45,7 +45,7 @@ function CheckoutContent() {
     if (stored) {
       const user = JSON.parse(stored)
       setSession(user)
-      setForm(f => ({
+      setForm((f: typeof form) => ({
         ...f,
         name:     user.name     ?? '',
         email:    user.email    ?? '',
