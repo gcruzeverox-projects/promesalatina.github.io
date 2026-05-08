@@ -20,7 +20,7 @@ function fmt(n: number) {
 }
 
 function ProductDetailContent() {
-  const { id }   = useParams<{ id: string }>()
+  const { id, locale } = useParams<{ id: string; locale: string }>()
   const router   = useRouter()
   const { addItem, isInCart, getItem, updateQuantity } = useCartStore()
 
@@ -115,11 +115,11 @@ function ProductDetailContent() {
 
       {/* Header */}
       <header style={{ background: navy, padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', gap: 16, position: 'sticky', top: 0, zIndex: 100 }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
+        <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <div style={{ width: 30, height: 30, background: orange, borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 12, color: '#fff' }}>PL</div>
           <span style={{ color: '#fff', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 13 }}>Promesa Latina</span>
         </Link>
-        <Link href="/catalog" style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, textDecoration: 'none' }}>← Catálogo</Link>
+        <Link href={`/${locale}/catalog`} style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, textDecoration: 'none' }}>← Catálogo</Link>
         <div style={{ marginLeft: 'auto' }}>
           <CartButton lang="es" />
         </div>
@@ -131,7 +131,7 @@ function ProductDetailContent() {
         <div style={{ display: 'flex', gap: 6, fontSize: 12, color: '#94A3B8', marginBottom: 24, flexWrap: 'wrap' }}>
           <Link href="/" style={{ color: '#94A3B8', textDecoration: 'none' }}>Inicio</Link>
           <span>›</span>
-          <Link href="/catalog" style={{ color: '#94A3B8', textDecoration: 'none' }}>Catálogo</Link>
+          <Link href={`/${locale}/catalog`} style={{ color: '#94A3B8', textDecoration: 'none' }}>Catálogo</Link>
           {product.category && <>
             <span>›</span>
             <span style={{ color: '#94A3B8' }}>{product.category.name}</span>
@@ -307,7 +307,7 @@ function ProductDetailContent() {
               {outOfStock ? '❌ Sin stock disponible' : inCart ? '🛒 Actualizar en carrito' : '🛒 Agregar al carrito'}
             </button>
 
-            <Link href="/checkout"
+            <Link href={`/${locale}/checkout`}
               style={{ display: 'block', width: '100%', height: 44, background: navy, color: '#fff', borderRadius: 8, textAlign: 'center', textDecoration: 'none', fontWeight: 700, fontSize: 14, fontFamily: 'Poppins, sans-serif', lineHeight: '44px' }}>
               ⚡ Ir al checkout →
             </Link>

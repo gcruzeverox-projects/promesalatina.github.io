@@ -5,7 +5,7 @@
 // badges nuevo/top seller, stock, y toast de confirmación al agregar.
 
 import { useState, useEffect, useCallback, useRef, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { ProductCard }     from '@/components/catalog/ProductCard'
 import { CartButton }      from '@/components/cart/CartButton'
@@ -39,6 +39,7 @@ function CatalogContent() {
   const [totalPages, setTotalPages] = useState(1)
   const [total,      setTotal]      = useState(0)
   const [toast,      setToast]      = useState<string | null>(null)
+  const { locale } = useParams<{ locale: string }>()
   const searchParams = useSearchParams()
   const searchTimer = useRef<ReturnType<typeof setTimeout>>()
   const LIMIT = 24
@@ -107,7 +108,7 @@ function CatalogContent() {
 
       {/* Header del catálogo */}
       <header style={{ background: navy, padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', gap: 16, position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 4px 20px rgba(31,58,147,.25)' }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }}>
+        <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }}>
           {/* REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ */}
           <div style={{ width: 30, height: 30, background: '#E65100', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 12, color: '#fff' }}>PL</div>
           <span style={{ color: '#fff', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 13 }}>Promesa Latina</span>
@@ -127,7 +128,7 @@ function CatalogContent() {
 
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 10 }}>
           <CartButton lang="es" />
-          <Link href="/" style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
+          <Link href={`/${locale}`} style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
             🌐 Inicio
           </Link>
         </div>

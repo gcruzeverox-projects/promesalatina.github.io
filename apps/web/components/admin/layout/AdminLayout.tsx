@@ -175,7 +175,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
           {/* Breadcrumb / page title se inyecta desde children */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <Link
-              href="/"
+              href={`/${locale}`}
               target="_blank"
               style={{ fontSize: 12, color: '#64748B', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}
             >

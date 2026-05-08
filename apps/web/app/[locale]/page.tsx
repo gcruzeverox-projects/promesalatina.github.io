@@ -151,7 +151,7 @@ export default async function LandingPage({
               Regístrate gratis o solicita una cotización personalizada.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="/admin/login" style={{
+              <a href={`/${params.locale}/admin/login`} style={{
                 background: '#E65100', color: '#fff', padding: '13px 28px',
                 borderRadius: 8, textDecoration: 'none', fontSize: 14,
                 fontWeight: 700, fontFamily: 'Poppins, sans-serif',

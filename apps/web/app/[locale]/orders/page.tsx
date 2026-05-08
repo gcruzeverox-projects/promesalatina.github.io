@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import { fetchMyOrders } from '@/lib/api-catalog'
 import { CartButton } from '@/components/cart/CartButton'
 import { ORDER_STATUS_LABELS } from '@/types/order'
@@ -38,11 +38,11 @@ export default function OrdersPage() {
 
       {/* Header */}
       <header style={{ background: navy, padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', gap: 16, position: 'sticky', top: 0, zIndex: 100 }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
+        <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <div style={{ width: 30, height: 30, background: '#E65100', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 12, color: '#fff' }}>PL</div>
           <span style={{ color: '#fff', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 13 }}>Promesa Latina</span>
         </Link>
-        <Link href="/catalog" style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, textDecoration: 'none' }}>Catálogo</Link>
+        <Link href={`/${locale}/catalog`} style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, textDecoration: 'none' }}>Catálogo</Link>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 10 }}>
           <CartButton lang="es" />
         </div>
@@ -73,7 +73,7 @@ export default function OrdersPage() {
             <p style={{ color: '#64748B', marginBottom: 20 }}>
               Explora el catálogo y solicita tu primera cotización
             </p>
-            <Link href="/catalog" style={{ background: navy, color: '#fff', padding: '12px 24px', borderRadius: 8, textDecoration: 'none', fontWeight: 700, fontFamily: 'Poppins, sans-serif' }}>
+            <Link href={`/${locale}/catalog`} style={{ background: navy, color: '#fff', padding: '12px 24px', borderRadius: 8, textDecoration: 'none', fontWeight: 700, fontFamily: 'Poppins, sans-serif' }}>
               Ver catálogo
             </Link>
           </div>
@@ -142,7 +142,7 @@ export default function OrdersPage() {
         )}
 
         <div style={{ marginTop: 24, textAlign: 'center' }}>
-          <Link href="/catalog" style={{ color: '#64748B', fontSize: 13, textDecoration: 'none' }}>
+          <Link href={`/${locale}/catalog`} style={{ color: '#64748B', fontSize: 13, textDecoration: 'none' }}>
             ← Seguir comprando
           </Link>
         </div>
