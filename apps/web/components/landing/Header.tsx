@@ -51,7 +51,7 @@ export function Header() {
       about:   'Nosotros',
       contact: 'Contacto',
       login:   'Iniciar sesión',
-      loginSub:'Vendedores · Admins · Clientes',
+
       logout:  'Cerrar sesión',
       orders:  'Mis Órdenes',
     },
@@ -60,7 +60,7 @@ export function Header() {
       about:   'About',
       contact: 'Contact',
       login:   'Sign in',
-      loginSub:'Sellers · Admins · Clients',
+
       logout:  'Sign out',
       orders:  'My Orders',
     },
@@ -368,9 +368,7 @@ export function Header() {
                 <span style={{ fontSize: 13, fontWeight: 800, fontFamily: 'Poppins, sans-serif' }}>
                   🔑 {t.login}
                 </span>
-                <span style={{ fontSize: 9, color: '#94A3B8', letterSpacing: '0.04em', marginTop: 1 }}>
-                  {t.loginSub}
-                </span>
+
               </Link>
             )}
           </>

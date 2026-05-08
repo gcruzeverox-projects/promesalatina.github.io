@@ -33,15 +33,7 @@ export default async function LandingPage({
           overflow: 'hidden',
         }}>
           <div style={{ maxWidth: 680, margin: '0 auto', position: 'relative' }}>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              background: 'rgba(230,81,0,0.2)', border: '1px solid rgba(230,81,0,0.4)',
-              color: '#FFB74D', fontSize: 12, fontWeight: 600,
-              padding: '5px 14px', borderRadius: 20, marginBottom: 20,
-              letterSpacing: '0.04em',
-            }}>
-              🌎 Distribución B2B — Los Ángeles &amp; EE.UU.
-            </div>
+            
             <h1 style={{
               fontFamily: 'Poppins, sans-serif',
               fontSize: 'clamp(28px,5vw,46px)',
@@ -155,12 +147,12 @@ export default async function LandingPage({
                 background: '#E65100', color: '#fff', padding: '13px 28px',
                 borderRadius: 8, textDecoration: 'none', fontSize: 14,
                 fontWeight: 700, fontFamily: 'Poppins, sans-serif',
-              }}>Crear cuenta gratis</a>
+              }}>Contactar a ventas</a>
               <a href="#contact" style={{
                 background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '13px 28px',
                 borderRadius: 8, textDecoration: 'none', fontSize: 14, fontWeight: 600,
                 border: '1.5px solid rgba(255,255,255,0.35)',
-              }}>Solicitar cotización</a>
+              }}>Ver catálogo</a>
             </div>
           </div>
         </section>

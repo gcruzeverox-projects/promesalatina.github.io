@@ -56,10 +56,12 @@ export default function AdminLoginPage() {
 
         {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          {/* REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ */}
-          <div style={{ width: 48, height: 48, background: '#E65100', borderRadius: 12, margin: '0 auto 12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 800, color: '#fff', fontFamily: 'Poppins, sans-serif' }}>PL</div>
+          <img
+            src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png"
+            alt="Promesa Latina"
+            style={{ height: 80, width: 'auto', objectFit: 'contain', marginBottom: 12 }}
+          />
           <h1 style={{ fontFamily: 'Poppins, sans-serif', fontSize: 20, fontWeight: 700, color: '#0f172a', margin: 0 }}>Promesa Latina</h1>
-          <p style={{ color: '#64748b', fontSize: 13, margin: '4px 0 0' }}>Panel Administrativo</p>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -97,26 +99,10 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        {/* Demo credentials */}
-        <div style={{ marginTop: 24, padding: '14px', background: '#f0f4ff', borderRadius: 10, border: '1px solid #c7d2fe' }}>
-          <p style={{ fontSize: 11, fontWeight: 700, color: '#1F3A93', margin: '0 0 8px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Credenciales de prueba</p>
-          {[
-            ['ADMIN',   'admin@promesalatina.com',   'Admin123!'],
-            ['VENTAS',  'ventas@promesalatina.com',  'Ventas123!'],
-            ['CLIENTE', 'cliente@example.com',       'Cliente123!'],
-          ].map(([role, em, pw]) => (
-            <div key={role} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, fontSize: 11 }}>
-              <span style={{ background: '#1F3A93', color: '#fff', padding: '1px 6px', borderRadius: 3, fontWeight: 700, fontSize: 9 }}>{role}</span>
-              <button onClick={() => { setEmail(em); setPassword(pw) }}
-                style={{ background: 'none', border: 'none', color: '#1F3A93', cursor: 'pointer', fontSize: 11, textDecoration: 'underline', padding: 0 }}>
-                {em}
-              </button>
-            </div>
-          ))}
-        </div>
+
 
         <p style={{ textAlign: 'center', marginTop: 20 }}>
-          <a href="/" style={{ color: '#64748b', fontSize: 12, textDecoration: 'none' }}>← Volver al sitio</a>
+          <a href={`/${locale}`} style={{ color: '#64748b', fontSize: 12, textDecoration: 'none' }}>← Volver al sitio</a>
         </p>
       </div>
     </div>
