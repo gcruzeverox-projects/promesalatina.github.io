@@ -18,6 +18,7 @@ function fmt(n: number) {
 
 export default function OrdersPage() {
   const router   = useRouter()
+  const { locale } = useParams<{ locale: string }>()
   const [orders,  setOrders]  = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [session, setSession] = useState<any>(null)
