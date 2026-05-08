@@ -70,24 +70,21 @@ function CatalogContent() {
     }
   }, [search, catFilter, badge, page])
 
-  // Leer categoría de la URL al cargar
-  useEffect(() => {
-    const categoryName = searchParams.get('category')
-    if (categoryName && categories.length > 0) {
-      const cat = categories.find((c: any) => 
-        c.nameEs === categoryName || c.name === categoryName
-      )
-      if (cat) { setCatFilter(cat.id); setCatName(cat.nameEs ?? cat.name) }
-    }
-  }, [searchParams, categories])
-
   useEffect(() => {
     clearTimeout(searchTimer.current)
     searchTimer.current = setTimeout(load, search ? 350 : 0)
   }, [load, search])
-
   useEffect(() => {
-    fetchCategories().then(setCategories).catch(() => {})
+    fetchCategories().then((cats: any[]) => {
+      setCategories(cats)
+      const categoryName = searchParams.get('category')
+      if (categoryName && cats.length > 0) {
+        const cat = cats.find((c: any) =>
+          c.nameEs === categoryName || c.name === categoryName
+        )
+        if (cat) { setCatFilter(cat.id); setCatName(cat.nameEs ?? cat.name) }
+      }
+    }).catch(() => {})
   }, [])
 
   function resetFilters() {

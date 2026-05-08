@@ -28,11 +28,15 @@ function CheckoutContent() {
   const locale = params.locale as string || 'es'
   const { items, subtotal, checkoutNotes, setNotes, clearCart } = useCartStore()
 
-  const [form, setForm] = useState({
-    name:     '', email:   '', phone:   '',
-    business: '', address: '', city:    '', state: '',
+  const [form, setForm] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('pl_checkout_form')
+      if (saved) return JSON.parse(saved)
+    }
+    return { name: '', email: '', phone: '', business: '', address: '', city: '', state: '' }
   })
   const [submitting, setSubmitting] = useState(false)
+  const [submitted,  setSubmitted]  = useState(false)
   const [error,      setError]      = useState<string | null>(null)
   const [session,    setSession]    = useState<any>(null)
 
@@ -53,8 +57,13 @@ function CheckoutContent() {
   }, [])
 
   function set(field: string) {
-    return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-      setForm(prev => ({ ...prev, [field]: e.target.value }))
+    return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setForm(prev => {
+        const updated = { ...prev, [field]: e.target.value }
+        localStorage.setItem('pl_checkout_form', JSON.stringify(updated))
+        return updated
+      })
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -80,7 +89,9 @@ function CheckoutContent() {
         })),
       }
       const order = await submitOrder(payload)
+      setSubmitted(true)
       clearCart()
+      localStorage.removeItem('pl_checkout_form')
       router.push(`/${locale}/checkout/success?order=${order.orderNumber}`)
     } catch (e: any) {
       setError(e.message ?? 'Error al enviar la orden')
@@ -89,7 +100,7 @@ function CheckoutContent() {
     }
   }
 
-  if (items.length === 0) {
+  if (items.length === 0 && !submitted) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Inter, sans-serif' }}>
         <div style={{ textAlign: 'center' }}>
