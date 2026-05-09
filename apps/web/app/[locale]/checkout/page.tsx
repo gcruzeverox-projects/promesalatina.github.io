@@ -58,7 +58,7 @@ function CheckoutContent() {
 
   function set(field: string) {
     return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setForm(prev => {
+      setForm((prev: typeof form) => {
         const updated = { ...prev, [field]: e.target.value }
         localStorage.setItem('pl_checkout_form', JSON.stringify(updated))
         return updated
