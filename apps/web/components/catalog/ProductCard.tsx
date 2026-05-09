@@ -44,7 +44,7 @@ function fmt(n: number) {
 export function ProductCard({ product, lang = 'es', onToast }: Props) {
   const { locale } = useParams<{ locale: string }>()
   const { addItem, isInCart, getItem, updateQuantity } = useCartStore()
-  const [qty,      setQty]      = useState(product.moq)
+  const [qty,      setQty]      = useState(1)
   const [unitType, setUnitType] = useState<UnitType>('caja')
   const [adding,   setAdding]   = useState(false)
 
@@ -78,7 +78,7 @@ export function ProductCard({ product, lang = 'es', onToast }: Props) {
         categoryName:  product.category?.name ?? '',
         stockQuantity: product.stockQuantity,
       })
-      setQty(product.moq)
+      setQty(1)
       onToast?.(lang === 'es'
         ? `${product.name} agregado al carrito`
         : `${product.name} added to cart`)
@@ -184,9 +184,9 @@ export function ProductCard({ product, lang = 'es', onToast }: Props) {
 
           {/* Cantidad + precio */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }} onClick={e => e.preventDefault()}>
-            <button onClick={e => { e.preventDefault(); setQty(q => Math.max(product.moq, q - 1)) }}
-              disabled={qty <= product.moq}
-              style={{ width: 26, height: 26, borderRadius: '50%', border: '1.5px solid #E2E8F0', background: '#F8FAFC', cursor: qty <= product.moq ? 'not-allowed' : 'pointer', fontSize: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: qty <= product.moq ? 0.4 : 1 }}>
+            <button onClick={e => { e.preventDefault(); setQty(q => Math.max(1, q - 1)) }}
+              disabled={qty <= 1}
+              style={{ width: 26, height: 26, borderRadius: '50%', border: '1.5px solid #E2E8F0', background: '#F8FAFC', cursor: qty <= 1 ? 'not-allowed' : 'pointer', fontSize: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: qty <= 1 ? 0.4 : 1 }}>
               −
             </button>
             <span style={{ fontWeight: 800, fontSize: 14, minWidth: 22, textAlign: 'center', color: navy }}>{qty}</span>

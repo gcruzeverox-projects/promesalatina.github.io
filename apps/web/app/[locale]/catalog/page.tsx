@@ -82,10 +82,14 @@ function CatalogContent() {
         const cat = cats.find((c: any) =>
           c.name === categoryName || c.nameEn === categoryName
         )
-        if (cat) { setCatFilter(cat.id); setCatName(cat.nameEs ?? cat.name) }
+        if (cat) {
+          setCatFilter(cat.id)
+          setCatName(cat.name)
+          setPage(1)
+        }
       }
     }).catch(() => {})
-  }, [])
+  }, [searchParams])
 
   function resetFilters() {
     setSearch(''); setCatFilter(''); setBadge('all'); setPage(1)
