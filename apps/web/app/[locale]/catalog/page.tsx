@@ -80,7 +80,7 @@ function CatalogContent() {
       const categoryName = searchParams.get('category')
       if (categoryName && cats.length > 0) {
         const cat = cats.find((c: any) =>
-          c.nameEs === categoryName || c.name === categoryName
+          c.name === categoryName || c.nameEn === categoryName
         )
         if (cat) { setCatFilter(cat.id); setCatName(cat.nameEs ?? cat.name) }
       }
@@ -106,8 +106,11 @@ function CatalogContent() {
       {/* Header del catálogo */}
       <header style={{ background: navy, padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', gap: 16, position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 4px 20px rgba(31,58,147,.25)' }}>
         <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }}>
-          {/* REEMPLAZAR LOGO DE PROMESA LATINA AQUÍ */}
-          <div style={{ width: 30, height: 30, background: '#E65100', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 12, color: '#fff' }}>PL</div>
+          <img
+            src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png"
+            alt="Promesa Latina"
+            style={{ height: 44, width: 'auto', objectFit: 'contain' }}
+          />
           <span style={{ color: '#fff', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 13 }}>Promesa Latina</span>
         </Link>
 

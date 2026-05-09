@@ -6,6 +6,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { useParams } from 'next/navigation'
 import { useCartStore } from '@/store/cart'
 import type { UnitType } from '@/store/cart'
 
@@ -41,6 +42,7 @@ function fmt(n: number) {
 }
 
 export function ProductCard({ product, lang = 'es', onToast }: Props) {
+  const { locale } = useParams<{ locale: string }>()
   const { addItem, isInCart, getItem, updateQuantity } = useCartStore()
   const [qty,      setQty]      = useState(product.moq)
   const [unitType, setUnitType] = useState<UnitType>('caja')
@@ -76,6 +78,7 @@ export function ProductCard({ product, lang = 'es', onToast }: Props) {
         categoryName:  product.category?.name ?? '',
         stockQuantity: product.stockQuantity,
       })
+      setQty(product.moq)
       onToast?.(lang === 'es'
         ? `${product.name} agregado al carrito`
         : `${product.name} added to cart`)
@@ -85,7 +88,7 @@ export function ProductCard({ product, lang = 'es', onToast }: Props) {
   }
 
   return (
-    <Link href={`/catalog/${product.id}`} style={{ textDecoration: 'none' }}>
+    <Link href={`/${locale}/catalog/${product.id}`} style={{ textDecoration: 'none' }}>
       <div style={{
         background: '#fff',
         border: `1.5px solid ${inCart ? navy : '#E2E8F0'}`,
