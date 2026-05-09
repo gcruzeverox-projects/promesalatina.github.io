@@ -79,7 +79,9 @@ function CatalogContent() {
       setCategories(cats)
       const categoryName = searchParams.get('category')
       if (categoryName && cats.length > 0) {
+        const decodedName = decodeURIComponent(categoryName)
         const cat = cats.find((c: any) =>
+          c.name === decodedName || c.nameEn === decodedName ||
           c.name === categoryName || c.nameEn === categoryName
         )
         if (cat) {
