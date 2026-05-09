@@ -183,7 +183,17 @@ export function ProductForm({ product, onSubmit, onCancel, isSubmitting }: Props
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!validate()) { setActiveTab('basic'); return }
+    const e2: typeof errors = {}
+    if (!form.name.trim())       e2.name       = 'El nombre es obligatorio'
+    if (!form.sku.trim())        e2.sku        = 'El SKU es obligatorio'
+    if (!form.categoryId)        e2.categoryId = 'Selecciona una categoría'
+    if (!form.basePrice || isNaN(Number(form.basePrice))) e2.basePrice = 'Precio base requerido — ve a la pestaña Inventario & precios'
+    setErrors(e2)
+    if (Object.keys(e2).length > 0) {
+      // Ir a la pestaña donde está el primer error
+      if (e2.basePrice) { setActiveTab('stock'); return }
+      setActiveTab('basic'); return
+    }
     await onSubmit(form)
   }
 
