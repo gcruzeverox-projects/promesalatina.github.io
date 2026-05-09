@@ -11,7 +11,11 @@ export class EmailService {
   private resend: Resend
 
   constructor() {
-    this.resend = new Resend(process.env.RESEND_API_KEY)
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+      this.logger.warn('[Email] RESEND_API_KEY no configurada — emails desactivados')
+    }
+    this.resend = new Resend(apiKey ?? 're_placeholder')
   }
 
   // ── Confirmación de orden al cliente ────────────────────────────────────
