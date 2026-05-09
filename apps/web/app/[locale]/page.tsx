@@ -84,17 +84,17 @@ export default async function LandingPage({
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
               {[
-                ['🥤','Bebidas','Jugos · Sodas · Energizantes','Bebidas'],
-                ['🍪','Galletas & Snacks','Rosquillas · Churritos','Galletas & Snacks'],
-                ['🥖','Pan & Repostería','Pan dulce · Tortillas','Pan & Repostería'],
-                ['🫘','Granos & Condimentos','Frijoles · Arroz · Salsas','Granos & Condimentos'],
-                ['🧊','Congelados','Pupusas · Tamales · Yuca','Congelados'],
-                ['💊','Medicina & Salud','Remedios · Vitaminas','Medicina & Salud'],
-                ['💛','Nostalgia Latina','Marcas clásicas importadas','Nostalgia Latina'],
+                ['🥤','Bebidas','Jugos · Sodas · Energizantes','bebidas'],
+                ['🍪','Galletas & Snacks','Rosquillas · Churritos','galletas-snacks'],
+                ['🥖','Pan & Repostería','Pan dulce · Tortillas','pan-reposteria'],
+                ['🫘','Granos & Condimentos','Frijoles · Arroz · Salsas','granos-condimentos'],
+                ['🧊','Congelados','Pupusas · Tamales · Yuca','congelados'],
+                ['💊','Medicina & Salud','Remedios · Vitaminas','medicina-salud'],
+                ['💛','Nostalgia Latina','Marcas clásicas importadas','nostalgia-latina'],
                 ['📦','Ver Todo','Catálogo completo','all'],
               ].map(([icon, name, sub, slug]) => {
                 const locale = params.locale
-                const href = slug === 'all' ? `/${locale}/catalog` : `/${locale}/catalog?category=${slug}`
+                const href = slug === 'all' ? `/${locale}/catalog` : `/${locale}/catalog?slug=${slug}`
                 return (
                 <Link key={name} href={href} style={{
                   background: '#F5F7FA', border: '1.5px solid #DDE3EE',

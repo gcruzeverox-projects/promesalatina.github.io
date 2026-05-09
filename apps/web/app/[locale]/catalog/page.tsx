@@ -77,11 +77,11 @@ function CatalogContent() {
   useEffect(() => {
     fetchCategories().then((cats: any[]) => {
       setCategories(cats)
+      const categorySlug = searchParams.get('slug')
       const categoryName = searchParams.get('category')
-      if (categoryName && cats.length > 0) {
-        const decodedName = decodeURIComponent(categoryName)
+      if ((categorySlug || categoryName) && cats.length > 0) {
         const cat = cats.find((c: any) =>
-          c.name === decodedName || c.nameEn === decodedName ||
+          c.slug === categorySlug ||
           c.name === categoryName || c.nameEn === categoryName
         )
         if (cat) {
