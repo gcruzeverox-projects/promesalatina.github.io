@@ -22,7 +22,7 @@ export default async function LandingPage({
   return (
     <>
       <Header />
-      <main>
+      <main style={{ overflowX: 'hidden', width: '100%' }}>
 
         {/* ── HERO ── */}
         <section style={{
@@ -117,7 +117,7 @@ export default async function LandingPage({
             <h2 style={{ fontFamily: 'Poppins, sans-serif', fontSize: 24, fontWeight: 700, margin: '0 0 28px', textAlign: 'center' }}>
               ¿Cómo funciona?
             </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 24 }}>
               {[
                 ['1','Explora el catálogo','Navega cientos de productos latinos importados directamente desde Centroamérica y Sudamérica.'],
                 ['2','Crea tu orden','Agrega productos a tu carrito B2B por caja o paquete. Recibe cotización personalizada en minutos.'],

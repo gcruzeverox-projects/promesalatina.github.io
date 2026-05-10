@@ -120,10 +120,23 @@ function CatalogContent() {
       <Header />
 
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: isMobile ? '16px' : '24px' }}>
+        {/* Filtro mobile */}
+        {isMobile && (
+          <div style={{ overflowX: 'auto', display: 'flex', gap: 8, paddingBottom: 8, marginBottom: 8 }}>
+            <button onClick={() => { setCatFilter(''); setPage(1) }} style={{ flexShrink: 0, padding: '8px 16px', borderRadius: 20, border: 'none', background: !catFilter ? navy : '#E2E8F0', color: !catFilter ? '#fff' : '#475569', fontSize: 13, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+              Todas
+            </button>
+            {categories.map(cat => (
+              <button key={cat.id} onClick={() => { setCatFilter(cat.id); setPage(1) }} style={{ flexShrink: 0, padding: '8px 16px', borderRadius: 20, border: 'none', background: catFilter === cat.id ? navy : '#E2E8F0', color: catFilter === cat.id ? '#fff' : '#475569', fontSize: 13, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                {cat.icon ?? '🏷️'} {cat.name}
+              </button>
+            ))}
+          </div>
+        )}
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 24, alignItems: 'start' }}>
 
           {/* ── SIDEBAR FILTROS ──────────────────────────────────────────── */}
-          <aside style={{ position: 'sticky', top: 80 }}>
+          {!isMobile && <aside style={{ position: 'sticky', top: 80 }}>
 
             {/* Categorías */}
             <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #E2E8F0', padding: '16px', marginBottom: 14 }}>
@@ -172,7 +185,7 @@ function CatalogContent() {
                 Limpiar filtros ×
               </button>
             )}
-          </aside>
+          </aside>}
 
           {/* ── GRID DE PRODUCTOS ─────────────────────────────────────────── */}
           <div>
