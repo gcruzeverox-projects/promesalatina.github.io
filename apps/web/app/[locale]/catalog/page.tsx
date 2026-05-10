@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { ProductCard }     from '@/components/catalog/ProductCard'
 import { CartButton }      from '@/components/cart/CartButton'
 import { fetchProducts, fetchCategories } from '@/lib/api-catalog'
+import { Header } from '@/components/landing/Header'
 
 const navy = '#1F3A93'
 
@@ -40,6 +41,13 @@ function CatalogContent() {
   const [total,      setTotal]      = useState(0)
   const [toast,      setToast]      = useState<string | null>(null)
   const { locale } = useParams<{ locale: string }>()
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   const searchParams = useSearchParams()
   const searchTimer = useRef<ReturnType<typeof setTimeout>>()
   const LIMIT = 24
@@ -109,39 +117,10 @@ function CatalogContent() {
         </div>
       )}
 
-      {/* Header del catálogo */}
-      <header style={{ background: navy, padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', gap: 16, position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 4px 20px rgba(31,58,147,.25)' }}>
-        <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }}>
-          <img
-            src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png"
-            alt="Promesa Latina"
-            style={{ height: 44, width: 'auto', objectFit: 'contain' }}
-          />
-          <span style={{ color: '#fff', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 13 }}>Promesa Latina</span>
-        </Link>
+      <Header />
 
-        {/* Buscador */}
-        <div style={{ flex: 1, position: 'relative', maxWidth: 440 }}>
-          <span style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.5)', fontSize: 16 }}>⌕</span>
-          <input
-            type="text"
-            placeholder="Buscar productos, marcas, SKU..."
-            value={search}
-            onChange={e => { setSearch(e.target.value); setPage(1) }}
-            style={{ width: '100%', height: 38, background: 'rgba(255,255,255,0.12)', border: '1.5px solid rgba(255,255,255,0.2)', borderRadius: 20, paddingLeft: 38, paddingRight: 14, fontSize: 13, color: '#fff', outline: 'none', fontFamily: 'Inter, sans-serif' }}
-          />
-        </div>
-
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: 10 }}>
-          <CartButton lang="es" />
-          <Link href={`/${locale}`} style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
-            🌐 Inicio
-          </Link>
-        </div>
-      </header>
-
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: 24, alignItems: 'start' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: isMobile ? '16px' : '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: 24, alignItems: 'start' }}>
 
           {/* ── SIDEBAR FILTROS ──────────────────────────────────────────── */}
           <aside style={{ position: 'sticky', top: 80 }}>

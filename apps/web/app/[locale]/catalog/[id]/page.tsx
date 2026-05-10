@@ -10,6 +10,7 @@ import { useCartStore } from '@/store/cart'
 import type { UnitType } from '@/store/cart'
 import { fetchProduct, fetchProducts } from '@/lib/api-catalog'
 import { CartButton } from '@/components/cart/CartButton'
+import { Header } from '@/components/landing/Header'
 import { ProductCard } from '@/components/catalog/ProductCard'
 
 const navy   = '#1F3A93'
@@ -114,16 +115,7 @@ function ProductDetailContent() {
       )}
 
       {/* Header */}
-      <header style={{ background: navy, padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', gap: 16, position: 'sticky', top: 0, zIndex: 100 }}>
-        <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
-          <img src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png" alt="Promesa Latina" style={{ height: 44, width: 'auto', objectFit: 'contain' }} />
-          <span style={{ color: '#fff', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 13 }}>Promesa Latina</span>
-        </Link>
-        <Link href={`/${locale}/catalog`} style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, textDecoration: 'none' }}>← Catálogo</Link>
-        <div style={{ marginLeft: 'auto' }}>
-          <CartButton lang="es" />
-        </div>
-      </header>
+        <Header />
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '28px 24px' }}>
 
