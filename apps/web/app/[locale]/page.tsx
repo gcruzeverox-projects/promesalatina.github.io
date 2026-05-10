@@ -82,7 +82,7 @@ export default async function LandingPage({
             <p style={{ color: '#94A3B8', fontSize: 14, margin: '0 0 28px' }}>
               Categorías administrables desde el panel admin
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 14 }}>
               {[
                 ['🥤','Bebidas','Jugos · Sodas · Energizantes','bebidas'],
                 ['🍪','Galletas & Snacks','Rosquillas · Churritos','galletas-snacks'],

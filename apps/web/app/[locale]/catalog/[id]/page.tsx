@@ -22,6 +22,13 @@ function fmt(n: number) {
 
 function ProductDetailContent() {
   const { id, locale } = useParams<{ id: string; locale: string }>()
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   const router   = useRouter()
   const { addItem, isInCart, getItem, updateQuantity } = useCartStore()
 
@@ -117,7 +124,7 @@ function ProductDetailContent() {
       {/* Header */}
         <Header />
 
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '28px 24px' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: isMobile ? '16px' : '28px 24px', overflowX: 'hidden' }}>
 
         {/* Breadcrumb */}
         <div style={{ display: 'flex', gap: 6, fontSize: 12, color: '#94A3B8', marginBottom: 24, flexWrap: 'wrap' }}>
@@ -133,7 +140,7 @@ function ProductDetailContent() {
         </div>
 
         {/* ── LAYOUT PRINCIPAL ─────────────────────────────────────────────── */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 420px', gap: 32, alignItems: 'start', marginBottom: 48 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 420px', gap: 32, alignItems: 'start', marginBottom: 48 }}>
 
           {/* ── IMÁGENES ─────────────────────────────────────────────────── */}
           <div>
