@@ -56,7 +56,7 @@ function SuccessContent() {
           <p style={{ fontSize: 11, fontWeight: 700, color: '#4338CA', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 6px' }}>
             Número de orden
           </p>
-          <p style={{ fontFamily: 'monospace', fontSize: 18, fontWeight: 800, color: navy, margin: 0 }}>
+          <p style={{ fontFamily: 'monospace', fontSize: 14, fontWeight: 800, color: navy, margin: 0, wordBreak: 'break-all' }}>
             #{orderNumber}
           </p>
         </div>
