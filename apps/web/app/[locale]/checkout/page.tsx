@@ -37,6 +37,13 @@ function CheckoutContent() {
   })
   const [submitting, setSubmitting] = useState(false)
   const [submitted,  setSubmitted]  = useState(false)
+  const [isMobile,   setIsMobile]   = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   const [error,      setError]      = useState<string | null>(null)
   const [session,    setSession]    = useState<any>(null)
 
@@ -123,7 +130,7 @@ function CheckoutContent() {
         <h1 style={{ fontFamily: 'Poppins, sans-serif', fontSize: 16, fontWeight: 700, color: '#fff', margin: 0 }}>Solicitar Cotización B2B</h1>
       </header>
 
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '28px 24px', display: 'grid', gridTemplateColumns: '1fr 380px', gap: 24, alignItems: 'start' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: isMobile ? '16px' : '28px 24px', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 380px', gap: 24, alignItems: 'start' }}>
 
         {/* ── Formulario ────────────────────────────────────────────────── */}
         <form onSubmit={handleSubmit}>
@@ -138,7 +145,7 @@ function CheckoutContent() {
                 ✓ Sesión iniciada como <strong>{session.name}</strong> ({session.email})
               </div>
             )}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '0 16px' }}>
               {[
                 ['name',     'Nombre de contacto *',     'Ana García',             true],
                 ['business', 'Nombre del negocio *',     'La Tiendita Latina',     true],
