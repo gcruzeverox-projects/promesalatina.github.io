@@ -128,6 +128,7 @@ export default function QuotesPage() {
 
         /* ── ÓRDENES PENDIENTES ─────────────────────────────────────────── */
         <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto' }}>
           {pending.length === 0 ? (
             <div style={{ padding: 56, textAlign: 'center' }}>
               <div style={{ fontSize: 40, marginBottom: 10 }}>🎉</div>
@@ -196,6 +197,7 @@ export default function QuotesPage() {
 
         /* ── COTIZACIONES ENVIADAS ───────────────────────────────────────── */
         <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto' }}>
           {quotes.length === 0 ? (
             <div style={{ padding: 56, textAlign: 'center' }}>
               <div style={{ fontSize: 40, marginBottom: 10 }}>📄</div>

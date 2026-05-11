@@ -39,7 +39,7 @@ export default function OrdersPage() {
             <p style={{ color: '#6B7280', marginTop: 16 }}>No hay órdenes aún</p>
           </div>
         ) : (
-          <table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff', borderRadius: 12, overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto' }}><table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff', borderRadius: 12, overflow: 'hidden' }}>
             <thead>
               <tr style={{ background: '#F9FAFB' }}>
                 {['#Orden', 'Cliente', 'Total', 'Estado', 'Fecha'].map(h => (
@@ -63,7 +63,7 @@ export default function OrdersPage() {
                 )
               })}
             </tbody>
-          </table>
+          </table></div>
         )}
       </div>
     </AdminLayout>
