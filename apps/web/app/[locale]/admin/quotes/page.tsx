@@ -190,8 +190,8 @@ export default function QuotesPage() {
                 })}
               </tbody>
             </table>
-          </div>
           )}
+          </div>
         </div>
 
       ) : (
@@ -260,8 +260,8 @@ export default function QuotesPage() {
                 })}
               </tbody>
             </table>
-          </div>
           )}
+          </div>
         </div>
       )}
     </AdminLayout>
