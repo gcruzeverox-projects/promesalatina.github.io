@@ -233,8 +233,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
           </div>
 
           {/* Tabla de items */}
-          <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, overflow: 'hidden' }}>
-            <div style={{ overflowX: 'auto' }}>
+          <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, overflowX: 'auto' }}>
             {/* Header */}
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 80px 80px', gap: 8, padding: '10px 16px', background: '#f8fafc', borderBottom: '1px solid #e2e8f0', fontSize: 11, fontWeight: 700, color: '#475569', letterSpacing: '0.05em', textTransform: 'uppercase', minWidth: 600 }}>
               <span>Producto</span>
@@ -359,7 +358,6 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
             })}
           </div>
 
-            </div>
           {/* Notas globales */}
           <div style={{ marginTop: 16 }}>
             <label style={labelStyle}>Notas comerciales (aparecen en el PDF)</label>
