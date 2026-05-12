@@ -9,7 +9,7 @@
 //   - Ver totales en tiempo real
 //   - Generar y enviar el PDF por correo
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import type { Order } from '@/types/order'
 import type { QuoteFormData, QuoteItemForm } from '@/types/quote'
 
@@ -129,10 +129,19 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
     })
   }
 
+  // ─── Mobile detection ───────────────────────────────────────────────────────
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   // ─── Render ───────────────────────────────────────────────────────────────
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 24, alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 340px', gap: 24, alignItems: 'start' }}>
 
         {/* ── COLUMNA IZQUIERDA: Items ──────────────────────────────────────── */}
         <div>
@@ -142,7 +151,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
             <p style={{ fontSize: 11, fontWeight: 700, color: navy, letterSpacing: '0.07em', margin: '0 0 10px', textTransform: 'uppercase' }}>
               Cliente / Negocio
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '4px 16px', fontSize: 13 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr', gap: '4px 16px', fontSize: 13 }}>
               <div><span style={{ color: '#64748b' }}>Negocio:</span> <strong>{clientName}</strong></div>
               <div><span style={{ color: '#64748b' }}>Correo:</span> {clientEmail}</div>
               <div><span style={{ color: '#64748b' }}>Tel:</span> {clientPhone}</div>
@@ -176,7 +185,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, alignItems: 'end' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: 12, alignItems: 'end' }}>
               <div>
                 <label style={labelStyle}>% Ganancia</label>
                 <div style={{ position: 'relative' }}>
@@ -225,8 +234,9 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
 
           {/* Tabla de items */}
           <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, overflow: 'hidden' }}>
+            <div style={{ overflowX: 'auto' }}>
             {/* Header */}
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 80px 80px', gap: 8, padding: '10px 16px', background: '#f8fafc', borderBottom: '1px solid #e2e8f0', fontSize: 11, fontWeight: 700, color: '#475569', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 80px 80px', gap: 8, padding: '10px 16px', background: '#f8fafc', borderBottom: '1px solid #e2e8f0', fontSize: 11, fontWeight: 700, color: '#475569', letterSpacing: '0.05em', textTransform: 'uppercase', minWidth: 600 }}>
               <span>Producto</span>
               <span>Cant. / Tipo</span>
               <span>P. Proveedor</span>
@@ -349,6 +359,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
             })}
           </div>
 
+            </div>
           {/* Notas globales */}
           <div style={{ marginTop: 16 }}>
             <label style={labelStyle}>Notas comerciales (aparecen en el PDF)</label>
