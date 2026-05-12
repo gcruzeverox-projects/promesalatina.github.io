@@ -134,7 +134,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
         </header>
 
         {/* Content */}
-        <main style={{ flex: 1, padding: isMobile ? '16px' : '24px', minWidth: 0 }}>
+        <main style={{ flex: 1, padding: isMobile ? '12px' : '24px', minWidth: 0, width: '100%' }}>
           {children}
         </main>
       </div>
