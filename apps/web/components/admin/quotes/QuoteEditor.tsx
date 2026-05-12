@@ -163,7 +163,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
 
           {/* Controles globales de precio */}
           <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, padding: '16px 20px', marginBottom: 20 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 14 }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: '#475569', letterSpacing: '0.07em', margin: 0, textTransform: 'uppercase' }}>
                 Configuración de precios
               </p>
