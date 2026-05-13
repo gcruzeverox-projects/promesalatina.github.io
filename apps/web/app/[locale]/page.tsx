@@ -82,33 +82,53 @@ export default async function LandingPage({
             <p style={{ color: '#94A3B8', fontSize: 14, margin: '0 0 28px' }}>
               Categorías administrables desde el panel admin
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 14 }}>
+            <style>{`
+              .cat-card {
+                background: #F5F7FA;
+                border: 1.5px solid #DDE3EE;
+                border-radius: 12px;
+                overflow: hidden;
+                text-decoration: none;
+                display: flex;
+                flex-direction: column;
+                transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+              }
+              .cat-card:hover {
+                box-shadow: 0 8px 24px rgba(31, 58, 147, 0.13);
+                transform: translateY(-4px);
+                border-color: #1F3A93;
+              }
+              .cat-card:hover .cat-label {
+                color: #1F3A93;
+              }
+            `}</style>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
               {[
-                ['https://images.unsplash.com/photo-1544145945-f90425340c7e?w=300&h=300&fit=crop','Bebidas','Jugos · Sodas · Energizantes','bebidas'],
-                ['https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop','Galletas & Snacks','Rosquillas · Churritos','galletas-snacks'],
-                ['https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&h=300&fit=crop','Pan & Repostería','Pan dulce · Tortillas','pan-reposteria'],
-                ['https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=300&h=300&fit=crop','Granos & Condimentos','Frijoles · Arroz · Salsas','granos-condimentos'],
-                ['https://images.unsplash.com/photo-1547592166-23ac45744acd?w=300&h=300&fit=crop','Congelados','Pupusas · Tamales · Yuca','congelados'],
-                ['https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300&h=300&fit=crop','Medicina & Salud','Remedios · Vitaminas','medicina-salud'],
-                ['https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=300&h=300&fit=crop','Nostalgia Latina','Marcas clásicas importadas','nostalgia-latina'],
-                ['https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=300&fit=crop','Ver Todo','Catálogo completo','all'],
-              ].map(([icon, name, sub, slug]) => {
+                { name: 'Bebidas',             sub: 'Jugos · Sodas · Energizantes',   slug: 'bebidas',            img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=220&fit=crop&auto=format' },
+                { name: 'Galletas & Snacks',   sub: 'Rosquillas · Churritos',         slug: 'galletas-snacks',    img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=220&fit=crop&auto=format' },
+                { name: 'Pan & Repostería',    sub: 'Pan dulce · Tortillas',          slug: 'pan-reposteria',     img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=220&fit=crop&auto=format' },
+                { name: 'Granos & Condimentos',sub: 'Frijoles · Arroz · Salsas',      slug: 'granos-condimentos', img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=220&fit=crop&auto=format' },
+                { name: 'Congelados',          sub: 'Pupusas · Tamales · Yuca',       slug: 'congelados',         img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=220&fit=crop&auto=format' },
+                { name: 'Medicina & Salud',    sub: 'Remedios · Vitaminas',           slug: 'medicina-salud',     img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=220&fit=crop&auto=format' },
+                { name: 'Nostalgia Latina',    sub: 'Marcas clásicas importadas',     slug: 'nostalgia-latina',   img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400&h=220&fit=crop&auto=format' },
+                { name: 'Ver Todo',            sub: 'Catálogo completo',              slug: 'all',                img: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=220&fit=crop&auto=format' },
+              ].map(({ name, sub, slug, img }) => {
                 const locale = params.locale
                 const href = slug === 'all' ? `/${locale}/catalog` : `/${locale}/catalog?slug=${slug}`
                 return (
-                <Link key={name} href={href} style={{
-                  background: '#F5F7FA', border: '1.5px solid #DDE3EE',
-                  borderRadius: 12, padding: '0', textAlign: 'center', cursor: 'pointer',
-                  textDecoration: 'none', display: 'block', overflow: 'hidden',
-                }}>
-                  <img src={icon} alt={name} style={{ width: '100%', height: 120, objectFit: 'cover', borderRadius: '8px 8px 0 0', marginBottom: 10, display: 'block' }} />
-                  <div style={{ padding: '10px 12px 14px' }}>
-                  <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 13, fontWeight: 600, color: '#0F172A' }}>{name}</div>
-                  <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 2 }}>{sub}</div>
-                  </div>
-                </Link>
-              )
-            })}
+                  <Link key={name} href={href} className="cat-card">
+                    <div style={{ width: '100%', height: 140, overflow: 'hidden', flexShrink: 0 }}>
+                      <img src={img} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                    </div>
+                    <div style={{ padding: '14px 16px 16px' }}>
+                      <div className="cat-label" style={{ fontFamily: 'Poppins, sans-serif', fontSize: 13, fontWeight: 700, color: '#0F172A', marginBottom: 3, transition: 'color 0.2s ease' }}>
+                        {name}
+                      </div>
+                      <div style={{ fontSize: 11, color: '#94A3B8' }}>{sub}</div>
+                    </div>
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </section>
