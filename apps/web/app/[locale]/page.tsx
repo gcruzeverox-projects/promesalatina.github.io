@@ -118,14 +118,14 @@ export default async function LandingPage({
             `}</style>
             <div className="cat-grid">
               {[
-                { name: 'Bebidas',             sub: 'Jugos · Sodas · Energizantes',   slug: 'bebidas',            img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=220&fit=crop&auto=format' },
+                { name: 'Bebidas',             sub: 'Jugos · Sodas · Energizantes',   slug: 'bebidas',            img: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&h=220&fit=crop&auto=format' },
                 { name: 'Galletas & Snacks',   sub: 'Rosquillas · Churritos',         slug: 'galletas-snacks',    img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=220&fit=crop&auto=format' },
                 { name: 'Pan & Repostería',    sub: 'Pan dulce · Tortillas',          slug: 'pan-reposteria',     img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=220&fit=crop&auto=format' },
                 { name: 'Granos & Condimentos',sub: 'Frijoles · Arroz · Salsas',      slug: 'granos-condimentos', img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=220&fit=crop&auto=format' },
-                { name: 'Congelados',          sub: 'Pupusas · Tamales · Yuca',       slug: 'congelados',         img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=220&fit=crop&auto=format' },
+                { name: 'Congelados',          sub: 'Pupusas · Tamales · Yuca',       slug: 'congelados',         img: 'https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c?w=400&h=220&fit=crop&auto=format' },
                 { name: 'Medicina & Salud',    sub: 'Remedios · Vitaminas',           slug: 'medicina-salud',     img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=220&fit=crop&auto=format' },
-                { name: 'Nostalgia Latina',    sub: 'Marcas clásicas importadas',     slug: 'nostalgia-latina',   img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400&h=220&fit=crop&auto=format' },
-                { name: 'Ver Todo',            sub: 'Catálogo completo',              slug: 'all',                img: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=220&fit=crop&auto=format' },
+                { name: 'Nostalgia Latina',    sub: 'Marcas clásicas importadas',     slug: 'nostalgia-latina',   img: 'https://images.unsplash.com/photo-1583623025817-d180a2221d0a?w=400&h=220&fit=crop&auto=format' },
+                { name: 'Ver Todo',            sub: 'Catálogo completo',              slug: 'all',                img: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400&h=220&fit=crop&auto=format' },
               ].map(({ name, sub, slug, img }) => {
                 const locale = params.locale
                 const href = slug === 'all' ? `/${locale}/catalog` : `/${locale}/catalog?slug=${slug}`
