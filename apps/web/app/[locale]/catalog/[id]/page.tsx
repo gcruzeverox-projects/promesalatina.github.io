@@ -158,7 +158,15 @@ function ProductDetailContent() {
                 // eslint-disable-next-line @next/next/no-img-element
                 ? <img src={images[imgIdx].url} alt={product.name}
                     style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 16 }} />
-                : <div style={{ fontSize: 64, color: '#CBD5E1' }}>📦</div>
+                : <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, width: '100%', height: '100%' }}>
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="80" height="80" rx="16" fill="#EEF2FF"/>
+                      <path d="M20 28L40 20L60 28V52L40 60L20 52V28Z" stroke="#A5B4FC" strokeWidth="2.5" fill="none"/>
+                      <path d="M40 20V60M20 28L40 38L60 28" stroke="#A5B4FC" strokeWidth="2.5"/>
+                      <circle cx="40" cy="38" r="4" fill="#818CF8"/>
+                    </svg>
+                    <span style={{ fontSize: 13, color: '#94A3B8', fontFamily: 'Inter, sans-serif', fontWeight: 500, letterSpacing: '0.03em' }}>Sin imagen disponible</span>
+                  </div>
               }
 
               {/* Badges */}
