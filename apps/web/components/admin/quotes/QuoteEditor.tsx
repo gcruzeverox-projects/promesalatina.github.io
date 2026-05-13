@@ -239,7 +239,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
           {/* Tabla de items */}
           <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, overflowX: 'auto' }}>
             {/* Header */}
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 80px 80px', gap: 8, padding: '10px 16px', background: '#f8fafc', borderBottom: '1px solid #e2e8f0', fontSize: 11, fontWeight: 700, color: '#475569', letterSpacing: '0.05em', textTransform: 'uppercase', minWidth: 600 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 80px 110px 110px 90px 70px 70px', gap: 8, padding: '10px 16px', background: '#f8fafc', borderBottom: '1px solid #e2e8f0', fontSize: 11, fontWeight: 700, color: '#475569', letterSpacing: '0.05em', textTransform: 'uppercase', minWidth: 600 }}>
               <span>Producto</span>
               <span>Cant. / Tipo</span>
               <span>P. Proveedor</span>
@@ -258,7 +258,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
               return (
                 <div key={item.productId} style={{
                   display: 'grid',
-                  gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 80px 80px',
+                  gridTemplateColumns: '2fr 80px 110px 110px 90px 70px 70px',
                   gap: 8, padding: '12px 16px',
                   borderBottom: idx < items.length - 1 ? '1px solid #f1f5f9' : 'none',
                   alignItems: 'center',
