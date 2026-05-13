@@ -53,7 +53,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
     <>
       {/* Logo */}
       <div style={{ padding: '16px', borderBottom: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: 12 }}>
-        <img src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png" alt="Promesa Latina" style={{ height: 48, width: 48, objectFit: 'contain', flexShrink: 0 }} />
+        <div style={{ background: '#fff', borderRadius: '50%', padding: '3px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.20)', flexShrink: 0 }}><img src="https://res.cloudinary.com/db9s1q9zf/image/upload/LOGO_SIN_FONDO_ouvjnr.png" alt="Promesa Latina" style={{ height: 42, width: 42, objectFit: 'contain' }} /></div>
         {(sidebarOpen || isMobile) && (
           <div>
             <div style={{ color: '#fff', fontWeight: 700, fontSize: 13, fontFamily: 'Poppins, sans-serif', whiteSpace: 'nowrap' }}>Promesa Latina</div>
