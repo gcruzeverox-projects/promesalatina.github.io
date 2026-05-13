@@ -57,7 +57,7 @@ export default function AdminLoginPage() {
         {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <img
-            src="https://res.cloudinary.com/db9s1q9zf/image/upload/LOGO_SIN_FONDO_ouvjnr.png"
+            src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png"
             alt="Promesa Latina"
             style={{ height: 80, width: 'auto', objectFit: 'contain', marginBottom: 12 }}
           />

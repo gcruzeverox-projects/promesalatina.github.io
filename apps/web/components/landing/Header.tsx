@@ -69,7 +69,7 @@ export function Header() {
 
           {/* Logo */}
           <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-            <div style={{ background: '#fff', borderRadius: '50%', padding: '3px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.20)' }}><img src="https://res.cloudinary.com/db9s1q9zf/image/upload/LOGO_SIN_FONDO_ouvjnr.png" alt="Promesa Latina" style={{ height: isMobile ? 40 : 48, width: 'auto', objectFit: 'contain' }} /></div>
+            <img src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png" alt="Promesa Latina" style={{ height: isMobile ? 44 : 52, width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.35)) brightness(1.15)', borderRadius: '50%' }} />
           </Link>
 
           {/* Spacer mobile para empujar carrito y hamburguesa a la derecha */}
@@ -174,7 +174,7 @@ export function Header() {
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 200 }} onClick={() => setMobileOpen(false)}>
           <div style={{ position: 'absolute', top: 0, right: 0, width: '80%', maxWidth: 320, height: '100%', background: '#1F3A93', padding: '24px 20px', display: 'flex', flexDirection: 'column', gap: 4, overflowY: 'auto' }} onClick={e => e.stopPropagation()}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-              <div style={{ background: '#fff', borderRadius: '50%', padding: '3px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.20)' }}><img src="https://res.cloudinary.com/db9s1q9zf/image/upload/LOGO_SIN_FONDO_ouvjnr.png" alt="Promesa Latina" style={{ height: 44, width: 'auto', objectFit: 'contain' }} /></div>
+              <img src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png" alt="Promesa Latina" style={{ height: 48, width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.35)) brightness(1.15)', borderRadius: '50%' }} />
               <button onClick={() => setMobileOpen(false)} style={{ background: 'none', border: 'none', color: '#fff', fontSize: 22, cursor: 'pointer' }}>✕</button>
             </div>
             {navLinks.map(item => (
