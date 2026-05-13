@@ -74,7 +74,7 @@ export function Header() {
 
           {/* Buscador desktop */}
           {!isMobile && (
-            <div style={{ flex: 1, maxWidth: 360, position: 'relative' }}>
+            <div style={{ flex: 2, maxWidth: 480, position: 'relative' }}>
               <span style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.45)', fontSize: 16, pointerEvents: 'none' }}>⌕</span>
               <input type="text" placeholder={lang === 'es' ? 'Buscar productos...' : 'Search products...'}
                 style={{ width: '100%', height: 36, background: 'rgba(255,255,255,0.1)', border: '1.5px solid rgba(255,255,255,0.18)', borderRadius: 20, paddingLeft: 36, paddingRight: 14, fontSize: 13, color: '#fff', outline: 'none', fontFamily: 'Inter, sans-serif' }}
@@ -85,7 +85,7 @@ export function Header() {
             </div>
           )}
 
-          <div style={{ flex: 1 }} />
+          <div style={{ flex: '0 0 16px' }} />
 
           {/* Nav desktop */}
           {!isMobile && (
