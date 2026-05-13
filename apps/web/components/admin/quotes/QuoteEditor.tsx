@@ -141,7 +141,11 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
   // ─── Render ───────────────────────────────────────────────────────────────
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 340px', gap: 24, alignItems: 'start' }}>
+      <style>{`
+        .quote-grid { display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start; }
+        @media (max-width: 768px) { .quote-grid { grid-template-columns: 1fr; } }
+      `}</style>
+      <div className="quote-grid">
 
         {/* ── COLUMNA IZQUIERDA: Items ──────────────────────────────────────── */}
         <div>
