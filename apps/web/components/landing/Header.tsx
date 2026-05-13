@@ -72,6 +72,10 @@ export function Header() {
             <img src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png" alt="Promesa Latina" style={{ height: isMobile ? 44 : 52, width: 'auto', objectFit: 'contain' }} />
           </Link>
 
+          {/* Spacer mobile para empujar carrito y hamburguesa a la derecha */}
+          {isMobile && <div style={{ flex: 1 }} />}
+
+          {isMobile && <div style={{ flex: 1 }} />}
           {/* Buscador desktop */}
           {!isMobile && (
             <div style={{ flex: 2, maxWidth: 480, position: 'relative' }}>
