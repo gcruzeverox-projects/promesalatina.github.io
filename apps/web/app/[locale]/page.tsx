@@ -84,26 +84,28 @@ export default async function LandingPage({
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 14 }}>
               {[
-                ['🥤','Bebidas','Jugos · Sodas · Energizantes','bebidas'],
-                ['🍪','Galletas & Snacks','Rosquillas · Churritos','galletas-snacks'],
-                ['🥖','Pan & Repostería','Pan dulce · Tortillas','pan-reposteria'],
-                ['🫘','Granos & Condimentos','Frijoles · Arroz · Salsas','granos-condimentos'],
-                ['🧊','Congelados','Pupusas · Tamales · Yuca','congelados'],
-                ['💊','Medicina & Salud','Remedios · Vitaminas','medicina-salud'],
-                ['💛','Nostalgia Latina','Marcas clásicas importadas','nostalgia-latina'],
-                ['📦','Ver Todo','Catálogo completo','all'],
+                ['https://images.unsplash.com/photo-1544145945-f90425340c7e?w=300&h=300&fit=crop','Bebidas','Jugos · Sodas · Energizantes','bebidas'],
+                ['https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop','Galletas & Snacks','Rosquillas · Churritos','galletas-snacks'],
+                ['https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&h=300&fit=crop','Pan & Repostería','Pan dulce · Tortillas','pan-reposteria'],
+                ['https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=300&h=300&fit=crop','Granos & Condimentos','Frijoles · Arroz · Salsas','granos-condimentos'],
+                ['https://images.unsplash.com/photo-1547592166-23ac45744acd?w=300&h=300&fit=crop','Congelados','Pupusas · Tamales · Yuca','congelados'],
+                ['https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300&h=300&fit=crop','Medicina & Salud','Remedios · Vitaminas','medicina-salud'],
+                ['https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=300&h=300&fit=crop','Nostalgia Latina','Marcas clásicas importadas','nostalgia-latina'],
+                ['https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=300&fit=crop','Ver Todo','Catálogo completo','all'],
               ].map(([icon, name, sub, slug]) => {
                 const locale = params.locale
                 const href = slug === 'all' ? `/${locale}/catalog` : `/${locale}/catalog?slug=${slug}`
                 return (
                 <Link key={name} href={href} style={{
                   background: '#F5F7FA', border: '1.5px solid #DDE3EE',
-                  borderRadius: 12, padding: '20px 16px', textAlign: 'center', cursor: 'pointer',
-                  textDecoration: 'none', display: 'block',
+                  borderRadius: 12, padding: '0', textAlign: 'center', cursor: 'pointer',
+                  textDecoration: 'none', display: 'block', overflow: 'hidden',
                 }}>
-                  <div style={{ fontSize: 28, marginBottom: 10 }}>{icon}</div>
+                  <img src={icon} alt={name} style={{ width: '100%', height: 120, objectFit: 'cover', borderRadius: '8px 8px 0 0', marginBottom: 10, display: 'block' }} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                  <div style={{ padding: '10px 12px 14px' }}>
                   <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 13, fontWeight: 600, color: '#0F172A' }}>{name}</div>
                   <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 2 }}>{sub}</div>
+                  </div>
                 </Link>
               )
             })}
