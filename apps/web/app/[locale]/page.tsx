@@ -86,16 +86,7 @@ export default async function LandingPage({
 
           {/* Contenido principal */}
           <div className="hero-content" style={{ maxWidth: 680, margin: '0 auto', position: 'relative' }}>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: 'rgba(255,183,77,0.15)', border: '1px solid rgba(255,183,77,0.35)',
-              borderRadius: 20, padding: '5px 14px', marginBottom: 20,
-            }}>
-              <span style={{ fontSize: 12 }}>🌎</span>
-              <span style={{ fontSize: 12, color: '#FFB74D', fontWeight: 600, fontFamily: 'Inter, sans-serif', letterSpacing: '0.04em' }}>
-                Distribuidora B2B · Centroamérica & Sudamérica
-              </span>
-            </div>
+
             <h1 style={{
               fontFamily: 'Poppins, sans-serif',
               fontSize: 'clamp(28px,5vw,46px)',
