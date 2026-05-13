@@ -120,7 +120,15 @@ export function ProductCard({ product, lang = 'es', onToast }: Props) {
           {product.mainImageUrl
             // eslint-disable-next-line @next/next/no-img-element
             ? <img src={product.mainImageUrl} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 8, transition: 'transform .3s' }} />
-            : <div style={{ fontSize: 48, color: '#CBD5E1' }}>📦</div>
+            : <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, width: '100%', height: '100%' }}>
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="56" height="56" rx="12" fill="#EEF2FF"/>
+                  <path d="M14 20L28 14L42 20V36L28 42L14 36V20Z" stroke="#A5B4FC" strokeWidth="2" fill="none"/>
+                  <path d="M28 14V42M14 20L28 26L42 20" stroke="#A5B4FC" strokeWidth="2"/>
+                  <circle cx="28" cy="26" r="3" fill="#818CF8"/>
+                </svg>
+                <span style={{ fontSize: 11, color: '#94A3B8', fontFamily: 'Inter, sans-serif', fontWeight: 500, letterSpacing: '0.03em' }}>Sin imagen</span>
+              </div>
           }
 
           {/* Badges */}
