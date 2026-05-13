@@ -101,8 +101,22 @@ export default async function LandingPage({
               .cat-card:hover .cat-label {
                 color: #1F3A93;
               }
+              .cat-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 16px;
+              }
+              @media (max-width: 768px) {
+                .cat-grid {
+                  grid-template-columns: repeat(2, 1fr);
+                  gap: 12px;
+                }
+                .cat-card .cat-label {
+                  font-size: 12px !important;
+                }
+              }
             `}</style>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+            <div className="cat-grid">
               {[
                 { name: 'Bebidas',             sub: 'Jugos · Sodas · Energizantes',   slug: 'bebidas',            img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=220&fit=crop&auto=format' },
                 { name: 'Galletas & Snacks',   sub: 'Rosquillas · Churritos',         slug: 'galletas-snacks',    img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=220&fit=crop&auto=format' },
