@@ -101,7 +101,7 @@ export default async function LandingPage({
                   borderRadius: 12, padding: '0', textAlign: 'center', cursor: 'pointer',
                   textDecoration: 'none', display: 'block', overflow: 'hidden',
                 }}>
-                  <img src={icon} alt={name} style={{ width: '100%', height: 120, objectFit: 'cover', borderRadius: '8px 8px 0 0', marginBottom: 10, display: 'block' }} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                  <img src={icon} alt={name} style={{ width: '100%', height: 120, objectFit: 'cover', borderRadius: '8px 8px 0 0', marginBottom: 10, display: 'block' }} />
                   <div style={{ padding: '10px 12px 14px' }}>
                   <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 13, fontWeight: 600, color: '#0F172A' }}>{name}</div>
                   <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 2 }}>{sub}</div>
