@@ -3,7 +3,7 @@
 // Botón flotante del carrito con badge de cantidad.
 // Se integra en el Header y muestra el drawer.
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useCartStore } from '@/store/cart'
 import { CartDrawer } from './CartDrawer'
 
@@ -14,6 +14,13 @@ interface Props {
 export function CartButton({ lang = 'es' }: Props) {
   const [open, setOpen] = useState(false)
   const count = useCartStore(s => s.itemCount())
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   return (
     <>
@@ -33,7 +40,7 @@ export function CartButton({ lang = 'es' }: Props) {
         aria-label={lang === 'es' ? 'Ver carrito' : 'View cart'}
       >
         <span style={{ fontSize: 16 }}>🛒</span>
-        <span>{lang === 'es' ? 'Carrito' : 'Cart'}</span>
+        {!isMobile && <span>{lang === 'es' ? 'Carrito' : 'Cart'}</span>}
         {count > 0 && (
           <span style={{
             position: 'absolute', top: -6, right: -6,
