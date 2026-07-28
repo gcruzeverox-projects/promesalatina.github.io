@@ -87,6 +87,11 @@ function CatalogContent() {
       setCategories(cats)
       const categorySlug = searchParams.get('slug')
       const categoryName = searchParams.get('category')
+      const isNewParam   = searchParams.get('isNew')
+      if (isNewParam === 'true') {
+        setBadge('new')
+        setPage(1)
+      }
       if ((categorySlug || categoryName) && cats.length > 0) {
         const cat = cats.find((c: any) =>
           c.slug === categorySlug ||
