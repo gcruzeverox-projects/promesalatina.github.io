@@ -168,26 +168,13 @@ export function ProductCard({ product, lang = 'es', onToast }: Props) {
             {product.sku}
           </p>
 
-          {/* Stock */}
-          <p style={{ fontSize: 11, fontWeight: 600, margin: '0 0 8px', color: outOfStock ? '#EF4444' : product.stockQuantity < 10 ? '#F59E0B' : green }}>
-            {outOfStock ? '⚠ Sin stock' : `✓ ${product.stockQuantity} cajas disp.`}
-          </p>
 
-          {/* Selector tipo */}
-          <div style={{ display: 'flex', gap: 4, marginBottom: 10 }} onClick={e => e.preventDefault()}>
-            {(['caja', 'paquete'] as UnitType[]).map(type => (
-              <button key={type}
-                onClick={e => { e.preventDefault(); setUnitType(type) }}
-                style={{
-                  flex: 1, padding: '4px 6px', borderRadius: 5, border: '1.5px solid',
-                  borderColor: unitType === type ? navy : '#E2E8F0',
-                  background: unitType === type ? navy : '#fff',
-                  color: unitType === type ? '#fff' : '#64748B',
-                  fontSize: 10, fontWeight: 600, cursor: 'pointer', transition: 'all .15s',
-                }}>
-                {type === 'caja' ? `Caja ×${product.unitsPerCase}` : `Pack ×${product.unitsPerPack}`}
-              </button>
-            ))}
+
+          {/* Label caja x unidades */}
+          <div style={{ marginBottom: 10 }}>
+            <span style={{ fontSize: 11, fontWeight: 600, color: '#475569', background: '#F1F5F9', padding: '4px 10px', borderRadius: 5 }}>
+              📦 Caja × {product.unitsPerCase} unid.
+            </span>
           </div>
 
           {/* Cantidad + precio */}
@@ -202,14 +189,7 @@ export function ProductCard({ product, lang = 'es', onToast }: Props) {
               style={{ width: 26, height: 26, borderRadius: '50%', border: '1.5px solid #E2E8F0', background: '#F8FAFC', cursor: 'pointer', fontSize: 14, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               +
             </button>
-            <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
-              <p style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 800, fontSize: 15, color: navy, margin: 0 }}>
-                ${fmt(product.basePrice * qty)}
-              </p>
-              <p style={{ fontSize: 9, color: '#94A3B8', margin: 0 }}>
-                ${fmt(product.basePrice)}/{unitType}
-              </p>
-            </div>
+
           </div>
 
           {/* Botón agregar */}

@@ -219,57 +219,22 @@ function ProductDetailContent() {
               {product.countryOfOrigin && ` · Origen: ${product.countryOfOrigin}`}
             </p>
 
-            {/* Precio */}
-            <div style={{ background: '#F0F4FF', borderRadius: 12, padding: '16px 18px', marginBottom: 20 }}>
-              <p style={{ fontSize: 11, color: '#4338CA', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', margin: '0 0 4px' }}>Precio base</p>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-                <span style={{ fontFamily: 'Poppins, sans-serif', fontSize: 32, fontWeight: 800, color: navy }}>${fmt(product.basePrice)}</span>
-                <span style={{ color: '#64748B', fontSize: 13 }}>/ {unitType}</span>
-              </div>
-              <p style={{ fontSize: 11, color: '#64748B', margin: '4px 0 0' }}>
-                * Precio final confirmado en cotización
-              </p>
-            </div>
 
-            {/* Stock */}
-            <div style={{ display: 'flex', gap: 6, marginBottom: 20, flexWrap: 'wrap' }}>
-              <span style={{
-                fontSize: 11, fontWeight: 700, padding: '4px 10px', borderRadius: 5,
-                background: outOfStock ? '#FEE2E2' : product.stockQuantity < 10 ? '#FEF3C7' : '#DCFCE7',
-                color: outOfStock ? '#991B1B' : product.stockQuantity < 10 ? '#92400E' : '#166534',
-              }}>
-                {outOfStock ? '⚠ Sin stock' : `✓ ${product.stockQuantity} cajas disponibles`}
-              </span>
-              {inCart && (
+
+            {/* En carrito badge */}
+            {inCart && (
+              <div style={{ marginBottom: 20 }}>
                 <span style={{ fontSize: 11, fontWeight: 700, padding: '4px 10px', borderRadius: 5, background: '#EEF2FF', color: navy }}>
                   🛒 En tu orden
                 </span>
-              )}
-            </div>
-
-            {/* Selector tipo de empaque */}
-            <div style={{ marginBottom: 16 }}>
-              <p style={{ fontSize: 12, fontWeight: 700, color: '#374151', margin: '0 0 8px', letterSpacing: '0.03em', textTransform: 'uppercase' }}>
-                Tipo de empaque
-              </p>
-              <div style={{ display: 'flex', gap: 8 }}>
-                {([
-                  ['caja',    `Caja × ${product.unitsPerCase} unid.`],
-                  ['paquete', `Paquete × ${product.unitsPerPack} unid.`],
-                ] as [UnitType, string][]).map(([type, label]) => (
-                  <button key={type} onClick={() => setUnitType(type)}
-                    style={{
-                      flex: 1, padding: '10px 12px', borderRadius: 8,
-                      border: `2px solid ${unitType === type ? navy : '#E2E8F0'}`,
-                      background: unitType === type ? '#EEF2FF' : '#fff',
-                      color: unitType === type ? navy : '#475569',
-                      fontSize: 13, fontWeight: unitType === type ? 700 : 400,
-                      cursor: 'pointer', transition: 'all .15s',
-                    }}>
-                    {label}
-                  </button>
-                ))}
               </div>
+            )}
+
+            {/* Label caja x unidades */}
+            <div style={{ marginBottom: 16 }}>
+              <span style={{ fontSize: 13, fontWeight: 600, color: '#475569', background: '#F1F5F9', padding: '8px 14px', borderRadius: 8, display: 'inline-block' }}>
+                📦 Caja × {product.unitsPerCase} unidades
+              </span>
             </div>
 
             {/* Selector cantidad */}
@@ -291,10 +256,7 @@ function ProductDetailContent() {
                   style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid #E2E8F0', background: '#F8FAFC', cursor: 'pointer', fontSize: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>
                   +
                 </button>
-                <div style={{ marginLeft: 8 }}>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: navy, margin: 0 }}>${fmt(product.basePrice * qty)}</p>
-                  <p style={{ fontSize: 11, color: '#94A3B8', margin: 0 }}>estimado</p>
-                </div>
+
               </div>
             </div>
 
