@@ -72,7 +72,7 @@ export class EmailService {
               <tbody>${itemsHtml}</tbody>
             </table>
 
-            <a href="${process.env.ADMIN_URL ?? 'https://promesalatina-github-io.vercel.app'}/admin/quotes?orderId=${order.id}"
+            <a href="${process.env.ADMIN_URL ?? 'https://promesalatina-github-io.vercel.app'}/es/admin/login?redirect=/es/admin/quotes?orderId=${order.id}"
                style="display: inline-block; background: #E65100; color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 14px;">
               + Crear cotización →
             </a>
