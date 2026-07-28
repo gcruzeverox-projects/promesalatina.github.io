@@ -100,22 +100,7 @@ export function CartDrawer({ open, onClose, lang = 'es' }: Props) {
                     <p style={{ fontWeight: 600, fontSize: 13, color: '#0F172A', margin: '0 0 2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.name}</p>
                     <p style={{ fontSize: 10, color: '#94A3B8', margin: '0 0 8px', fontFamily: 'monospace' }}>{item.sku}</p>
 
-                    {/* Tipo de empaque */}
-                    <div style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
-                      {(['caja', 'paquete'] as UnitType[]).map(type => (
-                        <button key={type} onClick={() => updateUnitType(item.productId, type)}
-                          style={{
-                            padding: '3px 10px', borderRadius: 5, border: '1.5px solid',
-                            borderColor: item.unitType === type ? navy : '#E2E8F0',
-                            background: item.unitType === type ? navy : '#fff',
-                            color: item.unitType === type ? '#fff' : '#64748B',
-                            fontSize: 11, fontWeight: 600, cursor: 'pointer', transition: 'all .15s',
-                          }}
-                        >
-                          {type === 'caja' ? t.caja : t.paquete}
-                        </button>
-                      ))}
-                    </div>
+
 
                     {/* Cantidad + precio */}
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -127,10 +112,7 @@ export function CartDrawer({ open, onClose, lang = 'es' }: Props) {
                         <button onClick={() => updateQuantity(item.productId, item.quantity + 1)}
                           style={{ width: 26, height: 26, borderRadius: '50%', border: '1.5px solid #E2E8F0', background: '#F8FAFC', cursor: 'pointer', fontSize: 14, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>+</button>
                       </div>
-                      <div style={{ textAlign: 'right' }}>
-                        <p style={{ fontWeight: 700, fontSize: 14, color: navy, margin: 0 }}>${fmt(item.basePrice * item.quantity)}</p>
-                        <p style={{ fontSize: 10, color: '#94A3B8', margin: 0 }}>${fmt(item.basePrice)}/{item.unitType}</p>
-                      </div>
+
                     </div>
                   </div>
 
@@ -147,11 +129,7 @@ export function CartDrawer({ open, onClose, lang = 'es' }: Props) {
         {/* Footer con totales */}
         {items.length > 0 && (
           <div style={{ padding: '16px 20px', borderTop: '1px solid #E2E8F0', background: '#FAFBFD' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-              <span style={{ color: '#64748B', fontSize: 13 }}>{t.subtotal}</span>
-              <span style={{ fontWeight: 800, fontSize: 18, color: navy, fontFamily: 'Poppins, sans-serif' }}>${fmt(subtotal())}</span>
-            </div>
-            <p style={{ fontSize: 11, color: '#94A3B8', margin: '0 0 14px', textAlign: 'center' }}>⚠️ {t.note}</p>
+
             <Link
               href={`/${locale}/checkout`}
               onClick={onClose}

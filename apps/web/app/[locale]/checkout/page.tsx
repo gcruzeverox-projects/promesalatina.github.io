@@ -223,23 +223,19 @@ function CheckoutContent() {
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <p style={{ fontWeight: 600, fontSize: 12, margin: '0 0 2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.name}</p>
-                    <p style={{ fontSize: 10, color: '#94A3B8', margin: 0 }}>{item.quantity} {item.unitType}(s)</p>
+                    <p style={{ fontSize: 10, color: '#94A3B8', margin: 0 }}>{item.quantity} caja(s)</p>
                   </div>
-                  <p style={{ fontWeight: 700, fontSize: 13, color: navy, margin: 0, flexShrink: 0 }}>
-                    ${fmt(item.basePrice * item.quantity)}
-                  </p>
+
                 </div>
               ))}
             </div>
 
             <div style={{ padding: '16px 20px', background: '#FAFBFD' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-                <span style={{ color: '#64748B', fontSize: 13 }}>Subtotal estimado</span>
-                <span style={{ fontWeight: 700, fontSize: 14, color: '#0F172A' }}>${fmt(subtotal())}</span>
+
               </div>
               <div style={{ background: navy, borderRadius: 8, padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-                <span style={{ color: 'rgba(255,255,255,0.85)', fontWeight: 700 }}>Total orden</span>
-                <span style={{ color: '#FFB74D', fontFamily: 'Poppins, sans-serif', fontWeight: 800, fontSize: 20 }}>${fmt(subtotal())}</span>
+
               </div>
               <p style={{ fontSize: 10, color: '#94A3B8', textAlign: 'center', marginTop: 8 }}>
                 * El precio final se confirma en la cotización oficial
