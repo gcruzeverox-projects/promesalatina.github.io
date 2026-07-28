@@ -286,9 +286,7 @@ function ProductDetailContent() {
               <p style={{ fontSize: 11, fontWeight: 800, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 12px' }}>Especificaciones</p>
               {[
                 ['Unidades por caja', product.unitsPerCase],
-                ['Unidades por paquete', product.unitsPerPack],
                 ['Pedido mínimo (MOQ)', `${product.moq} caja(s)`],
-                ['Peso por unidad', product.weight ? `${product.weight}g` : '—'],
                 ['País de origen', product.countryOfOrigin ?? '—'],
               ].map(([label, val]) => (
                 <div key={label as string} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E2E8F0', fontSize: 13 }}>
