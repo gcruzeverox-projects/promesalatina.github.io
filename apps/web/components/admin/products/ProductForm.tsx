@@ -293,7 +293,32 @@ export function ProductForm({ product, onSubmit, onCancel, isSubmitting }: Props
               <Field label="SKU" name="sku" value={form.sku} onChange={set('sku')} required placeholder="Ej: POS-SODA-350" hint="Código único del producto" />
               {errors.sku && <p style={{ color: '#EF4444', fontSize: 11, marginTop: -14, marginBottom: 10 }}>{errors.sku}</p>}
             </div>
-            <Field label="País de origen" name="countryOfOrigin" value={form.countryOfOrigin} onChange={set('countryOfOrigin')} placeholder="Ej: Colombia" />
+            <div>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#374151', marginBottom: 6, letterSpacing: '0.03em' }}>País de origen</label>
+              <select name="countryOfOrigin" value={form.countryOfOrigin} onChange={e => set('countryOfOrigin')(e as any)}
+                style={{ width: '100%', height: 42, border: '1.5px solid #E2E8F0', borderRadius: 8, padding: '0 12px', fontSize: 14, color: '#1E293B', background: '#FAFBFD', outline: 'none', fontFamily: 'Inter, sans-serif', cursor: 'pointer' }}>
+                <option value="">Seleccionar país</option>
+                <option value="GT">🇬🇹 Guatemala</option>
+                <option value="SV">🇸🇻 El Salvador</option>
+                <option value="HN">🇭🇳 Honduras</option>
+                <option value="NI">🇳🇮 Nicaragua</option>
+                <option value="CR">🇨🇷 Costa Rica</option>
+                <option value="PA">🇵🇦 Panamá</option>
+                <option value="MX">🇲🇽 México</option>
+                <option value="CO">🇨🇴 Colombia</option>
+                <option value="PE">🇵🇪 Perú</option>
+                <option value="EC">🇪🇨 Ecuador</option>
+                <option value="BO">🇧🇴 Bolivia</option>
+                <option value="CL">🇨🇱 Chile</option>
+                <option value="AR">🇦🇷 Argentina</option>
+                <option value="VE">🇻🇪 Venezuela</option>
+                <option value="DO">🇩🇴 Rep. Dominicana</option>
+                <option value="CU">🇨🇺 Cuba</option>
+                <option value="PR">🇵🇷 Puerto Rico</option>
+                <option value="US">🇺🇸 Estados Unidos</option>
+                <option value="LA">🌎 Latinoamérica</option>
+              </select>
+            </div>
           </div>
 
           <TextAreaField label="Descripción (Español)" name="description" value={form.description} onChange={set('description')} placeholder="Describe el producto, sus características, usos..." />
@@ -360,11 +385,11 @@ export function ProductForm({ product, onSubmit, onCancel, isSubmitting }: Props
               />
               {errors.basePrice && <p style={{ color: '#EF4444', fontSize: 11, marginTop: -14, marginBottom: 10 }}>{errors.basePrice}</p>}
             </div>
-            <Field label="Stock disponible (cajas)" name="stockQuantity" value={form.stockQuantity} onChange={set('stockQuantity')} type="number" min="0" placeholder="0" />
+
           </div>
 
           <div style={gridTwo}>
-            <Field label="Unidades por paquete" name="unitsPerPack" value={form.unitsPerPack} onChange={set('unitsPerPack')} type="number" min="1" placeholder="12" hint="Unidades dentro de un paquete" />
+
             <Field label="Unidades por caja" name="unitsPerCase" value={form.unitsPerCase} onChange={set('unitsPerCase')} type="number" min="1" placeholder="24" hint="Unidades dentro de una caja" />
           </div>
 
