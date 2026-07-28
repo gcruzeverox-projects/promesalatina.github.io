@@ -126,6 +126,13 @@ export class ProductsService {
     })
   }
 
+  async updateIsNew(id: string, isNew: boolean) {
+    return this.prisma.product.update({
+      where: { id },
+      data:  { isNew, updatedAt: new Date() },
+    })
+  }
+
   async updateStatus(id: string, status: ProductStatus) {
     await this.findOne(id)
     return this.prisma.product.update({
