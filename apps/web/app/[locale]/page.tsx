@@ -275,7 +275,7 @@ export default async function LandingPage({
               </div>
             </div>
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-              <span>© 2025 Promesa Latina. Todos los derechos reservados.</span>
+              <span>© 2025 Distribuidora Promesa Latina. Todos los derechos reservados.</span>
               <div style={{ display: 'flex', gap: 16 }}>
                 <a href="#" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none' }}>Privacidad</a>
                 <a href="#" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none' }}>Términos</a>

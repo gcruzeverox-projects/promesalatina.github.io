@@ -41,7 +41,7 @@ export default function DashboardPage() {
     <AdminLayout>
       <div style={{ padding: '32px' }}>
         <h1 style={{ fontSize: 28, fontWeight: 700, color: '#111827', marginBottom: 8 }}>Dashboard</h1>
-        <p style={{ color: '#6B7280', marginBottom: 32 }}>Resumen general de Promesa Latina</p>
+        <p style={{ color: '#6B7280', marginBottom: 32 }}>Resumen general de Distribuidora Promesa Latina</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 20 }}>
           {cards.map(card => (
             <div key={card.label} style={{

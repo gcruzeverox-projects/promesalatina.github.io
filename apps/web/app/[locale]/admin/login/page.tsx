@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
             alt="Promesa Latina"
             style={{ height: 80, width: 'auto', objectFit: 'contain', marginBottom: 12 }}
           />
-          <h1 style={{ fontFamily: 'Poppins, sans-serif', fontSize: 20, fontWeight: 700, color: '#0f172a', margin: 0 }}>Promesa Latina</h1>
+          <h1 style={{ fontFamily: 'Poppins, sans-serif', fontSize: 20, fontWeight: 700, color: '#0f172a', margin: 0 }}>Distribuidora Promesa Latina</h1>
         </div>
 
         <form onSubmit={handleSubmit}>

@@ -1,16 +1,21 @@
 // apps/api/src/orders/orders.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
+import { EmailService } from '../email/email.service'
 
 @Injectable()
 export class OrdersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private email: EmailService,
+  ) {}
 
   async create(dto: any) {
     const subtotal = dto.items.reduce(
       (acc: number, i: any) => acc + i.unitPrice * i.quantity, 0
     )
-    return this.prisma.order.create({
+
+    const order = await this.prisma.order.create({
       data: {
         userId:        dto.userId ?? null,
         guestName:     dto.guestName,
@@ -31,8 +36,17 @@ export class OrdersService {
           })),
         },
       },
-      include: { items: { include: { product: true } } },
+      include: { items: { include: { product: true } }, user: true },
     })
+
+    // ── Enviar emails ──────────────────────────────────────────────────────
+    const clientEmail = order.guestEmail ?? order.user?.email
+    if (clientEmail) {
+      this.email.sendOrderConfirmation(clientEmail, order).catch(() => {})
+    }
+    this.email.sendNewOrderAlert(order).catch(() => {})
+
+    return order
   }
 
   findAll(filters?: { status?: string }) {

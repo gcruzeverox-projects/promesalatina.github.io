@@ -45,7 +45,7 @@ function SuccessContent() {
           ¡Orden recibida!
         </h1>
         <p style={{ color: '#64748B', fontSize: 15, margin: '0 0 24px', lineHeight: 1.6 }}>
-          Tu solicitud fue enviada exitosamente al equipo de Promesa Latina.
+          Tu solicitud fue enviada exitosamente al equipo de Distribuidora Promesa Latina.
         </p>
 
         {/* Número de orden */}

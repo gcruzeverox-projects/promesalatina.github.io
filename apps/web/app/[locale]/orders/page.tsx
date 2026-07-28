@@ -41,7 +41,7 @@ export default function OrdersPage() {
       <header style={{ background: navy, padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', gap: 16, position: 'sticky', top: 0, zIndex: 100 }}>
         <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <div style={{ width: 30, height: 30, background: '#E65100', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 12, color: '#fff' }}>PL</div>
-          <span style={{ color: '#fff', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 13 }}>Promesa Latina</span>
+          <span style={{ color: '#fff', fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 13 }}>Distribuidora Promesa Latina</span>
         </Link>
         <Link href={`/${locale}/catalog`} style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, textDecoration: 'none' }}>Catálogo</Link>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 10 }}>
