@@ -22,6 +22,7 @@ export default async function LandingPage({
 
   return (
     <>
+      <NewProductsPopup />
       <Header />
       <main style={{ overflowX: 'hidden', width: '100%' }}>
 
@@ -286,6 +287,5 @@ export default async function LandingPage({
 
       </main>
     </>
-  </>
   )
 }
