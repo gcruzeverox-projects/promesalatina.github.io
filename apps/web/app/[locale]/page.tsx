@@ -139,7 +139,7 @@ export default async function LandingPage({
               Explorar por Categoría
             </h2>
             <p style={{ color: '#94A3B8', fontSize: 14, margin: '0 0 28px' }}>
-              Categorías administrables desde el panel admin
+              
             </p>
             <style>{`
               .cat-card {
