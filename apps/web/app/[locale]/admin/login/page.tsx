@@ -15,6 +15,7 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('')
   const [loading,  setLoading]  = useState(false)
   const [error,    setError]    = useState('')
+  const [showPwd,  setShowPwd]  = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -68,7 +69,7 @@ export default function AdminLoginPage() {
           <div style={{ marginBottom: 16 }}>
             <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#374151', marginBottom: 6, letterSpacing: '0.03em' }}>Correo electrónico</label>
             <input type="email" required value={email} onChange={e => setEmail(e.target.value)}
-              placeholder="admin@promesalatina.com" style={inp}
+              placeholder="Ingresa tu correo" style={inp}
               onFocus={e => (e.target.style.borderColor = '#1F3A93')}
               onBlur={e => (e.target.style.borderColor = '#e2e8f0')}
             />
@@ -76,11 +77,17 @@ export default function AdminLoginPage() {
 
           <div style={{ marginBottom: 24 }}>
             <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#374151', marginBottom: 6, letterSpacing: '0.03em' }}>Contraseña</label>
-            <input type="password" required value={password} onChange={e => setPassword(e.target.value)}
-              placeholder="••••••••" style={inp}
-              onFocus={e => (e.target.style.borderColor = '#1F3A93')}
-              onBlur={e => (e.target.style.borderColor = '#e2e8f0')}
-            />
+            <div style={{ position: 'relative' }}>
+              <input type={showPwd ? 'text' : 'password'} required value={password} onChange={e => setPassword(e.target.value)}
+                placeholder="Ingresa tu contraseña" style={{ ...inp, paddingRight: 44 }}
+                onFocus={e => (e.target.style.borderColor = '#1F3A93')}
+                onBlur={e => (e.target.style.borderColor = '#e2e8f0')}
+              />
+              <button type="button" onClick={() => setShowPwd(!showPwd)}
+                style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, color: '#64748b', padding: 0, lineHeight: 1 }}>
+                {showPwd ? '🙈' : '👁️'}
+              </button>
+            </div>
           </div>
 
           {error && (
