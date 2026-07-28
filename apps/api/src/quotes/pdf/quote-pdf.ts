@@ -117,9 +117,7 @@ export function QuotePdfTemplate({ quote }: { quote: any }) {
         ce(View, { style: S.summaryBox },
           ce(Text, { style: S.sectionLabel }, 'Resumen'),
           ...[
-            ['Items',        `${quote.items?.length ?? 0} productos`],
-            ['% Ganancia',   `${quote.profitPercent}%`],
-            ['% Embotellado',`${quote.bottlingPercent}%`],
+            ['Items', `${quote.items?.length ?? 0} productos`],
           ].map(([k, v]) =>
             ce(View, { key: k as string, style: S.row2 },
               ce(Text, { style: S.metaKey }, `${k}:`),
@@ -141,7 +139,7 @@ export function QuotePdfTemplate({ quote }: { quote: any }) {
           ce(Text, { style: [S.tHeadCell, S.colSub] },  'Subtotal'),
         ),
         ...(quote.items ?? []).map((item: any, i: number) =>
-          ce(View, { key: item.id ?? i, style: [S.tRow, i % 2 === 1 ? S.tRowAlt : {}] },
+          ce(View, { key: item.id ?? i, style: [S.tRow, i % 2 === 1 ? S.tRowAlt : {}, !item.isAvailable ? { backgroundColor: '#FEF2F2' } : {}] },
             ce(View, { style: S.colProd },
               ce(Text, { style: [S.tCell, { fontFamily: 'Helvetica-Bold' }] }, item.product?.name ?? ''),
               item.notes ? ce(Text, { style: [S.tCell, { color: '#64748b', fontSize: 7, marginTop: 1 }] }, item.notes) : null,
@@ -149,7 +147,7 @@ export function QuotePdfTemplate({ quote }: { quote: any }) {
             ce(Text, { style: [S.tCell, S.colSku] },  item.product?.sku ?? ''),
             ce(Text, { style: [S.tCell, S.colQty] },  `${item.quantity} ${item.unitType}`),
             ce(Text, { style: [S.tCell, S.colAvail, { color: item.isAvailable ? '#16a34a' : '#dc2626' }] }, item.isAvailable ? 'Sí' : 'No'),
-            ce(Text, { style: [S.tCell, S.colPrice] }, fmt(item.salePrice)),
+            ce(Text, { style: [S.tCell, S.colPrice] }, item.isAvailable ? fmt(item.salePrice) : '—'),
             ce(Text, { style: [S.tCell, S.colDays] },  item.deliveryDays ? `${item.deliveryDays}d` : '—'),
             ce(Text, { style: [S.tCell, S.colSub, { fontFamily: 'Helvetica-Bold' }] }, fmt(item.subtotal)),
           )
