@@ -25,7 +25,7 @@ export default function DashboardPage() {
         products: products?.total ?? products?.length ?? 0,
         orders: orders?.total ?? orders?.length ?? 0,
         quotes: quotes?.total ?? quotes?.length ?? 0,
-        revenue: orders?.data?.reduce((s: number, o: any) => s + (o.total ?? 0), 0) ?? 0,
+        revenue: quotes?.data?.reduce((s: number, q: any) => s + (q.total ?? 0), 0) ?? quotes?.reduce((s: number, q: any) => s + (q.total ?? 0), 0) ?? 0,
       })
     }).catch(() => {})
   }, [])
@@ -34,7 +34,7 @@ export default function DashboardPage() {
     { label: 'Productos activos', value: stats.products, icon: '📦', color: '#1F3A93' },
     { label: 'Órdenes totales',   value: stats.orders,   icon: '📋', color: '#E65100' },
     { label: 'Cotizaciones',      value: stats.quotes,   icon: '📄', color: '#7C3AED' },
-    { label: 'Ingresos totales',  value: `$${stats.revenue.toLocaleString()}`, icon: '💰', color: '#059669' },
+    { label: 'Total cotizado',  value: `$${stats.revenue.toLocaleString()}`, icon: '💰', color: '#059669' },
   ]
 
   return (
