@@ -42,6 +42,16 @@ export class AuthService {
     return { user: safe, access_token: this.signToken(user) }
   }
 
+  async findAllUsers() {
+    return this.prisma.user.findMany({
+      select: {
+        id: true, name: true, email: true, role: true,
+        businessName: true, phone: true, isActive: true, createdAt: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    })
+  }
+
   private signToken(user: { id: string; email: string; role: string }) {
     return this.jwt.sign({ sub: user.id, email: user.email, role: user.role })
   }

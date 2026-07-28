@@ -307,11 +307,7 @@ export default function ProductsPage() {
                         {product.subcategory && <p style={{ fontSize: 11, color: '#94A3B8', margin: '2px 0 0' }}>{product.subcategory.name}</p>}
                       </td>
 
-                      {/* Precio */}
-                      <td style={{ padding: '12px 16px', textAlign: 'right', fontWeight: 700, color: '#1F3A93', fontFamily: 'Poppins, sans-serif' }}>
-                        ${product.basePrice.toFixed(2)}
-                        <p style={{ fontSize: 10, color: '#94A3B8', fontWeight: 400, margin: '1px 0 0', fontFamily: 'Inter, sans-serif' }}>/ caja</p>
-                      </td>
+                      
 
                       {/* Stock */}
                       <td style={{ padding: '12px 16px', textAlign: 'center' }}>
