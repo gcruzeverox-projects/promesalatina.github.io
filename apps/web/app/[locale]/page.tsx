@@ -259,7 +259,7 @@ export default async function LandingPage({
             <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 32, marginBottom: 36 }}>
               <div>
                 <div style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 16, color: '#fff', marginBottom: 8 }}>
-                  Promesa Latina
+                  Distribuidora Promesa Latina
                 </div>
                 <p style={{ maxWidth: 240, color: 'rgba(255,255,255,0.5)', lineHeight: 1.65 }}>
                   Distribuidora B2B de productos latinoamericanos para tiendas en EE.UU.
@@ -270,7 +270,6 @@ export default async function LandingPage({
                   Contacto
                 </div>
                 <p style={{ margin: '0 0 6px' }}>📧 ventas@promesalatina.com</p>
-                <p style={{ margin: '0 0 6px' }}>📞 +1 (XXX) XXX-XXXX</p>
                 <p style={{ margin: 0 }}>📍 Los Ángeles, California</p>
               </div>
             </div>
