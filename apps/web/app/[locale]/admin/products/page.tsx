@@ -254,10 +254,10 @@ export default function ProductsPage() {
                   <th style={thStyle}>Imagen</th>
                   <th style={thStyle}>Nombre / SKU</th>
                   <th style={thStyle}>Categoría</th>
-                  <th style={{ ...thStyle, textAlign: 'right' }}>Precio base</th>
+
 
                   <th style={{ ...thStyle, textAlign: 'center' }}>Estado</th>
-                  <th style={{ ...thStyle, textAlign: 'right' }}>Acciones</th>
+                  <th style={{ ...thStyle, textAlign: 'center' }}>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -305,18 +305,6 @@ export default function ProductsPage() {
                       <td style={{ padding: '12px 16px', color: '#475569' }}>
                         {product.category?.name ?? '—'}
                         {product.subcategory && <p style={{ fontSize: 11, color: '#94A3B8', margin: '2px 0 0' }}>{product.subcategory.name}</p>}
-                      </td>
-
-                      
-
-                      {/* Stock */}
-                      <td style={{ padding: '12px 16px', textAlign: 'center' }}>
-                        <span style={{
-                          fontWeight: 600,
-                          color: product.stockQuantity === 0 ? '#EF4444' : product.stockQuantity < 10 ? '#F59E0B' : '#22C55E',
-                        }}>
-                          {product.stockQuantity}
-                        </span>
                       </td>
 
                       {/* Estado */}
