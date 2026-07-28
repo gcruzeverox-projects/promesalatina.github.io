@@ -19,7 +19,7 @@ export default function UsersPage() {
   useEffect(() => {
     const token = localStorage.getItem('pl_token')
     if (!token) { setLoading(false); return }
-    fetch(`${BASE}/api/users`, { headers: { Authorization: `Bearer ${token}` } })
+    fetch(`${BASE}/api/auth/users`, { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
       .then(data => { setUsers(Array.isArray(data) ? data : data.data ?? []); setLoading(false) })
       .catch(() => setLoading(false))
