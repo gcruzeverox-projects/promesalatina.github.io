@@ -52,6 +52,13 @@ export class ProductsController {
     return this.productsService.updateStatus(id, status as any)
   }
 
+  @Patch(':id/isnew')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN')
+  updateIsNew(@Param('id') id: string, @Body('isNew') isNew: boolean) {
+    return this.productsService.updateIsNew(id, isNew)
+  }
+
   @Delete(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('ADMIN')
