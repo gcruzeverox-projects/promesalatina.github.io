@@ -255,7 +255,7 @@ export default function ProductsPage() {
                   <th style={thStyle}>Nombre / SKU</th>
                   <th style={thStyle}>Categoría</th>
                   <th style={{ ...thStyle, textAlign: 'right' }}>Precio base</th>
-                  <th style={{ ...thStyle, textAlign: 'center' }}>Stock</th>
+
                   <th style={{ ...thStyle, textAlign: 'center' }}>Estado</th>
                   <th style={{ ...thStyle, textAlign: 'right' }}>Acciones</th>
                 </tr>
