@@ -3,6 +3,7 @@
 
 import { setRequestLocale } from 'next-intl/server'
 import { Header } from '@/components/landing/Header'
+import { NewProductsPopup } from '@/components/landing/NewProductsPopup'
 import Link from 'next/link'
 
 const locales = ['es', 'en']
@@ -285,5 +286,6 @@ export default async function LandingPage({
 
       </main>
     </>
+  </>
   )
 }

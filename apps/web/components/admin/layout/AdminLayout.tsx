@@ -56,7 +56,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
         <img src="https://res.cloudinary.com/db9s1q9zf/image/upload/v1778209449/LOGO_COLOR_b3ejfr.png" alt="Promesa Latina" style={{ height: 48, width: 48, objectFit: 'contain', flexShrink: 0, filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.35)) brightness(1.15)', borderRadius: '50%' }} />
         {(sidebarOpen || isMobile) && (
           <div>
-            <div style={{ color: '#fff', fontWeight: 700, fontSize: 13, fontFamily: 'Poppins, sans-serif', whiteSpace: 'nowrap' }}>Distribuidora Promesa Latina</div>
+            <div style={{ color: '#fff', fontWeight: 700, fontSize: 12, fontFamily: 'Poppins, sans-serif', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 150 }}>Distribuidora Promesa Latina</div>
             <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 10, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Panel Admin</div>
           </div>
         )}
