@@ -236,38 +236,8 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
                   <span style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', fontSize: 13 }}>%</span>
                 </div>
               </div>
-              <div>
-                <label style={labelStyle}>% Embotellado</label>
-                <div style={{ position: 'relative' }}>
-                  <input type="number" min="0" max="100" step="0.5"
-                    value={bottlingPct}
-                    onChange={e => {
-                      setBottlingPct(e.target.value)
-                      if (priceMode === 'margin') {
-                        const bot = parseFloat(e.target.value) / 100 || 0
-                        const pct = parseFloat(profitPct) / 100 || 0
-                        setItems(prev => prev.map(item => {
-                          const base = parseFloat(item.supplierPrice) || 0
-                          return { ...item, salePrice: base > 0 ? (base * (1 + pct + bot)).toFixed(2) : item.salePrice }
-                        }))
-                      }
-                    }}
-                    style={{ ...inputStyle, paddingRight: 28 }}
-                  />
-                  <span style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', fontSize: 13 }}>%</span>
-                </div>
-              </div>
-              <div>
-                <label style={labelStyle}>Fees / Cargos</label>
-                <div style={{ position: 'relative' }}>
-                  <span style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', fontSize: 13 }}>$</span>
-                  <input type="number" min="0" step="0.01"
-                    value={fees}
-                    onChange={e => setFees(e.target.value)}
-                    style={{ ...inputStyle, paddingLeft: 24 }}
-                  />
-                </div>
-              </div>
+
+
               <button type="button" onClick={applyGlobalMargin}
                 style={{
                   height: 36, background: navy, color: '#fff', border: 'none',
