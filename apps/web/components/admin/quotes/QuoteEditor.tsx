@@ -163,7 +163,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
       orderId:         order.id,
       validDays,
       profitPercent:   profitPct,
-      bottlingPercent: bottlingPct,
+      bottlingPercent: '0',
       fees,
       notes:           globalNotes,
       items,
@@ -339,10 +339,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
                         }}
                       />
                     </div>
-                    {sale > 0 && supplier > 0 && (
-                      <p style={{ fontSize: 10, margin: '3px 0 0', fontWeight: 600, color: margin >= 0 ? green : red }}>
-                        {margin >= 0 ? '+' : ''}{margin.toFixed(1)}% margen
-                      </p>
+                    {false && (
                     )}
                   </div>
 
