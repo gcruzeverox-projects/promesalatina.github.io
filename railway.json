@@ -5,7 +5,7 @@
     "buildCommand": "NODE_ENV=development npx --yes pnpm@9 install --no-frozen-lockfile && npx pnpm@9 --filter api run build"
   },
   "deploy": {
-    "startCommand": "node apps/api/dist/main.js",
+    "startCommand": "npx pnpm@9 --filter api exec prisma generate && npx pnpm@9 --filter api exec prisma migrate deploy && node apps/api/dist/main.js",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 3
   }
