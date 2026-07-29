@@ -56,7 +56,32 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
       quantity:     item.quantity,
       unitType:     item.unitType as 'caja' | 'paquete',
       supplierPrice: String(item.product.basePrice),
-      salePrice:    item.product.basePrice > 0 ? (item.product.basePrice * 1.25).toFixed(2) : '',
+      bottlingCost:  (() => {
+        const cat = item.product.category?.name ?? ''
+        const isBeverage = cat.includes('Jugos') || cat.includes('Sodas') || cat.includes('JUGOS') || cat.includes('SODAS')
+        if (!isBeverage) return 0
+        const units = item.product.unitsPerCase ?? 1
+        if (units <= 6)  return 0.60
+        if (units <= 12) return 0.60
+        if (units <= 24) return 1.20
+        if (units >= 48) return 2.40
+        return 0
+      })(),
+      salePrice: (() => {
+        const base    = item.product.basePrice || 0
+        const bot     = (() => {
+          const cat = item.product.category?.name ?? ''
+          const isBeverage = cat.includes('Jugos') || cat.includes('Sodas') || cat.includes('JUGOS') || cat.includes('SODAS')
+          if (!isBeverage) return 0
+          const units = item.product.unitsPerCase ?? 1
+          if (units <= 6)  return 0.60
+          if (units <= 12) return 0.60
+          if (units <= 24) return 1.20
+          if (units >= 48) return 2.40
+          return 0
+        })()
+        return base > 0 ? ((base + bot) * 1.25).toFixed(2) : ''
+      })(),
       isAvailable:  true,
       deliveryDays: '5',
       notes:        '',
@@ -73,10 +98,10 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
   // Aplicar % de ganancia global a todos los items
   const applyGlobalMargin = useCallback(() => {
     const pct = parseFloat(profitPct) / 100 || 0
-    const bot = parseFloat(bottlingPct) / 100 || 0
     setItems(prev => prev.map(item => {
       const base = parseFloat(item.supplierPrice) || 0
-      const sale = base * (1 + pct + bot)
+      const bot  = item.bottlingCost ?? 0
+      const sale = (base + bot) * (1 + pct)
       return { ...item, salePrice: sale.toFixed(2) }
     }))
   }, [profitPct, bottlingPct])
@@ -92,8 +117,8 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
     if (priceMode === 'margin') {
       const base = parseFloat(val) || 0
       const pct  = parseFloat(profitPct) / 100 || 0
-      const bot  = parseFloat(bottlingPct) / 100 || 0
-      const sale = base * (1 + pct + bot)
+      const bot  = items[idx]?.bottlingCost ?? 0
+      const sale = (base + bot) * (1 + pct)
       updateItem(idx, 'salePrice', sale.toFixed(2))
     }
   }

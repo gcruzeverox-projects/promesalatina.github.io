@@ -65,6 +65,7 @@ export interface QuoteItemForm {
   quantity: number
   unitType: 'caja' | 'paquete'
   supplierPrice: string
+  bottlingCost:  number
   salePrice: string
   isAvailable: boolean
   deliveryDays: string

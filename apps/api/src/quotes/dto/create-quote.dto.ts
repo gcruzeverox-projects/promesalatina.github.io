@@ -22,6 +22,12 @@ export class QuoteItemDto {
   @Min(0)
   supplierPrice: number
 
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(0)
+  bottlingCost?: number
+
   @Type(() => Number)
   @IsNumber()
   @Min(0)

@@ -202,6 +202,7 @@ model QuoteItem {
   quantity      Int
   unitType      String  @default("caja")
   supplierPrice Float
+  bottlingCost  Float  @default(0)
   salePrice     Float
   subtotal      Float
   isAvailable   Boolean @default(true)
