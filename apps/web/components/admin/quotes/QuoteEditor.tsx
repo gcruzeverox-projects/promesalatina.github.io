@@ -339,8 +339,6 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
                         }}
                       />
                     </div>
-                    {false && (
-                    )}
                   </div>
 
                   {/* Subtotal */}
