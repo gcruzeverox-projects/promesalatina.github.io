@@ -104,7 +104,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
     }))
 
   const [items,          setItems]          = useState<QuoteItemForm[]>(initItems)
-  const [profitPct,      setProfitPct]      = useState('20')
+  const [profitPct,      setProfitPct]      = useState('40')
   const [bottlingPct,    setBottlingPct]    = useState('5')
   const [fees,           setFees]           = useState('0')
   const [validDays,      setValidDays]      = useState('7')
