@@ -56,7 +56,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
       quantity:     item.quantity,
       unitType:     item.unitType as 'caja' | 'paquete',
       supplierPrice: String(item.product.basePrice),
-      salePrice:    '',
+      salePrice:    item.product.basePrice > 0 ? (item.product.basePrice * 1.25).toFixed(2) : '',
       isAvailable:  true,
       deliveryDays: '5',
       notes:        '',
