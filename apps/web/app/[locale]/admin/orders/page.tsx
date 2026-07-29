@@ -53,8 +53,8 @@ export default function OrdersPage() {
                 return (
                   <tr key={order.id} style={{ borderTop: '1px solid #F3F4F6' }}>
                     <td style={{ padding: '14px 16px', fontSize: 14, fontWeight: 600, color: '#1F3A93' }}>#{order.orderNumber ?? order.id?.slice(0,8)}</td>
-                    <td style={{ padding: '14px 16px', fontSize: 14, color: '#374151' }}>{order.user?.name ?? order.user?.email ?? '—'}</td>
-                    <td style={{ padding: '14px 16px', fontSize: 14, fontWeight: 600, color: '#111827' }}>${order.total?.toFixed(2) ?? '0.00'}</td>
+                    <td style={{ padding: '14px 16px', fontSize: 14, color: '#374151' }}>{order.guestBusiness ?? order.guestName ?? order.user?.businessName ?? order.user?.name ?? '—'}</td>
+
                     <td style={{ padding: '14px 16px' }}>
                       <span style={{ background: s.bg, color: s.color, padding: '4px 10px', borderRadius: 20, fontSize: 12, fontWeight: 600 }}>{s.label}</span>
                     </td>

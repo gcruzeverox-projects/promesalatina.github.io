@@ -113,9 +113,9 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
   // Validar y enviar
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const missing = items.some(i => !i.salePrice || parseFloat(i.salePrice) <= 0)
+    const missing = items.some(i => i.isAvailable && (!i.salePrice || parseFloat(i.salePrice) <= 0))
     if (missing) {
-      alert('Todos los items deben tener un precio de venta mayor a 0.')
+      alert('Todos los productos disponibles deben tener un precio de venta mayor a 0.')
       return
     }
     await onSubmit({

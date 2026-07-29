@@ -148,7 +148,7 @@ export function QuotePdfTemplate({ quote }: { quote: any }) {
             ce(Text, { style: [S.tCell, S.colAvail, { color: item.isAvailable ? '#16a34a' : '#dc2626' }] }, item.isAvailable ? 'Sí' : 'No'),
             ce(Text, { style: [S.tCell, S.colPrice] }, item.isAvailable ? fmt(item.salePrice) : '—'),
             ce(Text, { style: [S.tCell, S.colDays] },  item.deliveryDays ? `${item.deliveryDays}d` : '—'),
-            ce(Text, { style: [S.tCell, S.colSub, { fontFamily: 'Helvetica-Bold' }] }, fmt(item.subtotal)),
+            ce(Text, { style: [S.tCell, S.colSub, { fontFamily: 'Helvetica-Bold' }] }, item.isAvailable ? fmt(item.subtotal) : '—'),
           )
         ),
       ),
