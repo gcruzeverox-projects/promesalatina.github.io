@@ -57,8 +57,18 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
       unitType:     item.unitType as 'caja' | 'paquete',
       supplierPrice: String(item.product.basePrice),
       bottlingCost:  (() => {
-        const cat = item.product.category?.name ?? ''
-        const isBeverage = cat.includes('Jugos') || cat.includes('Sodas') || cat.includes('JUGOS') || cat.includes('SODAS')
+        const name = (item.product.name ?? '').toLowerCase()
+        const sku  = (item.product.sku ?? '').toLowerCase()
+        // Detectar bebidas por categoría o nombre
+        const isBeverage = item.product.category?.name?.includes('Jugos') ||
+                           item.product.category?.name?.includes('Sodas') ||
+                           name.includes('jugo') || name.includes('soda') ||
+                           name.includes('bebida') || name.includes('nectar') ||
+                           name.includes('refresco') || name.includes('suero') ||
+                           name.includes('leche') || name.includes('energy') ||
+                           name.includes('raptor') || name.includes('volt') ||
+                           name.includes('adrenaline') || name.includes('lata') ||
+                           name.includes('vidrio') || name.includes('tetra')
         if (!isBeverage) return 0
         const units = item.product.unitsPerCase ?? 1
         if (units <= 6)  return 0.60
@@ -68,10 +78,18 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
         return 0
       })(),
       salePrice: (() => {
-        const base    = item.product.basePrice || 0
-        const bot     = (() => {
-          const cat = item.product.category?.name ?? ''
-          const isBeverage = cat.includes('Jugos') || cat.includes('Sodas') || cat.includes('JUGOS') || cat.includes('SODAS')
+        const base = item.product.basePrice || 0
+        const name = (item.product.name ?? '').toLowerCase()
+        const isBeverage = item.product.category?.name?.includes('Jugos') ||
+                           item.product.category?.name?.includes('Sodas') ||
+                           name.includes('jugo') || name.includes('soda') ||
+                           name.includes('bebida') || name.includes('nectar') ||
+                           name.includes('refresco') || name.includes('suero') ||
+                           name.includes('leche') || name.includes('energy') ||
+                           name.includes('raptor') || name.includes('volt') ||
+                           name.includes('adrenaline') || name.includes('lata') ||
+                           name.includes('vidrio') || name.includes('tetra')
+        const bot = (() => {
           if (!isBeverage) return 0
           const units = item.product.unitsPerCase ?? 1
           if (units <= 6)  return 0.60
@@ -80,7 +98,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
           if (units >= 48) return 2.40
           return 0
         })()
-        return base > 0 ? ((base + bot) * 1.25).toFixed(2) : ''
+        return base > 0 ? ((base + bot) * 1.40).toFixed(2) : ''
       })(),
       isAvailable:  true,
       deliveryDays: '5',
