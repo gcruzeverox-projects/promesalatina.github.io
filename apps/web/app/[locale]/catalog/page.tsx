@@ -101,6 +101,10 @@ function CatalogContent() {
           setCatFilter(cat.id)
           setCatName(cat.name)
           setPage(1)
+          // Forzar carga inmediata con el categoryId correcto
+          fetchProducts({ categoryId: cat.id, page: 1, limit: 24 })
+            .then(res => { setProducts(res.data); setTotal(res.total); setTotalPages(res.totalPages) })
+            .catch(() => {})
         }
       }
     }).catch(() => {})
