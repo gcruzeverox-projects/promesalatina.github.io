@@ -60,8 +60,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
         const name = (item.product.name ?? '').toLowerCase()
         const sku  = (item.product.sku ?? '').toLowerCase()
         // Detectar bebidas por categoría o nombre
-        const isBeverage = item.product.category?.name?.includes('Jugos') ||
-                           item.product.category?.name?.includes('Sodas') ||
+        const isBeverage =
                            name.includes('jugo') || name.includes('soda') ||
                            name.includes('bebida') || name.includes('nectar') ||
                            name.includes('refresco') || name.includes('suero') ||
@@ -80,8 +79,7 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
       salePrice: (() => {
         const base = item.product.basePrice || 0
         const name = (item.product.name ?? '').toLowerCase()
-        const isBeverage = item.product.category?.name?.includes('Jugos') ||
-                           item.product.category?.name?.includes('Sodas') ||
+        const isBeverage =
                            name.includes('jugo') || name.includes('soda') ||
                            name.includes('bebida') || name.includes('nectar') ||
                            name.includes('refresco') || name.includes('suero') ||
