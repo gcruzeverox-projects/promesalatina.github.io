@@ -79,7 +79,6 @@ export class QuotesService {
             quantity:      item.quantity,
             unitType:      item.unitType,
             supplierPrice: item.supplierPrice,
-            bottlingCost:  item.bottlingCost ?? 0,
             salePrice:     item.salePrice,
             subtotal:      item.salePrice * item.quantity,
             isAvailable:   item.isAvailable ?? true,
