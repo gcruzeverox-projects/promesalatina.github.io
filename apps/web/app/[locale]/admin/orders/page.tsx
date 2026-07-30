@@ -1,11 +1,15 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
+import Link from 'next/link'
 import { AdminLayout } from '@/components/admin/layout/AdminLayout'
 
 const BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
+const navy = '#1F3A93'
 
 const STATUS_LABELS: Record<string, { label: string; color: string; bg: string }> = {
+  RECIBIDA:   { label: 'Recibida',   color: '#92400E', bg: '#FEF3C7' },
+  ENVIADA:    { label: 'Enviada',    color: '#1E40AF', bg: '#DBEAFE' },
   PENDING:    { label: 'Pendiente',  color: '#92400E', bg: '#FEF3C7' },
   PROCESSING: { label: 'Procesando', color: '#1E40AF', bg: '#DBEAFE' },
   SHIPPED:    { label: 'Enviado',    color: '#7C3AED', bg: '#EDE9FE' },
@@ -16,8 +20,9 @@ const STATUS_LABELS: Record<string, { label: string; color: string; bg: string }
 export default function OrdersPage() {
   const params = useParams()
   const locale = params.locale as string || 'es'
-  const [orders, setOrders] = useState<any[]>([])
+  const [orders,  setOrders]  = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [search,  setSearch]  = useState('')
 
   useEffect(() => {
     const token = localStorage.getItem('pl_token')
@@ -28,42 +33,77 @@ export default function OrdersPage() {
       .catch(() => setLoading(false))
   }, [])
 
+  const filtered = orders.filter(o => {
+    if (!search) return true
+    const q = search.toLowerCase()
+    const client = (o.guestBusiness ?? o.guestName ?? o.user?.businessName ?? o.user?.name ?? '').toLowerCase()
+    const orderNum = (o.orderNumber ?? o.id ?? '').toLowerCase()
+    const date = new Date(o.createdAt).toLocaleDateString('es').toLowerCase()
+    return client.includes(q) || orderNum.includes(q) || date.includes(q)
+  })
+
   return (
     <AdminLayout>
-      <div style={{ padding: 32 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 700, color: '#111827', marginBottom: 8 }}>Órdenes</h1>
-        <p style={{ color: '#6B7280', marginBottom: 32 }}>{orders.length} órdenes en total</p>
-        {loading ? <p>Cargando...</p> : orders.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: 60, background: '#fff', borderRadius: 12 }}>
+      <div style={{ padding: 32, fontFamily: 'Inter, sans-serif' }}>
+        <div style={{ marginBottom: 24 }}>
+          <h1 style={{ fontSize: 28, fontWeight: 700, color: '#111827', margin: '0 0 4px' }}>Órdenes</h1>
+          <p style={{ color: '#6B7280', margin: 0 }}>{filtered.length} de {orders.length} órdenes</p>
+        </div>
+
+        {/* Buscador */}
+        <div style={{ marginBottom: 20 }}>
+          <input
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="🔍 Buscar por cliente, número de orden o fecha..."
+            style={{ width: '100%', height: 42, border: '1.5px solid #E2E8F0', borderRadius: 8, padding: '0 14px', fontSize: 14, outline: 'none', fontFamily: 'Inter, sans-serif', boxSizing: 'border-box' }}
+          />
+        </div>
+
+        {loading ? <p>Cargando...</p> : filtered.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: 60, background: '#fff', borderRadius: 12, border: '1px dashed #E5E7EB' }}>
             <div style={{ fontSize: 48 }}>📋</div>
-            <p style={{ color: '#6B7280', marginTop: 16 }}>No hay órdenes aún</p>
+            <p style={{ color: '#6B7280', marginTop: 16 }}>No se encontraron órdenes</p>
           </div>
         ) : (
-          <div style={{ overflowX: 'auto' }}><table style={{ width: '100%', borderCollapse: 'collapse', background: '#fff', borderRadius: 12, overflow: 'hidden' }}>
-            <thead>
-              <tr style={{ background: '#F9FAFB' }}>
-                {['#Orden', 'Cliente', 'Total', 'Estado', 'Fecha'].map(h => (
-                  <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: 12, fontWeight: 600, color: '#6B7280', textTransform: 'uppercase' }}>{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order: any) => {
-                const s = STATUS_LABELS[order.status] ?? { label: order.status, color: '#374151', bg: '#F3F4F6' }
-                return (
-                  <tr key={order.id} style={{ borderTop: '1px solid #F3F4F6' }}>
-                    <td style={{ padding: '14px 16px', fontSize: 14, fontWeight: 600, color: '#1F3A93' }}>#{order.orderNumber ?? order.id?.slice(0,8)}</td>
-                    <td style={{ padding: '14px 16px', fontSize: 14, color: '#374151' }}>{order.guestBusiness ?? order.guestName ?? order.user?.businessName ?? order.user?.name ?? '—'}</td>
-
-                    <td style={{ padding: '14px 16px' }}>
-                      <span style={{ background: s.bg, color: s.color, padding: '4px 10px', borderRadius: 20, fontSize: 12, fontWeight: 600 }}>{s.label}</span>
-                    </td>
-                    <td style={{ padding: '14px 16px', fontSize: 13, color: '#6B7280' }}>{new Date(order.createdAt).toLocaleDateString('es')}</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table></div>
+          <div style={{ background: '#fff', borderRadius: 12, overflow: 'hidden', border: '1px solid #E5E7EB' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr style={{ background: '#F9FAFB', borderBottom: '1px solid #E5E7EB' }}>
+                  {['#Orden', 'Cliente', 'Estado', 'Fecha'].map(h => (
+                    <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: 11, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.map((order: any, i: number) => {
+                  const st = STATUS_LABELS[order.status] ?? { label: order.status, color: '#374151', bg: '#F3F4F6' }
+                  const client = order.guestBusiness ?? order.guestName ?? order.user?.businessName ?? order.user?.name ?? '—'
+                  return (
+                    <tr key={order.id} style={{ borderTop: i === 0 ? 'none' : '1px solid #F3F4F6' }}
+                      onMouseEnter={e => (e.currentTarget.style.background = '#FAFBFF')}
+                      onMouseLeave={e => (e.currentTarget.style.background = '#fff')}>
+                      <td style={{ padding: '14px 16px' }}>
+                        <Link href={`/${locale}/admin/quotes/new?orderId=${order.id}`}
+                          style={{ color: navy, fontWeight: 600, fontSize: 13, textDecoration: 'none', fontFamily: 'monospace' }}>
+                          #{order.orderNumber?.slice(-8) ?? order.id?.slice(-8)}
+                        </Link>
+                      </td>
+                      <td style={{ padding: '14px 16px', fontSize: 14, color: '#374151', fontWeight: 500 }}>{client}</td>
+                      <td style={{ padding: '14px 16px' }}>
+                        <span style={{ background: st.bg, color: st.color, padding: '3px 10px', borderRadius: 20, fontSize: 11, fontWeight: 700 }}>
+                          {st.label}
+                        </span>
+                      </td>
+                      <td style={{ padding: '14px 16px', fontSize: 13, color: '#6B7280' }}>
+                        {new Date(order.createdAt).toLocaleDateString('es', { day: '2-digit', month: 'short', year: 'numeric' })}
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </AdminLayout>
