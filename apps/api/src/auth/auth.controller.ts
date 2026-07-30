@@ -1,5 +1,5 @@
 // apps/api/src/auth/auth.controller.ts
-import { Controller, Post, Body, Get, UseGuards, Request } from '@nestjs/common'
+import { Controller, Post, Body, Get, Put, Patch, UseGuards, Request, Param } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { JwtAuthGuard } from './guards/jwt-auth.guard'
 
@@ -33,5 +33,17 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   getUsers() {
     return this.auth.findAllUsers()
+  }
+
+  @Put('users/:id')
+  @UseGuards(JwtAuthGuard)
+  updateUser(@Param('id') id: string, @Body() dto: any) {
+    return this.auth.updateUser(id, dto)
+  }
+
+  @Patch('users/:id/toggle')
+  @UseGuards(JwtAuthGuard)
+  toggleUser(@Param('id') id: string) {
+    return this.auth.toggleUserStatus(id)
   }
 }

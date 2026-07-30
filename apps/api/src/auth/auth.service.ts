@@ -42,6 +42,33 @@ export class AuthService {
     return { user: safe, access_token: this.signToken(user) }
   }
 
+  async updateUser(id: string, dto: any) {
+    const data: any = {}
+    if (dto.name)         data.name         = dto.name
+    if (dto.businessName) data.businessName = dto.businessName
+    if (dto.phone)        data.phone        = dto.phone
+    if (dto.role)         data.role         = dto.role
+    if (dto.password) {
+      const bcrypt = require('bcrypt')
+      data.password = await bcrypt.hash(dto.password, 10)
+    }
+    return this.prisma.user.update({
+      where: { id },
+      select: { id: true, name: true, email: true, role: true, businessName: true, phone: true, isActive: true, createdAt: true },
+      data,
+    })
+  }
+
+  async toggleUserStatus(id: string) {
+    const user = await this.prisma.user.findUnique({ where: { id } })
+    if (!user) throw new Error('Usuario no encontrado')
+    return this.prisma.user.update({
+      where: { id },
+      data:  { isActive: !user.isActive },
+      select: { id: true, name: true, email: true, role: true, isActive: true },
+    })
+  }
+
   async findAllUsers() {
     return this.prisma.user.findMany({
       select: {
