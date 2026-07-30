@@ -2,10 +2,10 @@
   "$schema": "https://railway.app/railway-schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "NODE_ENV=development npx --yes pnpm@9 install --no-frozen-lockfile && npx pnpm@9 --filter api exec prisma generate && npx pnpm@9 --filter api run build"
+    "buildCommand": "NODE_ENV=development npx --yes pnpm@9 install --no-frozen-lockfile && npx pnpm@9 --filter api exec prisma migrate deploy && npx pnpm@9 --filter api exec prisma generate && npx pnpm@9 --filter api run build"
   },
   "deploy": {
-    "startCommand": "npx pnpm@9 --filter api exec prisma migrate deploy && node apps/api/dist/main.js",
+    "startCommand": "node apps/api/dist/main.js",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 3
   }
