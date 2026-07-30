@@ -67,7 +67,15 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
                            name.includes('leche') || name.includes('energy') ||
                            name.includes('raptor') || name.includes('volt') ||
                            name.includes('adrenaline') || name.includes('lata') ||
-                           name.includes('vidrio') || name.includes('tetra')
+                           name.includes('vidrio') || name.includes('tetra') ||
+                           name.includes('malteada') || name.includes('agua') ||
+                           name.includes('limonada') || name.includes('horchata') ||
+                           name.includes('tamarindo') || name.includes('mora') ||
+                           name.includes('pina') || name.includes('piña') ||
+                           name.includes('mango') || name.includes('naranja') ||
+                           name.includes('fresa') || name.includes('melocoton') ||
+                           name.includes('melocotón') || name.includes('guanabana') ||
+                           name.includes('coco') || name.includes('maracuya')
         if (!isBeverage) return 0
         const units = item.product.unitsPerCase ?? 1
         if (units <= 6)  return 0.60
@@ -86,7 +94,15 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
                            name.includes('leche') || name.includes('energy') ||
                            name.includes('raptor') || name.includes('volt') ||
                            name.includes('adrenaline') || name.includes('lata') ||
-                           name.includes('vidrio') || name.includes('tetra')
+                           name.includes('vidrio') || name.includes('tetra') ||
+                           name.includes('malteada') || name.includes('agua') ||
+                           name.includes('limonada') || name.includes('horchata') ||
+                           name.includes('tamarindo') || name.includes('mora') ||
+                           name.includes('pina') || name.includes('piña') ||
+                           name.includes('mango') || name.includes('naranja') ||
+                           name.includes('fresa') || name.includes('melocoton') ||
+                           name.includes('melocotón') || name.includes('guanabana') ||
+                           name.includes('coco') || name.includes('maracuya')
         const bot = (() => {
           if (!isBeverage) return 0
           const units = item.product.unitsPerCase ?? 1
@@ -203,6 +219,12 @@ export function QuoteEditor({ order, onSubmit, onCancel, isSubmitting }: Props) 
               <div style={{ gridColumn: '1 / -1', marginTop: 4 }}>
                 <span style={{ color: '#64748b' }}>Orden ref.:</span> <code style={{ fontSize: 11, background: '#e0e7ff', padding: '1px 6px', borderRadius: 3 }}>#{order.orderNumber}</code>
               </div>
+              {order.notes && (
+                <div style={{ gridColumn: '1 / -1', marginTop: 6, background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 6, padding: '6px 10px' }}>
+                  <span style={{ color: '#92400e', fontSize: 11, fontWeight: 700 }}>📝 Nota del cliente: </span>
+                  <span style={{ color: '#78350f', fontSize: 12 }}>{order.notes}</span>
+                </div>
+              )}
             </div>
           </div>
 
